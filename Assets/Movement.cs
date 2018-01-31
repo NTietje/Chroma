@@ -9,24 +9,45 @@ public class Movement : MonoBehaviour {
 	private Vector3 rotAxis;
 	private Vector3 rotPoint;
 	private bool moving;
+	private bool falling;
 	private float height;
 
 	// Use this for initialization
 	void Start () {
+		height = Mathf.Round (transform.position.y);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		//ground detection
+		RaycastHit[] hit;
+		hit = Physics.RaycastAll (transform.position, new Vector3 (0, -1, 0), 1f);
+		if (hit.Length > 0) {
+			falling = false;
+		} else {
+			falling = true;
+		}
+		//player is within a movement
 		if (moving) {
 			//move for 90°
-			transform.RotateAround(rotPoint, rotAxis, speed*Time.deltaTime);
-			if (transform.position.y <= height) {
+			transform.RotateAround (rotPoint, rotAxis, speed * Time.deltaTime);
+			if (transform.position.y <= Mathf.Round (transform.position.y)) {
 				moving = false;
-				//TODO position correction
-				transform.eulerAngles = Vector3.zero;
-				transform.position = new Vector3 (Mathf.Round (transform.position.x), height, Mathf.Round (transform.position.z));
-
+				//position correction
+				//transform.eulerAngles = Vector3.zero;
+				//transform.position = new Vector3 (Mathf.Round (transform.position.x), height, Mathf.Round (transform.position.z));
+				AlignPosition();
 			}
+		// player is free falling
+		} else if (falling) {
+			if (transform.position.y < LevelManager.Instance.lowerYBounds) {
+				//reset to active checkpoint
+				transform.position = LevelManager.Instance.GetRespawnLocation ();
+				//gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+				AlignPosition();
+				falling = false;
+			}
+		//player interaction is not locked by a current falling or moving status
 		} else {
 			if (Input.GetKeyDown (KeyCode.Keypad1)) {
 				//x-0.5, y-0.5 BottomLeft
@@ -52,7 +73,12 @@ public class Movement : MonoBehaviour {
 				rotAxis = Vector3.back;
 				moving = true;
 			}
-			height = Mathf.Round(transform.position.y);
 		}
+	}
+	//corrects the position of the game object to integers, sets all angles and velocity to zero 
+	void AlignPosition(){
+		transform.eulerAngles = Vector3.zero;
+		transform.position = new Vector3 (Mathf.Round (transform.position.x), Mathf.Round (transform.position.y), Mathf.Round (transform.position.z));
+		gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 	}
 }

@@ -284,29 +284,6 @@ Prefab:
       propertyPath: m_Name
       value: Check Point 01
       objectReference: {fileID: 0}
-    - target: {fileID: 4445039902933276, guid: 36514103631675b4698cc0dd64adfa7a, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0.013333333
-      objectReference: {fileID: 0}
-    - target: {fileID: 4445039902933276, guid: 36514103631675b4698cc0dd64adfa7a, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 0.013333333
-      objectReference: {fileID: 0}
-    - target: {fileID: 114371009623350600, guid: 36514103631675b4698cc0dd64adfa7a,
-        type: 2}
-      propertyPath: colorChecked.r
-      value: 0.65517235
-      objectReference: {fileID: 0}
-    - target: {fileID: 114371009623350600, guid: 36514103631675b4698cc0dd64adfa7a,
-        type: 2}
-      propertyPath: colorChecked.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114371009623350600, guid: 36514103631675b4698cc0dd64adfa7a,
-        type: 2}
-      propertyPath: colorChecked.b
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 36514103631675b4698cc0dd64adfa7a, type: 2}
   m_IsPrefabParent: 0

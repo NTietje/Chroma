@@ -8,6 +8,7 @@ public class CheckPointBehaviour : MonoBehaviour {
 	public Color colorChecked = Color.green;
 	public bool active;
 	public float spawnOffset = 0.5f;
+
 	private Renderer rend;
 
 	// Use this for initialization

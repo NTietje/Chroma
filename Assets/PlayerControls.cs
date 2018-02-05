@@ -2,19 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour {
+public class PlayerControls : MonoBehaviour {
 
-	public int speed;
-	public Vector3 spawnPoint;
+	public int speed = 450;
+	public int resetFallingHeight = 50;
 
+	private GameObject movementPivot;
+
+	private Vector3 spawnPoint;
 	private Vector3 rotAxis;
 	private Vector3 rotPoint;
+	private Vector3 rotPointOffset;
+
 	private bool moving;
 	private bool falling;
+	private int lowerBound;
 
 	// Use this for initialization
 	void Start () {
 		spawnPoint = transform.position;
+		movementPivot = transform.Find ("MovementPivot").gameObject;
+		AlignPosition ();
 	}
 	
 	// Update is called once per frame
@@ -29,8 +37,8 @@ public class Movement : MonoBehaviour {
 		}
 		//player is within a movement
 		if (moving) {
-			//move for 90°
-			transform.RotateAround (rotPoint, rotAxis, speed * Time.deltaTime);
+			//continue 90-degree-rotation for this frame
+			transform.RotateAround (movementPivot.transform.position, rotAxis, speed * Time.deltaTime);
 			if (transform.position.y <= Mathf.Round (transform.position.y)) {
 				moving = false;
 				//position correction
@@ -40,45 +48,47 @@ public class Movement : MonoBehaviour {
 			}
 		// player is free falling
 		} else if (falling) {
-			/**if (transform.position.y < LevelManager.Instance.lowerYBounds) {
+			if (transform.position.y < lowerBound) {
 				//reset to active checkpoint
-				transform.position = LevelManager.Instance.GetRespawnLocation ();
-				//gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+				transform.position = spawnPoint;
 				AlignPosition();
 				falling = false;
-			}*/
+			}
 		//player interaction is not locked by a current falling or moving status
 		} else {
+			AlignPosition ();
 			if (Input.GetKeyDown (KeyCode.Keypad1)) {
 				//x-0.5, y-0.5 BottomLeft
-				rotPoint = transform.position + new Vector3 (-0.5f, -0.5f, 0f);
+				rotPointOffset = new Vector3 (-0.5f, -0.5f, 0f);
 				rotAxis = Vector3.forward;
 				moving = true;
 			}
 			if (Input.GetKeyDown (KeyCode.Keypad3)) {
-				//z-0.5, y-0.5 Bottom Right
-				rotPoint = transform.position + new Vector3 (0f, -0.5f, -0.5f);
+				rotPointOffset = new Vector3 (0f, -0.5f, -0.5f);
 				rotAxis = Vector3.left;
 				moving = true;
 			}
 			if (Input.GetKeyDown (KeyCode.Keypad7)) {
-				//z+0.5, y-0.5 TopLeft
-				rotPoint = transform.position + new Vector3 (0f, -0.5f, 0.5f);
-				rotAxis = Vector3.right;
+				rotPointOffset = new Vector3 (0f, -0.5f, 0.5f);
+				rotAxis = Vector3.right;	
 				moving = true;
 			}
 			if (Input.GetKeyDown (KeyCode.Keypad9)) {
-				//x+0.5, y-0.5 TopRight
-				rotPoint = transform.position + new Vector3 (0.5f, -0.5f, 0f);
+				rotPointOffset = new Vector3 (0.5f, -0.5f, 0f);
 				rotAxis = Vector3.back;
 				moving = true;
 			}
+			movementPivot.transform.localPosition = rotPointOffset;
 		}
 	}
 	//corrects the position of the game object to integers, sets all angles and velocity to zero 
 	public void AlignPosition(){
 		transform.rotation = Quaternion.identity;
-		transform.position = new Vector3 (Mathf.Round (transform.position.x), Mathf.Round (transform.position.y), Mathf.Round (transform.position.z));
+		transform.localPosition = new Vector3 (Mathf.Round (transform.localPosition.x), Mathf.Round (transform.localPosition.y), Mathf.Round (transform.localPosition.z));
 		gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+		lowerBound = (int)transform.position.y - resetFallingHeight;
+	}
+	public void SetSpawnPoint(Vector3 spawnPoint){
+		this.spawnPoint = spawnPoint;
 	}
 }

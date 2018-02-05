@@ -121,7 +121,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 310706796}
-  - component: {fileID: 310706794}
   m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
@@ -129,18 +128,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &310706794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 310706793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 610a6d24b2bd0104dbc8c9a17f57305e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lowerYBounds: -20
 --- !u!4 &310706796
 Transform:
   m_ObjectHideFlags: 0
@@ -396,6 +383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 250
+  spawnPoint: {x: 0, y: 0, z: 0}
 --- !u!23 &779565318
 MeshRenderer:
   m_ObjectHideFlags: 0

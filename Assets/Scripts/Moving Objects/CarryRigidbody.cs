@@ -5,7 +5,6 @@ using UnityEngine;
 public class CarryRigidbody : MonoBehaviour {
 
     public bool useTriggerAsSensor = false;
-    public GameObject carrier;
 
     Vector3 lastPosition;
     Transform _transform;
@@ -31,17 +30,10 @@ public class CarryRigidbody : MonoBehaviour {
         {
             Vector3 velocity = (_transform.position - lastPosition);
             movingRigidbody.transform.Translate(velocity);
-            // movingRigidbody.transform.Translate(velocity, _transform);
+            // movingRigidbody.transform.Translate(velocity, _transform); besser?
         }
         lastPosition = _transform.position;
         
-
-        /*
-        if(movingRigidbody != null)
-        {
-            movingRigidbody.transform.parent = carrier.transform;
-        }
-        */
     }
 
     void OnCollisionEnter(Collision collision)

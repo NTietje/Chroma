@@ -4,8 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - movewith
   - Platform
+  - Projectile
   layers:
   - Default
   - TransparentFX

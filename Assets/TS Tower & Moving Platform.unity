@@ -1005,7 +1005,7 @@ GameObject:
   - component: {fileID: 2005069411}
   - component: {fileID: 2005069410}
   - component: {fileID: 2005069409}
-  - component: {fileID: 2005069413}
+  - component: {fileID: 2005069414}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -1072,14 +1072,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2005069408}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 4, y: 1.25, z: 1}
   m_LocalScale: {x: 1, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2005069413
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &2005069414
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -1087,14 +1087,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2005069408}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14924db9bbb73f84fbd8c5f512e67df5, type: 3}
+  m_Script: {fileID: 11500000, guid: c908defe4a67de24089765f270078213, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 1386631022850872, guid: 95d4a2bed97bec24083b8eb4bb909579,
     type: 2}
-  projectileSpeed: 0
-  projectileDistance: 0
-  respawnTime: 0
+  projectileSpeed: 4.6
+  projectileDistance: 17
+  respawnTime: 0.8
 --- !u!1 &2019908186
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class CarryRigidbody : MonoBehaviour {
 
-    public bool useTriggerAsSensor = false;
+    public bool useTriggerAsSensor;
 
     Vector3 lastPosition;
     Transform _transform;
-    Rigidbody movingRigidbody = null;
+    Rigidbody movingRigidbody;
 
 	// Use this for initialization
 	void Start () {

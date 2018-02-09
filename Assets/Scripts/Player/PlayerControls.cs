@@ -28,23 +28,27 @@ public class PlayerControls : MonoBehaviour {
 	void Update (){
 		if (!moving && !falling) {
 			AlignPosition ();
-			if (Input.GetKeyDown (KeyCode.Keypad1)) {
+			//Bottom Left
+			if (Input.GetKeyDown (KeyCode.S)) {
 				//x-0.5, y-0.5 BottomLeft
 				rotPointOffset = new Vector3 (-0.5f, -0.5f, 0f);
 				rotAxis = Vector3.forward;
 				moving = true;
 			}
-			if (Input.GetKeyDown (KeyCode.Keypad3)) {
+			//Bottom Right
+			if (Input.GetKeyDown (KeyCode.D)) {
 				rotPointOffset = new Vector3 (0f, -0.5f, -0.5f);
 				rotAxis = Vector3.left;
 				moving = true;
 			}
-			if (Input.GetKeyDown (KeyCode.Keypad7)) {
+			//Top Left
+			if (Input.GetKeyDown (KeyCode.W)) {
 				rotPointOffset = new Vector3 (0f, -0.5f, 0.5f);
 				rotAxis = Vector3.right;	
 				moving = true;
 			}
-			if (Input.GetKeyDown (KeyCode.Keypad9)) {
+			//Top Right
+			if (Input.GetKeyDown (KeyCode.E)) {
 				rotPointOffset = new Vector3 (0.5f, -0.5f, 0f);
 				rotAxis = Vector3.back;
 				moving = true;

@@ -6,54 +6,67 @@ public class PlayerControls : MonoBehaviour {
 
 	public int speed = 450;
 	public int maxFallingHeight = 50;
+	public float maxClimb = 0.2f;
 
 	private GameObject pivot;
 
 	private Vector3 spawnPoint;
 	private Vector3 rotAxis;
-	private Vector3 rotPoint;
-	private Vector3 rotPointOffset;
+	//private Vector3 rotPoint;
+	//private Vector3 rotPointOffset;
+	private Vector3 direction;
 
+	private float cubeRadius;
 	private bool moving;
 	private bool falling;
 	private int lowerBound;
 
 	// Use this for initialization
 	void Start () {
+		cubeRadius = transform.lossyScale.x*0.5f;
 		spawnPoint = transform.position;
 		pivot = new GameObject("Pivot");
 		pivot.transform.SetParent (transform);
 		AlignPosition ();
 	}
 	void Update (){
+		direction = Vector3.zero;
 		if (!moving && !falling) {
 			AlignPosition ();
 			//Bottom Left
 			if (Input.GetKeyDown (KeyCode.S)) {
 				//x-0.5, y-0.5 BottomLeft
-				rotPointOffset = new Vector3 (-0.5f, -0.5f, 0f);
+				direction = Vector3.left;
+				//rotPointOffset = new Vector3 (-0.5f, -0.5f, 0f);
 				rotAxis = Vector3.forward;
-				moving = true;
 			}
 			//Bottom Right
 			if (Input.GetKeyDown (KeyCode.D)) {
-				rotPointOffset = new Vector3 (0f, -0.5f, -0.5f);
+				direction = Vector3.back;
+				//rotPointOffset = new Vector3 (0f, -0.5f, -0.5f);
 				rotAxis = Vector3.left;
-				moving = true;
 			}
 			//Top Left
 			if (Input.GetKeyDown (KeyCode.W)) {
-				rotPointOffset = new Vector3 (0f, -0.5f, 0.5f);
-				rotAxis = Vector3.right;	
-				moving = true;
+				direction = Vector3.forward;
+				//rotPointOffset = new Vector3 (0f, -0.5f, 0.5f);
+				rotAxis = Vector3.right;
 			}
 			//Top Right
 			if (Input.GetKeyDown (KeyCode.E)) {
-				rotPointOffset = new Vector3 (0.5f, -0.5f, 0f);
+				direction = Vector3.right;
+				//rotPointOffset = new Vector3 (0.5f, -0.5f, 0f);
 				rotAxis = Vector3.back;
-				moving = true;
+
 			}
-			pivot.transform.localPosition = rotPointOffset;
+
+			//pivot.transform.localPosition = rotPointOffset;
+			if (direction != Vector3.zero) {
+				pivot.transform.localPosition = new Vector3 (cubeRadius * direction.x, -cubeRadius, cubeRadius * direction.z);
+				if (TargetIsNegotiable(direction)){
+					moving = true;
+				}
+			}
 		}
 	}
 
@@ -100,5 +113,12 @@ public class PlayerControls : MonoBehaviour {
 	}
 	public void SetSpawnPoint(Vector3 spawnPoint){
 		this.spawnPoint = spawnPoint;
+	}
+	private bool TargetIsNegotiable(Vector3 direction){
+		Vector3 origin = new Vector3 (transform.position.x, (transform.position.y - cubeRadius) + maxClimb, transform.position.z);
+		if (Physics.Raycast (origin, direction*1.4f, 1f)) {
+				return false;
+		}
+		return true;
 	}
 }

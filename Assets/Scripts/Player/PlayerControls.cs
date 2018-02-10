@@ -116,8 +116,14 @@ public class PlayerControls : MonoBehaviour {
 	}
 	private bool TargetIsNegotiable(Vector3 direction){
 		Vector3 origin = new Vector3 (transform.position.x, (transform.position.y - cubeRadius) + maxClimb, transform.position.z);
-		if (Physics.Raycast (origin, direction*1.4f, 1f)) {
+		if (gameObject.layer == 0) {
+			if (Physics.Raycast (origin, direction * 1.4f, 1f)) {
 				return false;
+			}
+		} else {
+			if (Physics.Raycast (origin, direction * 1.4f, 1f, gameObject.layer)) {
+				return false;
+			}
 		}
 		return true;
 	}

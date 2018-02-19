@@ -4,4 +4,7 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/TS Tower & Moving Platform.unity
+    guid: be98469cf38d7e84090a7b4378ba8fa1

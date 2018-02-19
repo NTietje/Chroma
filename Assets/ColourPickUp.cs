@@ -16,9 +16,10 @@ public class ColourPickUp : MonoBehaviour {
 		
 	}
 	void OnCollisionEnter(Collision col){
-		GameObject g = col.gameObject;
-		if (g.GetComponent<Colourise> ()) {
-			g.GetComponent<Colourise> ().SetColourLayer (colour);
+		GameObject gameobject = col.gameObject;
+        gameobject.GetComponent<Renderer>().material.color = colour;
+		if (gameobject.GetComponent<Colourise> ()) {
+			gameobject.GetComponent<Colourise> ().SetColourLayer (colour);
 			Destroy (gameObject);
 		}
 	}

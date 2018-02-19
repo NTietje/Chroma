@@ -20,9 +20,10 @@ public class PlayerControls : MonoBehaviour {
 	private bool moving;
 	private bool falling;
 	private int lowerBound;
+    private Vector2 touchOrigin = -Vector2.one;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		cubeRadius = transform.lossyScale.x*0.5f;
 		spawnPoint = transform.position;
 		pivot = new GameObject("Pivot");
@@ -30,47 +31,120 @@ public class PlayerControls : MonoBehaviour {
 		AlignPosition ();
 	}
 	void Update (){
-		direction = Vector3.zero;
+        direction = Vector3.zero;
 		if (!moving && !falling) {
 			AlignPosition ();
-			//Bottom Left
-			if (Input.GetKeyDown (KeyCode.S)) {
-				//x-0.5, y-0.5 BottomLeft
-				direction = Vector3.left;
-				//rotPointOffset = new Vector3 (-0.5f, -0.5f, 0f);
-				rotAxis = Vector3.forward;
+
+#if UNITY_STANDALONE
+            //Bottom Left
+            if (Input.GetKeyDown (KeyCode.S)) {
+                MoveToBottomLeft();
 			}
 			//Bottom Right
-			if (Input.GetKeyDown (KeyCode.D)) {
-				direction = Vector3.back;
-				//rotPointOffset = new Vector3 (0f, -0.5f, -0.5f);
-				rotAxis = Vector3.left;
+			else if (Input.GetKeyDown (KeyCode.D)) {
+                MoveToBottomRight();
 			}
 			//Top Left
-			if (Input.GetKeyDown (KeyCode.W)) {
-				direction = Vector3.forward;
-				//rotPointOffset = new Vector3 (0f, -0.5f, 0.5f);
-				rotAxis = Vector3.right;
+			else if (Input.GetKeyDown (KeyCode.W)) {
+                MoveToTopLeft();
 			}
 			//Top Right
-			if (Input.GetKeyDown (KeyCode.E)) {
-				direction = Vector3.right;
-				//rotPointOffset = new Vector3 (0.5f, -0.5f, 0f);
-				rotAxis = Vector3.back;
-
+			else if (Input.GetKeyDown (KeyCode.E)) {
+                MoveToTopRight();
 			}
+#endif
 
-			//pivot.transform.localPosition = rotPointOffset;
-			if (direction != Vector3.zero) {
+#if UNITY_IOS || UNITY_ANDROID
+            //Check if Input has registered more than zero touches
+            if (Input.touchCount > 0)
+            {
+                //Store the first touch detected.
+                Touch firstTouch = Input.touches[0];
+            
+                //Check if the phase of that touch equals Began
+                if (firstTouch.phase == TouchPhase.Began)
+                {
+                    //If so, set touchOrigin to the position of that touch
+                    touchOrigin = firstTouch.position;
+                    Debug.Log("Touchorigin: " + touchOrigin);
+             
+                    int maxDistance = Screen.height / 2 - 5;
+                    Vector2 bottomRight = new Vector2(Screen.width, 0);
+                    Vector2 bottomLeft = new Vector2(0, 0);
+                    Vector2 topRight = new Vector2(Screen.width, Screen.height);
+                    Vector2 topLeft = new Vector2(0, Screen.height);
+
+                    if (Vector2.Distance(touchOrigin, bottomRight) <= maxDistance && touchOrigin.x >  Screen.width/2 + 5)
+                    {
+                        MoveToBottomRight();
+                    }
+                    else if (Vector2.Distance(touchOrigin, bottomLeft) <= maxDistance && touchOrigin.x < Screen.width / 2 - 5)
+                    {
+                        MoveToBottomLeft();
+                    }
+                    else if (Vector2.Distance(touchOrigin, topRight) <= maxDistance && touchOrigin.x > Screen.width / 2 + 5)
+                    {
+                        MoveToTopRight();
+                    }
+                    else if (Vector2.Distance(touchOrigin, topLeft) <= maxDistance && touchOrigin.x < Screen.width / 2 - 5)
+                    {
+                        MoveToTopLeft();
+                    }
+                    else
+                    {
+                        Debug.Log("Touch war nicht im gültigen Bereich");
+                    }
+                }
+                /*
+                foreach(Touch touch in Input.touches)
+                {
+                    Debug.Log("Touch: " + touch.position);
+                }
+                */
+            }
+#endif
+
+            //pivot.transform.localPosition = rotPointOffset;
+            if (direction != Vector3.zero) {
 				pivot.transform.localPosition = new Vector3 (cubeRadius * direction.x, -cubeRadius, cubeRadius * direction.z);
 				if (TargetIsNegotiable(direction)){
 					moving = true;
 				}
 			}
 		}
-	}
 
-	void FixedUpdate () {
+    }
+
+    void MoveToBottomLeft()
+    {
+        //x-0.5, y-0.5 BottomLeft
+        direction = Vector3.left;
+        //rotPointOffset = new Vector3 (-0.5f, -0.5f, 0f);
+        rotAxis = Vector3.forward;
+    }
+
+    void MoveToBottomRight()
+    {
+        direction = Vector3.back;
+        //rotPointOffset = new Vector3 (0f, -0.5f, -0.5f);
+        rotAxis = Vector3.left;
+    }
+
+    void MoveToTopLeft()
+    {
+        direction = Vector3.forward;
+        //rotPointOffset = new Vector3 (0f, -0.5f, 0.5f);
+        rotAxis = Vector3.right;
+    }
+
+    void MoveToTopRight ()
+    {
+        direction = Vector3.right;
+        //rotPointOffset = new Vector3 (0.5f, -0.5f, 0f);
+        rotAxis = Vector3.back;
+    }
+
+    void FixedUpdate () {
 		//ground detection
 		RaycastHit hit;
 		if (Physics.Raycast (transform.position, Vector3.down, out hit, 0.51f)) {

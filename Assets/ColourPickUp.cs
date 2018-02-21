@@ -4,17 +4,13 @@ using UnityEngine;
 
 public class ColourPickUp : MonoBehaviour {
 
-	public Color colour = Color.green;
+	private Color colour;
 
 	// Use this for initialization
 	void Start () {
-		
+        colour = GetComponent<Renderer>().material.color;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 	void OnCollisionEnter(Collision col){
 		GameObject gameobject = col.gameObject;
         gameobject.GetComponent<Renderer>().material.color = colour;

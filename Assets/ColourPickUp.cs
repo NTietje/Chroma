@@ -14,13 +14,15 @@ public class ColourPickUp : MonoBehaviour {
         controller = gameObject.GetComponentInParent<ColourItemController>();
 	}
 
-
-    void OnCollisionEnter(Collision col)
+    // Change player colour on trigger-collision
+    void OnTriggerEnter(Collider other)
     {
-		GameObject gameobject = col.gameObject;
+		GameObject gameobject = other.gameObject;
         gameobject.GetComponent<Renderer>().material.color = colour;
+        // Switch layer
 		if (gameobject.GetComponent<Colourise> ()) {
 			gameobject.GetComponent<Colourise> ().SetColourLayer (colour);
+            // Make ColourItem inactiv
             controller.SetColourItemInactiv();
 		}
 	}

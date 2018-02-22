@@ -9,46 +9,46 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1566027227398258}
+  m_RootGameObject: {fileID: 1561610207875086}
   m_IsPrefabParent: 1
---- !u!1 &1566027227398258
+--- !u!1 &1561610207875086
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4445039902933276}
-  - component: {fileID: 33267090732735464}
-  - component: {fileID: 23214495787047780}
-  - component: {fileID: 65986102046428036}
-  - component: {fileID: 114371009623350600}
+  - component: {fileID: 4692349056684198}
+  - component: {fileID: 33385754188705430}
+  - component: {fileID: 23133474915082692}
+  - component: {fileID: 114774570483180082}
+  - component: {fileID: 64754847657546194}
   m_Layer: 0
-  m_Name: CheckPoint
+  m_Name: Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
---- !u!4 &4445039902933276
+--- !u!4 &4692349056684198
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1566027227398258}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.51, z: 0}
-  m_LocalScale: {x: 0.013333333, y: 1, z: 0.013333333}
+  m_GameObject: {fileID: 1561610207875086}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 4, y: 0.83, z: -0.31}
+  m_LocalScale: {x: 0.3, y: 0.4, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23214495787047780
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!23 &23133474915082692
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1566027227398258}
+  m_GameObject: {fileID: 1561610207875086}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -57,7 +57,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 09da5d9c1c8bd8742b350eb5d3fe18b7, type: 2}
+  - {fileID: 2100000, guid: 3b8448f04cc0b694dbd208263a836209, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -65,7 +65,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
+  m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 0
@@ -77,37 +77,40 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33267090732735464
+--- !u!33 &33385754188705430
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1566027227398258}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65986102046428036
-BoxCollider:
+  m_GameObject: {fileID: 1561610207875086}
+  m_Mesh: {fileID: 4300000, guid: b79d9ec8e06abaa4392807fa20fd3fa5, type: 3}
+--- !u!64 &64754847657546194
+MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1566027227398258}
+  m_GameObject: {fileID: 1561610207875086}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5, y: 0.1, z: 5}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114371009623350600
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: b79d9ec8e06abaa4392807fa20fd3fa5, type: 3}
+--- !u!114 &114774570483180082
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1566027227398258}
+  m_GameObject: {fileID: 1561610207875086}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce4519a8d5d5cbb48b2fde020c7ed542, type: 3}
+  m_Script: {fileID: 11500000, guid: c908defe4a67de24089765f270078213, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorUnchecked: {r: 0.7352941, g: 0.7352941, b: 0.7352941, a: 1}
-  colorChecked: {r: 0.30147058, g: 1, b: 0.59533465, a: 1}
-  active: 0
-  spawnOffset: 0.5
+  projectilePrefab: {fileID: 1635744289016744, guid: 07382df05f528654a94aee4d51ea4bd0,
+    type: 2}
+  projectileSpeed: 4.6
+  projectileDistance: 18
+  respawnTime: 0.8

@@ -27,6 +27,7 @@ public class ProjectileGenerator : MonoBehaviour {
             instantiateNewProjetile();
             //Debug.Log("generate new Projectile");
             time = respawnTime;
+			
         }
     }
 
@@ -36,6 +37,7 @@ public class ProjectileGenerator : MonoBehaviour {
     {
         GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation) as GameObject;
         projectile.GetComponent<Projectile>().Initialize(transform.position, projectileDistance, projectileSpeed);
+		
     }
 
 }

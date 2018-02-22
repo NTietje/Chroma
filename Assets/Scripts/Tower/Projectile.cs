@@ -8,6 +8,8 @@ public class Projectile : MonoBehaviour {
     float projectileDistance;
     float projectileSpeed;
     Vector3 startPosition;
+	
+	
 
     public void Initialize(Vector3 startPosition, float projectileDistance, float projectileSpeed)
     {
@@ -15,6 +17,7 @@ public class Projectile : MonoBehaviour {
         this.projectileSpeed = projectileSpeed;
         this.startPosition = startPosition;
         allowUpdate = true;
+		
     }
 
     void FixedUpdate()

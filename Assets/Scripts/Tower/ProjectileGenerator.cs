@@ -34,8 +34,9 @@ public class ProjectileGenerator : MonoBehaviour {
     // Instantiate new projectile and add to the projectiles list
     void instantiateNewProjetile()
     {
-        GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation) as GameObject;
-        projectile.GetComponent<Projectile>().Initialize(transform.position, projectileDistance, projectileSpeed);
+        Vector3 position = new Vector3(transform.position.x, transform.position.y +0.4f, transform.position.z);
+        GameObject projectile = Instantiate(projectilePrefab, position, transform.rotation) as GameObject;
+        projectile.GetComponent<Projectile>().Initialize(position, projectileDistance, projectileSpeed);
     }
 
 }

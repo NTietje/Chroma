@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
 
+    public Color defaultPlayerColour;
+
     bool allowUpdate;
     float projectileDistance;
     float projectileSpeed;
@@ -33,15 +35,16 @@ public class Projectile : MonoBehaviour {
         }  
     }
 
-    // ********* SPIELER COLLISION ABFRAGEN *********
-    private void OnTriggerEnter(Collider other) //Keine OnCollisionEnter Methode nehmen! Dann fliegt das Projektil nicht richtig aus dem Turm raus
+    // Waits for trigger-collision with player
+    private void OnTriggerEnter(Collider other) 
     {
         if (other.tag == "Player")
         {
-            Destroy(gameObject);
-            //Hier Spielerfarbe zu Default (erstmal weiß) ändern
-            //collision.gameObject.Blabla Funktion
-            Debug.Log("Spieler wurde von Projektil getroffen");
+            Destroy(gameObject); //Destroys projetile
+
+            //Change player colour
+            other.gameObject.GetComponent<Renderer>().material.color = defaultPlayerColour;
+            //Debug.Log("Spieler wurde von Projektil getroffen");
         }
     }
    

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ColourPickUp : MonoBehaviour {
 
+	public enum ColorLayer{Red, Green, Blue, Yellow};
+
+	public ColorLayer colorLayer;
+
 	private Color colour;
     private ColourItemController controller;
 
@@ -21,9 +25,25 @@ public class ColourPickUp : MonoBehaviour {
         gameobject.GetComponent<Renderer>().material.color = colour;
         // Switch layer
 		if (gameobject.GetComponent<Colourise> ()) {
-			gameobject.GetComponent<Colourise> ().SetColourLayer (colour);
+			//gameobject.GetComponent<Colourise> ().SetColourLayer (colour);
+			//gameobject.GetComponent<Colourise> ().SetColourLayer (colorLayer);
+			gameobject.layer = ApplyColorLayer (colorLayer);
             // Make ColourItem inactiv
             controller.SetColourItemInactiv();
+		}
+	}
+	int ApplyColorLayer(ColorLayer colorLayer){
+		switch (colorLayer) {
+		case ColorLayer.Red:
+			return 8;
+		case ColorLayer.Green:
+			return 9;
+		case ColorLayer.Blue:
+			return 10;
+		case ColorLayer.Yellow:
+			return 11;
+		default: 
+			return 0;
 		}
 	}
 

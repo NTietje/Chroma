@@ -12,7 +12,7 @@ public class Colourise : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-	}
+	}/*
 	public void SetColourLayer(Color colour){
 		if (colour == Color.red) {
 			gameObject.layer = 8;
@@ -23,5 +23,5 @@ public class Colourise : MonoBehaviour {
 		} else {
 			gameObject.layer = 0;
 		}
-	}
+	}*/
 }

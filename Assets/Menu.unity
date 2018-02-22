@@ -2802,8 +2802,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.8, y: -45}
-  m_SizeDelta: {x: 124.3, y: 137.3}
+  m_AnchoredPosition: {x: -3.9, y: -36.1}
+  m_SizeDelta: {x: 145.3, y: 119.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2091573129
 MonoBehaviour:
@@ -2826,7 +2826,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 8
+    m_FontSize: 7
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -2837,9 +2837,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Andorid Mobile Game\r\n\r\nMade in Unity 2017.3.0\r\n\nCreated for the
-    Image Processing module at the Hamburg University for Applied Sciences by Nina
-    Tietje, Christopher von Bargen and Tara Van Calster"
+  m_Text: "Andorid Mobile Game\r made in Unity 2017.3.0\r\n\nCreated for the Image
+    Processing module at the Hamburg University for Applied Sciences by Nina Tietje,
+    Christopher von Bargen and Tara Van Calster\n\nMusic by Daniel Birch\nfreemusicarchive.org/music/Daniel_Birch\n\nSound
+    effects by Eric Matyas \nsoundimage.org"
 --- !u!222 &2091573130
 CanvasRenderer:
   m_ObjectHideFlags: 0

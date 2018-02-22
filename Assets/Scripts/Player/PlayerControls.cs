@@ -9,6 +9,9 @@ public class PlayerControls : MonoBehaviour {
 	public float maxClimb = 0.2f;
 
 	private GameObject pivot;
+	
+	public AudioClip cubeSound;
+	private AudioSource source;
 
 	private Vector3 spawnPoint;
 	private Vector3 rotAxis;
@@ -22,6 +25,10 @@ public class PlayerControls : MonoBehaviour {
 	private int lowerBound;
     private Vector2 touchOrigin = -Vector2.one;
 
+	void Awake (){
+		source = GetComponent<AudioSource>();
+	}
+	
     // Use this for initialization
     void Start () {
 		cubeRadius = transform.lossyScale.x*0.5f;
@@ -121,6 +128,8 @@ public class PlayerControls : MonoBehaviour {
         direction = Vector3.left;
         //rotPointOffset = new Vector3 (-0.5f, -0.5f, 0f);
         rotAxis = Vector3.forward;
+		
+		source.PlayOneShot(cubeSound, 1F); //1parameter: audio clip 2paramenter: volume
     }
 
     void MoveToBottomRight()
@@ -128,6 +137,8 @@ public class PlayerControls : MonoBehaviour {
         direction = Vector3.back;
         //rotPointOffset = new Vector3 (0f, -0.5f, -0.5f);
         rotAxis = Vector3.left;
+		
+		source.PlayOneShot(cubeSound, 1F);
     }
 
     void MoveToTopLeft()
@@ -135,6 +146,8 @@ public class PlayerControls : MonoBehaviour {
         direction = Vector3.forward;
         //rotPointOffset = new Vector3 (0f, -0.5f, 0.5f);
         rotAxis = Vector3.right;
+		
+		source.PlayOneShot(cubeSound, 1F);
     }
 
     void MoveToTopRight ()
@@ -142,6 +155,8 @@ public class PlayerControls : MonoBehaviour {
         direction = Vector3.right;
         //rotPointOffset = new Vector3 (0.5f, -0.5f, 0f);
         rotAxis = Vector3.back;
+		
+		source.PlayOneShot(cubeSound, 1F);
     }
 
     void FixedUpdate () {

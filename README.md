@@ -1,5 +1,5 @@
 # Chroma
-Mobile Game (for Android)
+Mobile Game
 
 Unity 2017.3.0
 

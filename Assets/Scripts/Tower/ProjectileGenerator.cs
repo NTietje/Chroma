@@ -27,6 +27,7 @@ public class ProjectileGenerator : MonoBehaviour {
             instantiateNewProjetile();
             //Debug.Log("generate new Projectile");
             time = respawnTime;
+			
         }
     }
 

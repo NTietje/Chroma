@@ -24,13 +24,9 @@ public class ColourPickUp : MonoBehaviour {
 		GameObject gameobject = other.gameObject;
         gameobject.GetComponent<Renderer>().material.color = colour;
         // Switch layer
-		if (gameobject.GetComponent<Colourise> ()) {
-			//gameobject.GetComponent<Colourise> ().SetColourLayer (colour);
-			//gameobject.GetComponent<Colourise> ().SetColourLayer (colorLayer);
-			gameobject.layer = ApplyColorLayer (colorLayer);
-            // Make ColourItem inactiv
-            controller.SetColourItemInactiv();
-		}
+		gameobject.layer = ApplyColorLayer (colorLayer);
+		// Make ColourItem inactiv
+		controller.SetColourItemInactiv();
 	}
 	int ApplyColorLayer(ColorLayer colorLayer){
 		switch (colorLayer) {

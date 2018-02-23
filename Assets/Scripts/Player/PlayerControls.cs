@@ -63,8 +63,10 @@ public class PlayerControls : MonoBehaviour {
 
 #if UNITY_IOS || UNITY_ANDROID
             //Check if Input has registered more than zero touches
+            
             if (Input.touchCount > 0)
             {
+                
                 //Store the first touch detected.
                 Touch firstTouch = Input.touches[0];
             
@@ -80,7 +82,7 @@ public class PlayerControls : MonoBehaviour {
                     Vector2 bottomLeft = new Vector2(0, 0);
                     Vector2 topRight = new Vector2(Screen.width, Screen.height);
                     Vector2 topLeft = new Vector2(0, Screen.height);
-
+                    
                     if (Vector2.Distance(touchOrigin, bottomRight) <= maxDistance && touchOrigin.x >  Screen.width/2 + 5)
                     {
                         MoveToBottomRight();
@@ -101,7 +103,10 @@ public class PlayerControls : MonoBehaviour {
                     {
                         Debug.Log("Touch war nicht im gültigen Bereich");
                     }
+                    
                 }
+                
+
                 /*
                 foreach(Touch touch in Input.touches)
                 {
@@ -109,6 +114,7 @@ public class PlayerControls : MonoBehaviour {
                 }
                 */
             }
+            
 #endif
 
             //pivot.transform.localPosition = rotPointOffset;

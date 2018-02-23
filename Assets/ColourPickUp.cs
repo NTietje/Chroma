@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ColourPickUp : MonoBehaviour {
 
-	public enum ColorLayer{Red, Green, Blue, Yellow};
+	public enum ColorLayer{ColorLayer1, ColorLayer2, ColorLayer3, ColorLayer4};
 
 	public ColorLayer colorLayer;
 
@@ -30,13 +30,13 @@ public class ColourPickUp : MonoBehaviour {
 	}
 	int ApplyColorLayer(ColorLayer colorLayer){
 		switch (colorLayer) {
-		case ColorLayer.Red:
+		case ColorLayer.ColorLayer1:
 			return 8;
-		case ColorLayer.Green:
+		case ColorLayer.ColorLayer2:
 			return 9;
-		case ColorLayer.Blue:
+		case ColorLayer.ColorLayer3:
 			return 10;
-		case ColorLayer.Yellow:
+		case ColorLayer.ColorLayer4:
 			return 11;
 		default: 
 			return 0;

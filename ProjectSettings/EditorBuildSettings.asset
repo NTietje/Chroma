@@ -8,6 +8,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Menu.unity
     guid: 68163f138cd7197438de24428977fc22
-  - enabled: 1
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
     path: Assets/TS Tower & Moving Platform.unity
-    guid: be98469cf38d7e84090a7b4378ba8fa1
+    guid: c88a070fcf0f9dc469c125706b2c48de
+  - enabled: 0
+    path: Assets/TS Tower & Moving Platform BuildTest.unity
+    guid: 36fb4c66ca33f9e4785e210e4f7da6a8
+  - enabled: 1
+    path: Assets/Dev Nina.unity
+    guid: 2e922d6577d4a264bba4c62501253710
+  - enabled: 1
+    path: Assets/Dev Nina 1.unity
+    guid: 41139b916a334d745b5642f9a9ccea0b

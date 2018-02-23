@@ -108,6 +108,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorUnchecked: {r: 0.7352941, g: 0.7352941, b: 0.7352941, a: 1}
-  colorChecked: {r: 0.30147058, g: 1, b: 0.59533465, a: 1}
+  colorChecked: {r: 0.43382353, g: 1, b: 0.43772817, a: 1}
   active: 0
   spawnOffset: 0.5

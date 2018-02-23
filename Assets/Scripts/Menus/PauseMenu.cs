@@ -28,7 +28,7 @@ public class PauseMenu : MonoBehaviour {
 	}
 	
 	public void LoadMenu(){
-		SceneManager.LoadScene(0);	//Ruft Szene 0 auf, das ist in unserem Fall die Menu Szene
+		SceneManager.LoadScene("Menu");	//Ruft Szene Meu auf
 	}
 	
 }

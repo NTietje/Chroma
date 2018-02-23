@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ColourPickUp : MonoBehaviour {
 
-	public enum ColorLayer{Red, Green, Blue, Yellow};
-	public ColorLayer colorLayer;
+    public enum ColorLayer { ColorLayer1, ColorLayer2, ColorLayer3, ColorLayer4 };
+    public ColorLayer colorLayer;
     public float respawnTime;
 
     private Color colour;
@@ -45,19 +45,21 @@ public class ColourPickUp : MonoBehaviour {
         SetGameObjectActiv(true);
     }
 
-    int ApplyColorLayer(ColorLayer colorLayer){
-		switch (colorLayer) {
-		case ColorLayer.Red:
-			return 8;
-		case ColorLayer.Green:
-			return 9;
-		case ColorLayer.Blue:
-			return 10;
-		case ColorLayer.Yellow:
-			return 11;
-		default: 
-			return 0;
-		}
-	}
+    int ApplyColorLayer(ColorLayer colorLayer)
+    {
+        switch (colorLayer)
+        {
+            case ColorLayer.ColorLayer1:
+                return 8;
+            case ColorLayer.ColorLayer2:
+                return 9;
+            case ColorLayer.ColorLayer3:
+                return 10;
+            case ColorLayer.ColorLayer4:
+                return 11;
+            default:
+                return 0;
+        }
+    }
 
 }

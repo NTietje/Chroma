@@ -609,7 +609,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 64315984836594604, guid: ab0e153fdd8fb7f47aa8f28af64591d8, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: ab0e153fdd8fb7f47aa8f28af64591d8, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &221964227
@@ -2421,6 +2422,25 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1847743687}
+--- !u!1 &1863817029 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1089734668825760, guid: ab0e153fdd8fb7f47aa8f28af64591d8,
+    type: 2}
+  m_PrefabInternal: {fileID: 153920055}
+--- !u!64 &1863817030
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1863817029}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: b79d9ec8e06abaa4392807fa20fd3fa5, type: 3}
 --- !u!1 &2019908186
 GameObject:
   m_ObjectHideFlags: 0

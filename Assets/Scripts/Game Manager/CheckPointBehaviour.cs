@@ -10,12 +10,15 @@ public class CheckPointBehaviour : MonoBehaviour {
 	public float spawnOffset = 0.5f;
 
 	private Renderer rend;
+	private Component[] renderers;
+
 
 	// Use this for initialization
 	void Start () {
 		active = false;
 		rend = GetComponent<Renderer> ();
 		rend.material.color = colorUnchecked;
+		renderers = gameObject.GetComponentsInChildren(typeof(Renderer));
 	}
 	void OnTriggerEnter(Collider other){
 		if (!active) {
@@ -28,10 +31,16 @@ public class CheckPointBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		Color lerpColor = rend.material.color;
 		if (active) {
-			rend.material.color = Color.Lerp (rend.material.color, colorChecked, Time.deltaTime);
+			lerpColor = Color.Lerp (rend.material.color, colorChecked, Time.deltaTime);
+			
 		} else {
-			rend.material.color = Color.Lerp (rend.material.color, colorUnchecked, Time.deltaTime);
+			lerpColor = Color.Lerp (rend.material.color, colorUnchecked, Time.deltaTime);
+		}
+		rend.material.color = lerpColor;
+		foreach (Renderer childRenderer in renderers){
+			childRenderer.material.color = lerpColor;
 		}
 	}
 }

@@ -9,55 +9,54 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1876736909091642}
+  m_RootGameObject: {fileID: 1992137573596824}
   m_IsPrefabParent: 1
---- !u!1 &1876736909091642
+--- !u!1 &1992137573596824
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4134696875506796}
-  - component: {fileID: 33736575522540124}
-  - component: {fileID: 23989256415188776}
-  - component: {fileID: 65599314300834640}
-  - component: {fileID: 114421360849801336}
+  - component: {fileID: 4230642518830786}
+  - component: {fileID: 33783305652462500}
+  - component: {fileID: 23748556982213524}
+  - component: {fileID: 114386239788204598}
   m_Layer: 0
-  m_Name: CheckPoint2
+  m_Name: GlowPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4134696875506796
+--- !u!4 &4230642518830786
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1876736909091642}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2, y: 0.51000005, z: 0.00002733895}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_GameObject: {fileID: 1992137573596824}
+  m_LocalRotation: {x: 0.0000015045896, y: -0.7071068, z: 0.70710677, w: -0.0000016761803}
+  m_LocalPosition: {x: -0.7971667, y: 0.23541383, z: 0.017360207}
+  m_LocalScale: {x: 0.037781302, y: 0.06309354, z: 0.03874533}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23989256415188776
+--- !u!23 &23748556982213524
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1876736909091642}
+  m_GameObject: {fileID: 1992137573596824}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 09da5d9c1c8bd8742b350eb5d3fe18b7, type: 2}
+  - {fileID: 2100000, guid: 2ce1ad742aae3554997292eed468d59f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -65,7 +64,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
+  m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 0
@@ -77,37 +76,26 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33736575522540124
+--- !u!33 &33783305652462500
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1876736909091642}
+  m_GameObject: {fileID: 1992137573596824}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65599314300834640
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1876736909091642}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5, y: 0.1, z: 5}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114421360849801336
+--- !u!114 &114386239788204598
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1876736909091642}
+  m_GameObject: {fileID: 1992137573596824}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce4519a8d5d5cbb48b2fde020c7ed542, type: 3}
+  m_Script: {fileID: 11500000, guid: 07c97941585d6f14d8ebe7af20590e14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorUnchecked: {r: 0.7352941, g: 0.7352941, b: 0.7352941, a: 1}
-  colorChecked: {r: 0.43382353, g: 1, b: 0.43772817, a: 1}
-  active: 0
-  spawnOffset: 0.5
+  scrollSpeed: 1
+  MainoffsetX: 0
+  MainoffsetY: -1.51
+  UseCustomTex: 0
+  CustomTexName: 

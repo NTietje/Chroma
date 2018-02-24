@@ -82,7 +82,6 @@ public class PlayerControls : MonoBehaviour {
         //rotPointOffset = new Vector3 (0f, -0.5f, -0.5f);
         rotAxis = Vector3.left;
         //yield return null;
-        Move();
     }
 
     void MoveToTopLeft()
@@ -91,7 +90,6 @@ public class PlayerControls : MonoBehaviour {
         //rotPointOffset = new Vector3 (0f, -0.5f, 0.5f);
         rotAxis = Vector3.right;
         //yield return null;
-        Move();
     }
 
     void MoveToTopRight()
@@ -100,7 +98,6 @@ public class PlayerControls : MonoBehaviour {
         //rotPointOffset = new Vector3 (0.5f, -0.5f, 0f);
         rotAxis = Vector3.back;
         //yield return null;
-        Move();
     }
 
     void Move()
@@ -178,21 +175,25 @@ public class PlayerControls : MonoBehaviour {
 
 	private bool TargetIsNegotiable(Vector3 direction)
     {
+		string debugString = "";
 		Vector3 origin = new Vector3 (transform.position.x, (transform.position.y - cubeRadius) + maxClimb, transform.position.z);
 		if (gameObject.layer == 0)
         {
 			if (Physics.Raycast (origin, direction * 1.4f, 1f))
             {
+
 				return false;
 			}
-		}
-        else //<<<<<<<<<<<<<<<<<<<<<< kann es sein das du hier eigentlich nur ein else if haben wolltest?
-        {
-			if (Physics.Raycast (origin, direction * 1.4f, 1f, gameObject.layer))
+		} else {
+			LayerMask mask = ~(1 << gameObject.layer); //mask all layers except for the own (color) layer!
+			if (Physics.Raycast (origin, direction * 1.4f, 1f, mask))
             {
 				return false;
+
 			}
 		}
+		debugString += gameObject.layer.ToString();
+		Debug.Log (debugString);
 		return true;
 	}
 

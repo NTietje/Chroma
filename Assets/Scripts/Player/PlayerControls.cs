@@ -9,139 +9,71 @@ public class PlayerControls : MonoBehaviour {
 	public float maxClimb = 0.2f;
 	public AudioClip cubeSound;
 	public Color defaultPlayerColour;
-
-	private AudioSource source;
     
-
+	private AudioSource source;
     private GameObject pivot;
     private Vector3 spawnPoint;
 	private Vector3 rotAxis;
 	//private Vector3 rotPoint;
 	//private Vector3 rotPointOffset;
 	private Vector3 direction;
-    private bool touchAllowed;
+    //private bool touchAllowed;
     private float cubeRadius;
 	private bool moving;
 	private bool falling;
 	private int lowerBound;
-    private Vector2 touchOrigin = -Vector2.one;
-
-	void Awake (){
-		source = GetComponent<AudioSource>();
-	}
+    //private Vector2 touchOrigin = -Vector2.one;
 	
     // Use this for initialization
-    void Start () {
-        touchAllowed = true;
-		cubeRadius = transform.lossyScale.x*0.5f;
+    void Start ()
+    {
+        source = GetComponent<AudioSource>();
+        //touchAllowed = true;
+        cubeRadius = transform.lossyScale.x*0.5f;
 		spawnPoint = transform.position;
 		pivot = new GameObject("Pivot");
 		pivot.transform.SetParent (transform);
 		AlignPosition ();
 	}
-	void Update (){
-        direction = Vector3.zero;
-		if (!moving && !falling) {
-			AlignPosition ();
 
-#if UNITY_STANDALONE
-            //Bottom Left
-            if (Input.GetKeyDown (KeyCode.S)) {
-                MoveToBottomLeft();
-			}
-			//Bottom Right
-			else if (Input.GetKeyDown (KeyCode.D)) {
-                MoveToBottomRight();
-			}
-			//Top Left
-			else if (Input.GetKeyDown (KeyCode.W)) {
-                MoveToTopLeft();
-			}
-			//Top Right
-			else if (Input.GetKeyDown (KeyCode.E)) {
-                MoveToTopRight();
-			}
-#endif
-
-#if UNITY_IOS || UNITY_ANDROID
-            //Check if Input has registered more than zero touches
-            
-            if (Input.touchCount > 0 && touchAllowed)
-            {
-                
-                //Store the first touch detected.
-                Touch firstTouch = Input.touches[0];
-            
-                //Check if the phase of that touch equals Began
-                if (firstTouch.phase == TouchPhase.Began)
-                {
-                    //If so, set touchOrigin to the position of that touch
-                    touchOrigin = firstTouch.position;
-                    Debug.Log("Touchorigin: " + touchOrigin);
-             
-                    int maxDistance = Screen.height / 2;
-                    Vector2 bottomRight = new Vector2(Screen.width, 0);
-                    Vector2 bottomLeft = new Vector2(0, 0);
-                    Vector2 topRight = new Vector2(Screen.width, Screen.height);
-                    Vector2 topLeft = new Vector2(0, Screen.height);
-                    
-                    // if (Vector2.Distance(touchOrigin, bottomRight) <= maxDistance && touchOrigin.x >  Screen.width/2)
-                    if (touchOrigin.y < Screen.height/2 && touchOrigin.x >  Screen.width/2)
-                    {
-                        MoveToBottomRight();
-                    }
-                    //else if (Vector2.Distance(touchOrigin, bottomLeft) <= maxDistance && touchOrigin.x < Screen.width/2)
-                    else if (touchOrigin.y < Screen.height/2 && touchOrigin.x < Screen.width/2)
-                    {
-                        MoveToBottomLeft();
-                    }
-                    // else if (Vector2.Distance(touchOrigin, topRight) <= maxDistance && touchOrigin.x > Screen.width/2)
-                    else if (touchOrigin.y > Screen.height/2 && touchOrigin.x > Screen.width/2 && Vector2.Distance(touchOrigin, topRight) >= Screen.height/8)
-                    {
-                        MoveToTopRight();
-                    }
-                    //else if (Vector2.Distance(touchOrigin, topLeft) <= maxDistance && touchOrigin.x < Screen.width/2)
-                    else if (touchOrigin.y > Screen.height/2 && touchOrigin.x < Screen.width/2)
-                    {
-                        MoveToTopLeft();
-                    }
-                    else
-                    {
-                        Debug.Log("Touch war nicht im gültigen Bereich");
-                    }
-                    
-                }
-                
-
-                /*
-                foreach(Touch touch in Input.touches)
-                {
-                    Debug.Log("Touch: " + touch.position);
-                }
-                */
-            }
-            
-#endif
-
-            //pivot.transform.localPosition = rotPointOffset;
-            if (direction != Vector3.zero) {
-				pivot.transform.localPosition = new Vector3 (cubeRadius * direction.x, -cubeRadius, cubeRadius * direction.z);
-				if (TargetIsNegotiable(direction)){
-					moving = true;
-				}
-			}
-		}
-
+    private void Update()
+    {
+        direction = Vector3.zero; //<<<<<<<<<<<<<<<<<<<<<< muss das pro Frame ausgeführt werden?
     }
+
+    public void TryMove(string moveDirection)
+    {
+        Debug.Log("TryMove");  
+        if (!moving && !falling)
+        {
+            AlignPosition(); 
+            Invoke(moveDirection, 0f); //<<<<<<<<<<<<<<<<<<<<<< hier wird MoveToBottomLeft o.ä. aufgerufen, darin wird Move aufgerufen
+            //pivot.transform.localPosition = rotPointOffset;
+            //StartCoroutine(SequenzHandler(moveDirection));
+            Debug.Log("SetNewDirection");
+            source.PlayOneShot(cubeSound, 1F); //1parameter: audio clip 2paramenter: volume
+            //<<<<<<<<<<<<<<<<<<<<<< Move() kann in TryMove() nur mit Coroutine ausgeführt werden, kann ich auch wieder dahin zurück ändern
+        }
+    }
+
+    /*
+    IEnumerator SequenzHandler(string moveDirection)
+    {
+        Debug.Log(moveDirection);
+        yield return StartCoroutine(moveDirection);
+        yield return StartCoroutine(Move());
+    }
+    */
 
     void MoveToBottomLeft()
     {
+        Debug.Log("in MoveBottomLeft");
         //x-0.5, y-0.5 BottomLeft
         direction = Vector3.left;
         //rotPointOffset = new Vector3 (-0.5f, -0.5f, 0f);
         rotAxis = Vector3.forward;
-		
-		source.PlayOneShot(cubeSound, 1F); //1parameter: audio clip 2paramenter: volume
+        //yield return null;
+        Move();
     }
 
     void MoveToBottomRight()
@@ -149,8 +81,9 @@ public class PlayerControls : MonoBehaviour {
         direction = Vector3.back;
         //rotPointOffset = new Vector3 (0f, -0.5f, -0.5f);
         rotAxis = Vector3.left;
-		
-		source.PlayOneShot(cubeSound, 1F);
+        Move();
+        //yield return null;
+        Move();
     }
 
     void MoveToTopLeft()
@@ -158,45 +91,71 @@ public class PlayerControls : MonoBehaviour {
         direction = Vector3.forward;
         //rotPointOffset = new Vector3 (0f, -0.5f, 0.5f);
         rotAxis = Vector3.right;
-		
-		source.PlayOneShot(cubeSound, 1F);
+        Move();
+        //yield return null;
+        Move();
     }
 
-    void MoveToTopRight ()
+    void MoveToTopRight()
     {
         direction = Vector3.right;
         //rotPointOffset = new Vector3 (0.5f, -0.5f, 0f);
         rotAxis = Vector3.back;
-		
-		source.PlayOneShot(cubeSound, 1F);
+        Move();
+        //yield return null;
+        Move();
     }
 
-    void FixedUpdate () {
+    void Move()
+    {
+        if (direction != Vector3.zero)
+        {
+            pivot.transform.localPosition = new Vector3(cubeRadius * direction.x, -cubeRadius, cubeRadius * direction.z);
+            if (TargetIsNegotiable(direction))
+            {
+                moving = true;
+            }
+        } 
+        //yield return null;
+    }
+
+    void FixedUpdate ()
+    {
 		//ground detection
 		RaycastHit hit;
-		if (Physics.Raycast (transform.position, Vector3.down, out hit, 0.51f)) {
+		if (Physics.Raycast (transform.position, Vector3.down, out hit, 0.51f))
+        {
 			falling = false;
-			if (hit.transform.tag == "Platform") {
+			if (hit.transform.tag == "Platform")
+            {
 				transform.SetParent (hit.transform.parent);
 			}
-		} else {
+		}
+        else
+        {
 			falling = true;
 		}
 		
 		//player is within a movement
-		if (moving) {
+		if (moving)
+        {
 			//continue 90-degree-rotation for this frame
 			transform.RotateAround (pivot.transform.position, rotAxis, speed * Time.deltaTime);
-			if (transform.localPosition.y <= Mathf.Round (transform.localPosition.y)) {
+			if (transform.localPosition.y <= Mathf.Round (transform.localPosition.y))
+            {
 				moving = false;
 				AlignPosition ();
 			}
 			// player is free falling
-		} else {
-			
 		}
-		if (falling) {
-			if (transform.position.y < lowerBound) {
+        else
+        {
+            //<<<<<<<<<<<<<<<<<<<<<< else ist leer???
+        }
+        if (falling)
+        {
+			if (transform.position.y < lowerBound)
+            {
 				//reset to active checkpoint
 				transform.position = spawnPoint;
 				ResetColor ();
@@ -207,39 +166,42 @@ public class PlayerControls : MonoBehaviour {
 		} 
 	}
 	//corrects the position of the game object to integers, sets all angles and velocity to zero 
-	public void AlignPosition(){
+	public void AlignPosition()
+    {
 		transform.localRotation = Quaternion.identity;
 		transform.localPosition = new Vector3 (Mathf.Round (transform.localPosition.x), transform.localPosition.y, Mathf.Round (transform.localPosition.z));
 		gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 		lowerBound = (int)transform.position.y - maxFallingHeight;
 	}
-	public void SetSpawnPoint(Vector3 spawnPoint){
+
+	public void SetSpawnPoint(Vector3 spawnPoint)
+    {
 		this.spawnPoint = spawnPoint;
 	}
-	private bool TargetIsNegotiable(Vector3 direction){
+
+	private bool TargetIsNegotiable(Vector3 direction)
+    {
 		Vector3 origin = new Vector3 (transform.position.x, (transform.position.y - cubeRadius) + maxClimb, transform.position.z);
-		if (gameObject.layer == 0) {
-			if (Physics.Raycast (origin, direction * 1.4f, 1f)) {
+		if (gameObject.layer == 0)
+        {
+			if (Physics.Raycast (origin, direction * 1.4f, 1f))
+            {
 				return false;
 			}
-		} else {
-			if (Physics.Raycast (origin, direction * 1.4f, 1f, gameObject.layer)) {
+		}
+        else //<<<<<<<<<<<<<<<<<<<<<< kann es sein das du hier eigentlich nur ein else if haben wolltest?
+        {
+			if (Physics.Raycast (origin, direction * 1.4f, 1f, gameObject.layer))
+            {
 				return false;
 			}
 		}
 		return true;
 	}
 
-    public void AllowTouchTrue()
+	public void ResetColor()
     {
-        touchAllowed = true;
-    }
-
-    public void AllowTouchFalse()
-    {
-        touchAllowed = false;
-    }
-	public void ResetColor(){
 		GetComponent<Renderer> ().material.color = defaultPlayerColour;
 	}
-}	
+
+}

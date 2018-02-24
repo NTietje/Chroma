@@ -7,19 +7,24 @@ public class ObjectMovement : MonoBehaviour {
 
     public Vector3 destination;
     public float speed;
+    public bool allowMoving;
 
     Vector3 startposition;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         startposition = transform.position;
     }
 	
 	// Update is called once per frame
-	void Update () {
-         //transform.Translate(-Vector3.right * speed * Time.deltaTime);
-         float time = Mathf.PingPong(Time.time * speed, 1);
-         transform.position = Vector3.Lerp(startposition, destination, time);
+	void Update ()
+    {
+        if (allowMoving)
+        {
+            float time = Mathf.PingPong(Time.time * speed, 1);
+            transform.position = Vector3.Lerp(startposition, destination, time);
+        }
     }
     
 }

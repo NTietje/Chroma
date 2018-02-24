@@ -81,7 +81,6 @@ public class PlayerControls : MonoBehaviour {
         direction = Vector3.back;
         //rotPointOffset = new Vector3 (0f, -0.5f, -0.5f);
         rotAxis = Vector3.left;
-        Move();
         //yield return null;
         Move();
     }
@@ -91,7 +90,6 @@ public class PlayerControls : MonoBehaviour {
         direction = Vector3.forward;
         //rotPointOffset = new Vector3 (0f, -0.5f, 0.5f);
         rotAxis = Vector3.right;
-        Move();
         //yield return null;
         Move();
     }
@@ -101,7 +99,6 @@ public class PlayerControls : MonoBehaviour {
         direction = Vector3.right;
         //rotPointOffset = new Vector3 (0.5f, -0.5f, 0f);
         rotAxis = Vector3.back;
-        Move();
         //yield return null;
         Move();
     }

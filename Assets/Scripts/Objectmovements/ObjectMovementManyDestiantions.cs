@@ -7,12 +7,15 @@ public class ObjectMovementManyDestiantions : MonoBehaviour {
     public float speed;
     public GameObject platform;
     public Transform[] positions;
+    public bool oneWay;
+    public bool allowMoving;
    
     private Vector3 nextDestination;
     private int startIndex;
     private int destinationIndex;
     private int direction;
     private float movementTimer;
+    private bool move = true;
 
     // Use this for initialization
     void Start () {
@@ -32,18 +35,20 @@ public class ObjectMovementManyDestiantions : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 
-        // if destination reached
-        if (transform.position == nextDestination)
+        if (allowMoving && move)
         {
-            ChangeDirection();
-            ChangeDestination();
-            movementTimer = 0;
+            // if destination reached
+            if (transform.position == nextDestination)
+            {
+                ChangeDirection();
+                ChangeDestination();
+                movementTimer = 0;
+            }
+
+            // move object from startposition to destination
+            movementTimer += (Time.deltaTime * speed) / Vector3.Distance(positions[startIndex].position, nextDestination);
+            transform.position = Vector3.Lerp(positions[startIndex].position, nextDestination, movementTimer);
         }
-
-        // move object from startposition to destination
-        movementTimer += (Time.deltaTime * speed) / Vector3.Distance(positions[startIndex].position, nextDestination);
-        transform.position = Vector3.Lerp(positions[startIndex].position, nextDestination, movementTimer);
-
     }
 
     // change direction
@@ -51,7 +56,14 @@ public class ObjectMovementManyDestiantions : MonoBehaviour {
     {
         if (positions.Length == destinationIndex + 1) // if endposition reached: set direction to move back
         {
-            direction = 1;
+            if (oneWay)
+            {
+                move = false;
+            }
+            else
+            {
+                direction = 1;
+            } 
         }
         else if (destinationIndex == 0) // if startposition reached: set direction to move forward
         {
@@ -72,8 +84,10 @@ public class ObjectMovementManyDestiantions : MonoBehaviour {
         { 
             destinationIndex--;
         }
-        nextDestination = positions[destinationIndex].position;
-
+        if (!oneWay)
+        {
+            nextDestination = positions[destinationIndex].position;
+        }
     }
     
 

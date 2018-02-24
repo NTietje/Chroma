@@ -7,19 +7,18 @@ public class PlayerControls : MonoBehaviour {
 	public int speed = 450;
 	public int maxFallingHeight = 50;
 	public float maxClimb = 0.2f;
-
-	private GameObject pivot;
-	
 	public AudioClip cubeSound;
 	private AudioSource source;
+    
 
-	private Vector3 spawnPoint;
+    private GameObject pivot;
+    private Vector3 spawnPoint;
 	private Vector3 rotAxis;
 	//private Vector3 rotPoint;
 	//private Vector3 rotPointOffset;
 	private Vector3 direction;
-
-	private float cubeRadius;
+    private bool touchAllowed;
+    private float cubeRadius;
 	private bool moving;
 	private bool falling;
 	private int lowerBound;
@@ -31,6 +30,7 @@ public class PlayerControls : MonoBehaviour {
 	
     // Use this for initialization
     void Start () {
+        touchAllowed = true;
 		cubeRadius = transform.lossyScale.x*0.5f;
 		spawnPoint = transform.position;
 		pivot = new GameObject("Pivot");
@@ -64,7 +64,7 @@ public class PlayerControls : MonoBehaviour {
 #if UNITY_IOS || UNITY_ANDROID
             //Check if Input has registered more than zero touches
             
-            if (Input.touchCount > 0)
+            if (Input.touchCount > 0 && touchAllowed)
             {
                 
                 //Store the first touch detected.
@@ -77,25 +77,29 @@ public class PlayerControls : MonoBehaviour {
                     touchOrigin = firstTouch.position;
                     Debug.Log("Touchorigin: " + touchOrigin);
              
-                    int maxDistance = Screen.height / 2 - 5;
+                    int maxDistance = Screen.height / 2;
                     Vector2 bottomRight = new Vector2(Screen.width, 0);
                     Vector2 bottomLeft = new Vector2(0, 0);
                     Vector2 topRight = new Vector2(Screen.width, Screen.height);
                     Vector2 topLeft = new Vector2(0, Screen.height);
                     
-                    if (Vector2.Distance(touchOrigin, bottomRight) <= maxDistance && touchOrigin.x >  Screen.width/2 + 5)
+                    // if (Vector2.Distance(touchOrigin, bottomRight) <= maxDistance && touchOrigin.x >  Screen.width/2)
+                    if (touchOrigin.y < Screen.height/2 && touchOrigin.x >  Screen.width/2)
                     {
                         MoveToBottomRight();
                     }
-                    else if (Vector2.Distance(touchOrigin, bottomLeft) <= maxDistance && touchOrigin.x < Screen.width / 2 - 5)
+                    //else if (Vector2.Distance(touchOrigin, bottomLeft) <= maxDistance && touchOrigin.x < Screen.width/2)
+                    else if (touchOrigin.y < Screen.height/2 && touchOrigin.x < Screen.width/2)
                     {
                         MoveToBottomLeft();
                     }
-                    else if (Vector2.Distance(touchOrigin, topRight) <= maxDistance && touchOrigin.x > Screen.width / 2 + 5)
+                    // else if (Vector2.Distance(touchOrigin, topRight) <= maxDistance && touchOrigin.x > Screen.width/2)
+                    else if (touchOrigin.y > Screen.height/2 && touchOrigin.x > Screen.width/2 && Vector2.Distance(touchOrigin, topRight) >= Screen.height/8)
                     {
                         MoveToTopRight();
                     }
-                    else if (Vector2.Distance(touchOrigin, topLeft) <= maxDistance && touchOrigin.x < Screen.width / 2 - 5)
+                    //else if (Vector2.Distance(touchOrigin, topLeft) <= maxDistance && touchOrigin.x < Screen.width/2)
+                    else if (touchOrigin.y > Screen.height/2 && touchOrigin.x < Screen.width/2)
                     {
                         MoveToTopLeft();
                     }
@@ -222,4 +226,14 @@ public class PlayerControls : MonoBehaviour {
 		}
 		return true;
 	}
+
+    public void AllowTouchTrue()
+    {
+        touchAllowed = true;
+    }
+
+    public void AllowTouchFalse()
+    {
+        touchAllowed = false;
+    }
 }

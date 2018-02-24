@@ -83,7 +83,6 @@ public class PlayerControls : MonoBehaviour {
         rotAxis = Vector3.left;
         Move();
         //yield return null;
-        Move();
     }
 
     void MoveToTopLeft()
@@ -93,7 +92,6 @@ public class PlayerControls : MonoBehaviour {
         rotAxis = Vector3.right;
         Move();
         //yield return null;
-        Move();
     }
 
     void MoveToTopRight()
@@ -103,7 +101,6 @@ public class PlayerControls : MonoBehaviour {
         rotAxis = Vector3.back;
         Move();
         //yield return null;
-        Move();
     }
 
     void Move()
@@ -181,21 +178,29 @@ public class PlayerControls : MonoBehaviour {
 
 	private bool TargetIsNegotiable(Vector3 direction)
     {
+		string debugString = "";
 		Vector3 origin = new Vector3 (transform.position.x, (transform.position.y - cubeRadius) + maxClimb, transform.position.z);
 		if (gameObject.layer == 0)
         {
 			if (Physics.Raycast (origin, direction * 1.4f, 1f))
             {
+
+				Debug.Log ("on default layer, col");
 				return false;
 			}
-		}
-        else //<<<<<<<<<<<<<<<<<<<<<< kann es sein das du hier eigentlich nur ein else if haben wolltest?
-        {
-			if (Physics.Raycast (origin, direction * 1.4f, 1f, gameObject.layer))
+		} else {
+			LayerMask mask = ~(1 << gameObject.layer);
+			Debug.Log (debugString);
+			if (Physics.Raycast (origin, direction * 1.4f, 1f, mask))
             {
+				
+				Debug.Log ("on other layer, col ");
 				return false;
+
 			}
 		}
+		debugString += gameObject.layer.ToString();
+		Debug.Log (debugString);
 		return true;
 	}
 

@@ -8,6 +8,8 @@ public class PlayerControls : MonoBehaviour {
 	public int maxFallingHeight = 50;
 	public float maxClimb = 0.2f;
 	public AudioClip cubeSound;
+	public Color defaultPlayerColour;
+
 	private AudioSource source;
     
 
@@ -197,6 +199,7 @@ public class PlayerControls : MonoBehaviour {
 			if (transform.position.y < lowerBound) {
 				//reset to active checkpoint
 				transform.position = spawnPoint;
+				ResetColor ();
 				AlignPosition();
 				falling = false;
 			}
@@ -236,4 +239,7 @@ public class PlayerControls : MonoBehaviour {
     {
         touchAllowed = false;
     }
-}
+	public void ResetColor(){
+		GetComponent<Renderer> ().material.color = defaultPlayerColour;
+	}
+}	

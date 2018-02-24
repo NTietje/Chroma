@@ -46,7 +46,10 @@ public class Projectile : MonoBehaviour {
             Destroy(gameObject); //Destroys projetile
 
             //Change player colour
-            other.gameObject.GetComponent<Renderer>().material.color = defaultPlayerColour;
+			if (other.gameObject.GetComponent<PlayerControls> ()) {
+				other.gameObject.GetComponent<PlayerControls> ().ResetColor ();
+			}
+            //other.gameObject.GetComponent<Renderer>().material.color = defaultPlayerColour;
             //Debug.Log("Spieler wurde von Projektil getroffen");
         }
     }

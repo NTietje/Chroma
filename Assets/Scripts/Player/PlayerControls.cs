@@ -185,16 +185,12 @@ public class PlayerControls : MonoBehaviour {
 			if (Physics.Raycast (origin, direction * 1.4f, 1f))
             {
 
-				Debug.Log ("on default layer, col");
 				return false;
 			}
 		} else {
-			LayerMask mask = ~(1 << gameObject.layer);
-			Debug.Log (debugString);
+			LayerMask mask = ~(1 << gameObject.layer); //mask all layers except for the own (color) layer!
 			if (Physics.Raycast (origin, direction * 1.4f, 1f, mask))
             {
-				
-				Debug.Log ("on other layer, col ");
 				return false;
 
 			}

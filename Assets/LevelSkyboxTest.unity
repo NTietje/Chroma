@@ -1450,8 +1450,7 @@ MonoBehaviour:
   maxFallingHeight: 50
   maxClimb: 0.2
   cubeSound: {fileID: 0}
-  defaultPlayerMaterial: {fileID: 2100000, guid: 591b6bf118212bc4098a8114f3bb33a1,
-    type: 2}
+  defaultPlayerColour: {r: 0, g: 0, b: 0, a: 0}
 --- !u!54 &1179053146
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -24,7 +24,8 @@ GameObject:
   - component: {fileID: 64022803758709240}
   - component: {fileID: 114070744120180114}
   - component: {fileID: 114321925871207562}
-  m_Layer: 0
+  - component: {fileID: 114359825647073410}
+  m_Layer: 8
   m_Name: ColourItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4888741454046608}
   - component: {fileID: 108840261386283760}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +177,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0d2ea270d82b54d98188613fa5709f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorLayer: 0
   respawnTime: 4
 --- !u!114 &114321925871207562
 MonoBehaviour:
@@ -190,3 +190,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 100
+--- !u!114 &114359825647073410
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1848099108276290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3f7b87c883749a4b81ac362e8707843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

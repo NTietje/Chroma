@@ -4,27 +4,26 @@ using UnityEngine;
 
 public class ColourPickUp : MonoBehaviour {
 
-    public enum ColorLayer { ColorLayer1, ColorLayer2, ColorLayer3, ColorLayer4 };
-    public ColorLayer colorLayer;
+    /*public enum ColorLayer { ColorLayer1, ColorLayer2, ColorLayer3, ColorLayer4 };
+    public ColorLayer colorLayer;*/
     public float respawnTime;
 
-    private Color colour;
+    //private Color colour;
 
 	// Use this for initialization
 	void Start ()
     {
-        colour = GetComponent<Renderer>().material.color;
+        //colour = GetComponent<Renderer>().material.color;
 	}
 
     // Change player colour on trigger-collision
     void OnTriggerEnter(Collider other)
     {
-		GameObject gameobject = other.gameObject;
         // Switch player colour
-        gameobject.GetComponent<Renderer>().material.color = colour;
+		other.gameObject.GetComponent<Renderer>().material.color = gameObject.GetComponent<Renderer>().material.color;
 
         // Switch player layer
-		gameobject.layer = ApplyColorLayer (colorLayer);
+		other.gameObject.layer = gameObject.layer;
 
         // Make ColourItem not visible/ usable
         SetGameObjectActiv(false);
@@ -45,7 +44,7 @@ public class ColourPickUp : MonoBehaviour {
         SetGameObjectActiv(true);
     }
 
-    int ApplyColorLayer(ColorLayer colorLayer)
+    /*int ApplyColorLayer(ColorLayer colorLayer)
     {
         switch (colorLayer)
         {
@@ -60,6 +59,6 @@ public class ColourPickUp : MonoBehaviour {
             default:
                 return 0;
         }
-    }
+    }*/
 
 }

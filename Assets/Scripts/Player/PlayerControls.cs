@@ -174,13 +174,11 @@ public class PlayerControls : MonoBehaviour {
 
 	private bool TargetIsNegotiable(Vector3 direction)
     {
-		string debugString = "";
 		Vector3 origin = new Vector3 (transform.position.x, (transform.position.y - cubeRadius) + maxClimb, transform.position.z);
 		if (gameObject.layer == 0)
         {
 			if (Physics.Raycast (origin, direction * 1.4f, 1f))
             {
-
 				return false;
 			}
 		} else {
@@ -191,8 +189,6 @@ public class PlayerControls : MonoBehaviour {
 
 			}
 		}
-		debugString += gameObject.layer.ToString();
-		Debug.Log (debugString);
 		return true;
 	}
 

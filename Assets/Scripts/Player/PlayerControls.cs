@@ -8,7 +8,7 @@ public class PlayerControls : MonoBehaviour {
 	public int maxFallingHeight = 50;
 	public float maxClimb = 0.2f;
 	public AudioClip cubeSound;
-	public Color defaultPlayerColour;
+	public Material defaultPlayerMaterial;
     
 	private AudioSource source;
     private GameObject pivot;
@@ -198,7 +198,7 @@ public class PlayerControls : MonoBehaviour {
 
 	public void ResetColor()
     {
-		GetComponent<Renderer> ().material.color = defaultPlayerColour;
+		GetComponent<Renderer> ().material.color = defaultPlayerMaterial.color;
 	}
 
 }

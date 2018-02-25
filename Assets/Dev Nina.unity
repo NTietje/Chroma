@@ -747,6 +747,11 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114853153446682860, guid: 8635619346a7b87419e5233ab10d7a2e,
+        type: 2}
+      propertyPath: defaultPlayerMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 591b6bf118212bc4098a8114f3bb33a1, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8635619346a7b87419e5233ab10d7a2e, type: 2}
   m_IsPrefabParent: 0

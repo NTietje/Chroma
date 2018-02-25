@@ -194,7 +194,9 @@ public class PlayerControls : MonoBehaviour {
 
 	public void ResetColor()
     {
-		GetComponent<Renderer> ().material.color = defaultPlayerMaterial.color;
+		gameObject.layer = 0;
+		//GetComponent<Renderer> ().material.color = defaultPlayerMaterial.color;
+		GetComponent<Renderer> ().material.color = LayerColors.defaultColor;
 	}
 
 }

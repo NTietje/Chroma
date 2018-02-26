@@ -5,21 +5,22 @@ using UnityEngine;
 public class PlayerControls : MonoBehaviour {
 
 	public int speed = 450;
-	public int maxFallingHeight = 50;
+	//public int maxFallingHeight = 50;
 	public float maxClimb = 0.2f;
 	public AudioClip cubeSound;
-	public Material defaultPlayerMaterial;
-    
+	//public Material defaultPlayerMaterial;
+
 	private AudioSource source;
     private GameObject pivot;
     private Vector3 spawnPoint;
 	private Vector3 rotAxis;
 	private Vector3 direction;
-    //private bool touchAllowed;
-    private float cubeRadius;
+	private float cubeRadius;
+    
+	//private bool touchAllowed;
 	private bool moving;
 	private bool falling;
-	private int lowerBound;
+	//private int lowerBound;
 	private Renderer renderer; 
     //private Vector2 touchOrigin = -Vector2.one;
 	
@@ -143,11 +144,7 @@ public class PlayerControls : MonoBehaviour {
 				AlignPosition ();
 			}
 			// player is free falling
-		}
-        else
-        {
-            //<<<<<<<<<<<<<<<<<<<<<< else ist leer???
-        }
+		}/* moved to ResetPlayer Script
         if (falling)
         {
 			if (transform.position.y < lowerBound)
@@ -159,7 +156,7 @@ public class PlayerControls : MonoBehaviour {
 				falling = false;
 			}
 		//player interaction is not locked by a current falling or moving status
-		} 
+		} */
 	}
 	//corrects the position of the game object to integers, sets all angles and velocity to zero 
 	public void AlignPosition()
@@ -167,7 +164,7 @@ public class PlayerControls : MonoBehaviour {
 		transform.localRotation = Quaternion.identity;
 		transform.localPosition = new Vector3 (Mathf.Round (transform.localPosition.x), transform.localPosition.y, Mathf.Round (transform.localPosition.z));
 		gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
-		lowerBound = (int)transform.position.y - maxFallingHeight;
+		//lowerBound = (int)transform.position.y - maxFallingHeight;
 	}
 
 	public void SetSpawnPoint(Vector3 spawnPoint)
@@ -200,6 +197,12 @@ public class PlayerControls : MonoBehaviour {
 		gameObject.layer = 0;
 		//GetComponent<Renderer> ().material.color = defaultPlayerMaterial.color;
 		renderer.material.color = LayerColors.defaultColor;
+	}
+	public void Reset(){
+		ResetColor ();
+		AlignPosition();
+		falling = false;
+		moving = false;
 	}
 
 }

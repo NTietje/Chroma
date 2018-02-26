@@ -53,7 +53,7 @@ public class PlayerControls : MonoBehaviour {
 
 			renderer.material.color = LayerColors.defaultColor;
 		}
-		GameManager.instance.spawnPoint = transform.position;
+		GameManager.instance.SetSpawn(transform.position);
 		AlignPosition ();
 	}
 
@@ -223,7 +223,7 @@ public class PlayerControls : MonoBehaviour {
 
 		falling = false;
 		Camera.main.GetComponent<CameraFollow> ().enabled = true;
-		transform.position = GameManager.instance.spawnPoint;
+		transform.position = GameManager.instance.GetSpawn();
 		moving = false;
 		ResetColor ();
 		AlignPosition();

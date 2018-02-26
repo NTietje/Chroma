@@ -15,8 +15,7 @@ public class GameManager : MonoBehaviour {
 	//public GameObject rockBottomPrefab;
 	//public int rockBottomHeight = -10;
 
-	public Vector3 spawnPoint;
-	public Vector3 cameraOffset;
+	private Vector3 spawnPoint;
 	private int level;
 	//private int activePlayerLayer;
 
@@ -64,13 +63,10 @@ public class GameManager : MonoBehaviour {
 		LoadLevel (currentLevel + 1);
 		//activePlayerLayer = 0;
 
-	}/*
+	}
 	public Vector3 GetSpawn(){
-		if (spawnPoint != null) {
-			return spawnPoint;
-		}
-		return null;
-	}*/
+		return spawnPoint;
+	}
 	public void SetSpawn(Vector3 spawnPoint){
 		this.spawnPoint = spawnPoint;
 	}

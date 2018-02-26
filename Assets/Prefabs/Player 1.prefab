@@ -207,10 +207,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 450
-  maxFallingHeight: 50
   maxClimb: 0.2
+  maxFallingHeight: 10
+  respawnWait: 0.5
   cubeSound: {fileID: 8300000, guid: a4e6e0f9bee41f845822521fd12a3db1, type: 3}
-  defaultPlayerMaterial: {fileID: 0}
 --- !u!114 &114961485147578786
 MonoBehaviour:
   m_ObjectHideFlags: 1

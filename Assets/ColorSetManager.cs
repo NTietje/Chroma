@@ -25,6 +25,15 @@ public static class LayerColors {
 	public static Color defaultColor;
 	public static LayerColor[] layers;
 
+	public static Color FindLayerColor(int layerIndex){
+		foreach (LayerColor layercolor in layers) {
+			if (layercolor.index == layerIndex) {
+				return layercolor.color;
+			}
+		}
+		return defaultColor;
+	}
+
 }
 [System.Serializable]
 public struct LayerColor{

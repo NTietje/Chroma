@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class ColorSetManager : MonoBehaviour {
 
-	public Color defaultColor;
+	public Color defaultPlayerColor;
 	public LayerColor[] colorLayers;
 
 	// Use this for initialization
 	void Awake () {
 
-		LayerColors.defaultColor = defaultColor;
+		LayerColors.defaultColor = defaultPlayerColor;
 		LayerColors.layers = colorLayers;
 
 	}

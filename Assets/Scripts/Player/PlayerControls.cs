@@ -14,14 +14,13 @@ public class PlayerControls : MonoBehaviour {
     private GameObject pivot;
     private Vector3 spawnPoint;
 	private Vector3 rotAxis;
-	//private Vector3 rotPoint;
-	//private Vector3 rotPointOffset;
 	private Vector3 direction;
     //private bool touchAllowed;
     private float cubeRadius;
 	private bool moving;
 	private bool falling;
 	private int lowerBound;
+	private Renderer renderer; 
     //private Vector2 touchOrigin = -Vector2.one;
 	
     // Use this for initialization
@@ -33,6 +32,10 @@ public class PlayerControls : MonoBehaviour {
 		spawnPoint = transform.position;
 		pivot = new GameObject("Pivot");
 		pivot.transform.SetParent (transform);
+
+		renderer = gameObject.GetComponent<Renderer> ();
+		renderer.material.color = LayerColors.defaultColor;
+
 		AlignPosition ();
 	}
 
@@ -196,7 +199,7 @@ public class PlayerControls : MonoBehaviour {
     {
 		gameObject.layer = 0;
 		//GetComponent<Renderer> ().material.color = defaultPlayerMaterial.color;
-		GetComponent<Renderer> ().material.color = LayerColors.defaultColor;
+		renderer.material.color = LayerColors.defaultColor;
 	}
 
 }

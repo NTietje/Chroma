@@ -2079,6 +2079,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 450
   maxClimb: 0.2
+  maxFallingHeight: 50
+  respawnWait: 2
   cubeSound: {fileID: 0}
 --- !u!54 &1687018595
 Rigidbody:
@@ -2789,11 +2791,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114983439640022372, guid: 0dba38840593aaf418382470f82e595d,
-        type: 2}
-      propertyPath: platform
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1686552797669628, guid: 0dba38840593aaf418382470f82e595d, type: 2}
       propertyPath: m_Name
       value: Trigger 1
@@ -2809,6 +2806,11 @@ Prefab:
     - target: {fileID: 4405342076338760, guid: 0dba38840593aaf418382470f82e595d, type: 2}
       propertyPath: m_LocalScale.z
       value: 3.333333
+      objectReference: {fileID: 0}
+    - target: {fileID: 114983439640022372, guid: 0dba38840593aaf418382470f82e595d,
+        type: 2}
+      propertyPath: platform
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0dba38840593aaf418382470f82e595d, type: 2}

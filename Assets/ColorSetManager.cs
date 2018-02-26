@@ -12,7 +12,6 @@ public class ColorSetManager : MonoBehaviour {
 
 		LayerColors.defaultColor = defaultPlayerColor;
 		LayerColors.layers = colorLayers;
-
 	}
 	
 	// Update is called once per frame

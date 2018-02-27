@@ -7,15 +7,23 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+/**
+ * The GameManager organizes player data, saves, loads, activates checkpoints 
+ * 
+ * 
+ */
 
 public class GameManager : MonoBehaviour {
 
+	//used for various debugging purposes.
 	public bool debug;
 
 	public float spawnOffset = 0.5f;
 	public static GameManager instance;
 	//public GameObject rockBottomPrefab;
 	//public int rockBottomHeight = -10;
+
+	private PauseMenu menu;
 
 	private GameObject checkPoint;
 	private Vector3 spawnPoint;
@@ -64,19 +72,11 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 	public void NextLevel(){
-
-		LoadLevel (level+1);
-
-		if (level != null) {
-			LoadLevel (level + 1);
-		} else {
-			LoadLevel (1);
-		}
-
-
+		Debug.Log (level);
+		LoadLevel (level + 1);
 	}
 	public void Finish(){
-		//Load Canvas
+		menu.LevelCompleted ();
 	}
 	public void NewGame(){
 		LoadLevel (1);
@@ -134,6 +134,9 @@ public class GameManager : MonoBehaviour {
 			//activePlayerLayer = data.activePlayerLayer;
 			Debug.Log (spawnPoint.ToString());
 		}
+	}
+	public void SetMenu(PauseMenu menu){
+		this.menu = menu;
 	}
 
 	public bool CustomSpawn(){

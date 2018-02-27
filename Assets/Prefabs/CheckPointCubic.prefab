@@ -864,10 +864,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce4519a8d5d5cbb48b2fde020c7ed542, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorUnchecked: {r: 0.959, g: 0.528, b: 0.015686275, a: 0.315}
-  colorChecked: {r: 0, g: 1, b: 0, a: 1}
-  active: 0
-  spawnOffset: 0.5
+  colorUnchecked: {r: 1, g: 0.472, b: 0.015686275, a: 0.485}
+  colorChecked: {r: 0, g: 1, b: 0, a: 0.78431374}
 --- !u!114 &114204848408564824
 MonoBehaviour:
   m_ObjectHideFlags: 1

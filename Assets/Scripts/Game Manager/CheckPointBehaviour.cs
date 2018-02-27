@@ -24,7 +24,8 @@ public class CheckPointBehaviour : MonoBehaviour {
 		if (!active) {
 			active = true;
 			Vector3 spawnPoint = new Vector3 (transform.position.x, transform.position.y + spawnOffset, transform.position.z);
-			other.gameObject.GetComponent<PlayerControls> ().SetSpawnPoint(spawnPoint);
+			//other.gameObject.GetComponent<PlayerControls> ().SetSpawnPoint(spawnPoint);
+			GameManager.instance.SetSpawn(spawnPoint);
 		}
 
 	}

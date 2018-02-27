@@ -4,41 +4,62 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour {
 
+	public static PlayerControls instance;
+
 	public int speed = 450;
-	public int maxFallingHeight = 50;
 	public float maxClimb = 0.2f;
+	public int maxFallingHeight = 50;
+	public float respawnWait = 0.5f;
 	public AudioClip cubeSound;
-	public Material defaultPlayerMaterial;
-    
+	//public Material defaultPlayerMaterial;
+
 	private AudioSource source;
     private GameObject pivot;
-    private Vector3 spawnPoint;
+    //private Vector3 spawnPoint;
 	private Vector3 rotAxis;
-	//private Vector3 rotPoint;
-	//private Vector3 rotPointOffset;
 	private Vector3 direction;
-    //private bool touchAllowed;
-    private float cubeRadius;
+	private float cubeRadius;
+
+    
+	//private bool touchAllowed;
 	private bool moving;
 	private bool falling;
 	private int lowerBound;
+	private Renderer renderer; 
     //private Vector2 touchOrigin = -Vector2.one;
-	
+
+
+	void Awake () {
+		if (instance == null) {
+			instance = this;
+		} else if (instance != this) {
+			Destroy (gameObject);
+		}
+	}
     // Use this for initialization
     void Start ()
     {
-        source = GetComponent<AudioSource>();
+		source = GetComponent<AudioSource>();
         //touchAllowed = true;
         cubeRadius = transform.lossyScale.x*0.5f;
-		spawnPoint = transform.position;
+		//spawnPoint = transform.position;
 		pivot = new GameObject("Pivot");
 		pivot.transform.SetParent (transform);
+
+		renderer = gameObject.GetComponent<Renderer> ();
+		if (GameManager.instance.CustomSpawn()) {
+			renderer.material.color = LayerColors.FindLayerColor (gameObject.layer);
+		} else {
+
+			renderer.material.color = LayerColors.defaultColor;
+		}
+		GameManager.instance.SetSpawn(transform.position);
 		AlignPosition ();
 	}
 
     private void Update()
     {
-        direction = Vector3.zero; //<<<<<<<<<<<<<<<<<<<<<< muss das pro Frame ausgeführt werden?
+		
     }
 
     public void TryMove(string moveDirection)
@@ -108,6 +129,7 @@ public class PlayerControls : MonoBehaviour {
             {
                 moving = true;
             }
+			direction = Vector3.zero;
         } 
         //yield return null;
     }
@@ -141,22 +163,15 @@ public class PlayerControls : MonoBehaviour {
 			}
 			// player is free falling
 		}
-        else
-        {
-            //<<<<<<<<<<<<<<<<<<<<<< else ist leer???
-        }
         if (falling)
         {
 			if (transform.position.y < lowerBound)
             {
 				//reset to active checkpoint
-				transform.position = spawnPoint;
-				ResetColor ();
-				AlignPosition();
-				falling = false;
+				StartCoroutine (Reset());
 			}
 		//player interaction is not locked by a current falling or moving status
-		} 
+		}
 	}
 	//corrects the position of the game object to integers, sets all angles and velocity to zero 
 	public void AlignPosition()
@@ -167,10 +182,10 @@ public class PlayerControls : MonoBehaviour {
 		lowerBound = (int)transform.position.y - maxFallingHeight;
 	}
 
-	public void SetSpawnPoint(Vector3 spawnPoint)
+	/*public void SetSpawnPoint(Vector3 spawnPoint)
     {
 		this.spawnPoint = spawnPoint;
-	}
+	}*/
 
 	private bool TargetIsNegotiable(Vector3 direction)
     {
@@ -194,7 +209,24 @@ public class PlayerControls : MonoBehaviour {
 
 	public void ResetColor()
     {
-		GetComponent<Renderer> ().material.color = defaultPlayerMaterial.color;
+		gameObject.layer = 0;
+		//GetComponent<Renderer> ().material.color = defaultPlayerMaterial.color;
+		renderer.material.color = LayerColors.defaultColor;
+		//GameManager.instance.SetActivePlayerLayer (gameObject.layer);
+	}
+	public IEnumerator Reset(){
+		//immediately stop the camera follow
+		Camera.main.GetComponent<CameraFollow> ().enabled = false;
+
+		//reset player and reenable camera follow
+		yield return new WaitForSeconds (respawnWait);
+
+		falling = false;
+		Camera.main.GetComponent<CameraFollow> ().enabled = true;
+		transform.position = GameManager.instance.GetSpawn();
+		moving = false;
+		ResetColor ();
+		AlignPosition();
 	}
 
 }

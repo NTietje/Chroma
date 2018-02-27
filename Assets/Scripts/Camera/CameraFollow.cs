@@ -6,16 +6,23 @@ public class CameraFollow : MonoBehaviour {
 
 	public GameObject target; //object to follow
 
-	private Vector3 offset; 
+	public Vector3 offset; 
+
+	void Awake (){
+		offset = transform.position - target.transform.position;
+	}
 
 	// Use this for initialization
 	void Start () {
-		offset = transform.position - target.transform.position;
+		
 	}
 	
 	// Update is called once per frame
 	void LateUpdate () {
 		transform.position = target.transform.position + offset;
 		//TODO Lerp!
+	}
+	public void ForceUpdate() {
+		transform.position = target.transform.position + offset;
 	}
 }

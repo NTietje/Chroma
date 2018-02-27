@@ -173,6 +173,8 @@ public class PlayerControls : MonoBehaviour {
 					
 			if (transform.position.y < lowerBound && !resetting)
             {
+				fallingSource.PlayOneShot(fallingSound, 1F);
+				
 				resetting = true;
 
 				//reset to active checkpoint

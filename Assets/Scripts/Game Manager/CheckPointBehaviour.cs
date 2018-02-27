@@ -21,13 +21,10 @@ public class CheckPointBehaviour : MonoBehaviour {
 		renderers = gameObject.GetComponentsInChildren(typeof(Renderer));
 	}
 	void OnTriggerEnter(Collider other){
-		if (!active) {
-			active = true;
-			Vector3 spawnPoint = new Vector3 (transform.position.x, transform.position.y + spawnOffset, transform.position.z);
-			//other.gameObject.GetComponent<PlayerControls> ().SetSpawnPoint(spawnPoint);
-			GameManager.instance.SetSpawn(spawnPoint);
-		}
-
+		active = true;
+		Vector3 spawnPoint = new Vector3 (transform.position.x, transform.position.y + spawnOffset, transform.position.z);
+		//other.gameObject.GetComponent<PlayerControls> ().SetSpawnPoint(spawnPoint);
+		GameManager.instance.SetCheckPoint(gameObject, other.gameObject.layer);
 	}
 	
 	// Update is called once per frame

@@ -11,9 +11,12 @@ public class PlayerControls : MonoBehaviour {
 	public int maxFallingHeight = 50;
 	public float respawnWait = 0.5f;
 	public AudioClip cubeSound;
+	public AudioClip fallingSound;
 	//public Material defaultPlayerMaterial;
 
-	private AudioSource source;
+	private AudioSource cubeSource;
+	private AudioSource fallingSource;
+	
     private GameObject pivot;
     //private Vector3 spawnPoint;
 	private Vector3 rotAxis;
@@ -39,7 +42,8 @@ public class PlayerControls : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-		source = GetComponent<AudioSource>();
+		cubeSource = GetComponent<AudioSource>();
+		fallingSource = GetComponent<AudioSource>();
         //touchAllowed = true;
         cubeRadius = transform.lossyScale.x*0.5f;
 		//spawnPoint = transform.position;
@@ -72,7 +76,7 @@ public class PlayerControls : MonoBehaviour {
             //pivot.transform.localPosition = rotPointOffset;
             //StartCoroutine(SequenzHandler(moveDirection));
             Debug.Log("SetNewDirection");
-            source.PlayOneShot(cubeSound, 1F); //1parameter: audio clip 2paramenter: volume
+            cubeSource.PlayOneShot(cubeSound, 1F); //1parameter: audio clip 2paramenter: volume
             //<<<<<<<<<<<<<<<<<<<<<< Move() kann in TryMove() nur mit Coroutine ausgeführt werden, kann ich auch wieder dahin zurück ändern
         }
     }
@@ -165,8 +169,12 @@ public class PlayerControls : MonoBehaviour {
 		}
         if (falling)
         {
+					
 			if (transform.position.y < lowerBound)
             {
+
+				fallingSource.PlayOneShot(fallingSound, 1F);
+				
 				//reset to active checkpoint
 				StartCoroutine (Reset());
 			}
@@ -216,13 +224,15 @@ public class PlayerControls : MonoBehaviour {
 	}
 	public IEnumerator Reset(){
 		//immediately stop the camera follow
-		Camera.main.GetComponent<CameraFollow> ().enabled = false;
+		CameraFollow cam = Camera.main.GetComponent<CameraFollow> ();
+		cam.enabled = false;
 
 		//reset player and reenable camera follow
 		yield return new WaitForSeconds (respawnWait);
 
 		falling = false;
-		Camera.main.GetComponent<CameraFollow> ().enabled = true;
+		cam.enabled = true;
+		cam.LerpToTarget();
 		transform.position = GameManager.instance.GetSpawn();
 		moving = false;
 		ResetColor ();

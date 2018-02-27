@@ -11,9 +11,36 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/TS Tower & Moving Platform.unity
     guid: c88a070fcf0f9dc469c125706b2c48de
-  - enabled: 1
+  - enabled: 0
     path: Assets/Dev Cvb.unity
     guid: 8c4487dabd19a644cb8701cdc2ce7fc2
-  - enabled: 1
+  - enabled: 0
     path: Assets/Dev Nina.unity
     guid: 2e922d6577d4a264bba4c62501253710
+  - enabled: 0
+    path: Assets/testScene.unity
+    guid: 816c66affd58f1048bbeca66d2b44c71
+  - enabled: 0
+    path: Assets/TS Moving Platform.unity
+    guid: f8b62719dceb14540bbc8111f841ba6f
+  - enabled: 0
+    path: Assets/ParticleLight/Scene.unity
+    guid: 756a157420101c649a26e3556d0a03a6
+  - enabled: 1
+    path: Assets/Level1.unity
+    guid: 17c25406b4f3f1145b111f186c909435
+  - enabled: 1
+    path: Assets/Level2.unity
+    guid: 1e37e7c9a198cd14680a29c699e8dc53
+  - enabled: 1
+    path: Assets/Level3.unity
+    guid: 385d4f7796aac174ea5f05b2bba0baeb
+  - enabled: 1
+    path: Assets/Level4.unity
+    guid: 401bb533336dc4f4884504e4fd1ee8e1
+  - enabled: 1
+    path: Assets/Level5.unity
+    guid: f4bd1b85ecf72624ea1206a41b37feb5
+  - enabled: 1
+    path: Assets/Level6.unity
+    guid: 3dc017a0eef50ba44b0d65e3f94626c2

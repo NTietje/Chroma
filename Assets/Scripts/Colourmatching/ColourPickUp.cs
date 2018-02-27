@@ -25,24 +25,39 @@ public class ColourPickUp : MonoBehaviour {
         // Switch player layer
 		other.gameObject.layer = gameObject.layer;
 
-        // Make ColourItem not visible/ usable
-        SetGameObjectActiv(false);
+		// Make ColourItem not visible/ usable
+		SetGameObjectActiv(false);
 
-        // After respawnTime again visible/ usable
-        Invoke("ShowGameobjectAgain", respawnTime);
+		// After respawnTime again visible/ usable
+		Invoke("ShowGameobjectAgain", respawnTime);
     }
 
     void SetGameObjectActiv(bool boolean)
     {
         gameObject.GetComponent<Renderer>().enabled = boolean;
-        gameObject.GetComponent<Collider>().enabled = boolean;
+        //gameObject.GetComponent<Collider>().enabled = boolean;
         gameObject.GetComponentInChildren<Light>().enabled = boolean;
+		gameObject.GetComponentInChildren<BoxCollider> ().enabled = boolean;
     }
 
     void ShowGameobjectAgain()
     {
         SetGameObjectActiv(true);
     }
+
+	public void PickUp(GameObject player){
+		// Switch player colour
+		player.GetComponent<Renderer>().material.color = gameObject.GetComponent<Renderer>().material.color;
+
+		// Switch player layer
+		player.layer = gameObject.layer;
+
+		// Make ColourItem not visible/ usable
+		SetGameObjectActiv(false);
+
+		// After respawnTime again visible/ usable
+		Invoke("ShowGameobjectAgain", respawnTime);
+	}
 
     /*int ApplyColorLayer(ColorLayer colorLayer)
     {

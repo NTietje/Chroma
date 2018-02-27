@@ -51,12 +51,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf9de4740c42ad94989de97473a52081, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultPlayerColor: {r: 0.9338235, g: 0.9338235, b: 0.9338235, a: 0}
   colorLayers:
   - index: 8
-    color: {r: 0.75735295, g: 0.4009516, b: 0, a: 0.566}
+    color: {r: 1, g: 0.44705886, b: 0.37647063, a: 0.5019608}
   - index: 9
-    color: {r: 0, g: 0.766, b: 0.466, a: 0.428}
+    color: {r: 0.60784316, g: 0.84313726, b: 0.8352941, a: 0.5019608}
   - index: 10
-    color: {r: 0.2710953, g: 0.4710745, b: 0.7941176, a: 0.547}
+    color: {r: 1, g: 0.98039216, b: 0.8, a: 0.5019608}
   - index: 11
-    color: {r: 0.922, g: 0.822, b: 0, a: 0.659}
+    color: {r: 1, g: 0.2352941, b: 0.2352941, a: 0.15686275}

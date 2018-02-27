@@ -6,7 +6,10 @@ public class CameraFollow : MonoBehaviour {
 
 	public GameObject target; //object to follow
 
-	public Vector3 offset; 
+	private bool lerpTo;
+	private Vector3 lerpTarget;
+
+	private Vector3 offset; 
 
 	void Awake (){
 		offset = transform.position - target.transform.position;
@@ -19,10 +22,19 @@ public class CameraFollow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void LateUpdate () {
-		transform.position = target.transform.position + offset;
-		//TODO Lerp!
+		if (lerpTo) {
+			if (transform.position == lerpTarget) {
+				lerpTo = false;
+			} else {
+				transform.position = Vector3.Lerp (transform.position, lerpTarget, 0.3f);
+			}
+
+		} else {
+			transform.position = target.transform.position + offset;
+		}
 	}
-	public void ForceUpdate() {
-		transform.position = target.transform.position + offset;
+	public void LerpToTarget(){
+		lerpTarget = target.transform.position + offset;
+		lerpTo = true;
 	}
 }

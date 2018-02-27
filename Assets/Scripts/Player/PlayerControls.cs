@@ -25,6 +25,7 @@ public class PlayerControls : MonoBehaviour {
 
     
 	//private bool touchAllowed;
+	private bool resetting;
 	private bool moving;
 	private bool falling;
 	private int lowerBound;
@@ -69,7 +70,7 @@ public class PlayerControls : MonoBehaviour {
     public void TryMove(string moveDirection)
     {
         Debug.Log("TryMove");  
-        if (!moving && !falling)
+        if (!moving && !falling && !resetting)
         {
             AlignPosition(); 
             Invoke(moveDirection, 0f); //<<<<<<<<<<<<<<<<<<<<<< hier wird MoveToBottomLeft o.ä. aufgerufen, darin wird Move aufgerufen
@@ -170,11 +171,12 @@ public class PlayerControls : MonoBehaviour {
         if (falling)
         {
 					
-			if (transform.position.y < lowerBound)
+			if (transform.position.y < lowerBound && !resetting)
             {
-
 				fallingSource.PlayOneShot(fallingSound, 1F);
 				
+				resetting = true;
+
 				//reset to active checkpoint
 				StartCoroutine (Reset());
 			}
@@ -232,11 +234,12 @@ public class PlayerControls : MonoBehaviour {
 
 		falling = false;
 		cam.enabled = true;
-		cam.LerpToTarget();
 		transform.position = GameManager.instance.GetSpawn();
+		cam.LerpToTarget();
 		moving = false;
 		ResetColor ();
 		AlignPosition();
+		resetting = false;
 	}
 
 }

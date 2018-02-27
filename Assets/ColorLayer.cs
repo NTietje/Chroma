@@ -16,7 +16,10 @@ public class ColorLayer : MonoBehaviour {
 				break;
 			}
 		}
-		gameObject.GetComponent<Renderer> ().material.color = layerColor;
+		Renderer rend = gameObject.GetComponent<Renderer> ();
+		rend.material.color = layerColor;
+		rend.material.SetColor ("_EmissionColor", layerColor);
+		DynamicGI.SetEmissive (gameObject.GetComponent<Renderer> (), layerColor);
 		Component[] renderers = gameObject.GetComponentsInChildren(typeof(Renderer));
 		//Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>();
 		foreach (Renderer renderer in renderers) {

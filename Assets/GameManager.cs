@@ -76,12 +76,15 @@ public class GameManager : MonoBehaviour {
 		this.spawnPoint = spawnPoint;
 	}
 	public void SetCheckPoint(GameObject checkPoint, int layer){
-		if (this.checkPoint != null) {
-			this.checkPoint.GetComponent<CheckPointBehaviour> ().active = false;
-		}
-		this.checkPoint = checkPoint;
-		spawnPoint = new Vector3 (checkPoint.transform.position.x, checkPoint.transform.position.y + spawnOffset, checkPoint.transform.position.z);
-		saveLayer = layer;
+		if (checkPoint.GetComponent<CheckPointBehaviour> () && (this.checkPoint != checkPoint)) {
+			if (this.checkPoint != null) {
+				this.checkPoint.GetComponent<CheckPointBehaviour> ().Off();
+			}
+			this.checkPoint = checkPoint;
+			checkPoint.GetComponent<CheckPointBehaviour>().On ();
+			spawnPoint = new Vector3 (checkPoint.transform.position.x, checkPoint.transform.position.y + spawnOffset, checkPoint.transform.position.z);
+			saveLayer = layer;
+		} 
 	}
 	/*public void SetActivePlayerLayer(int layerIndex){
 		this.activePlayerLayer = activePlayerLayer;

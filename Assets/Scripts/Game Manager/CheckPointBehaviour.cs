@@ -6,8 +6,9 @@ public class CheckPointBehaviour : MonoBehaviour {
 
 	public Color colorUnchecked = Color.yellow;
 	public Color colorChecked = Color.green;
-	public bool active;
-	public float spawnOffset = 0.5f;
+	private bool active;
+	private bool switching;
+	//public float spawnOffset = 0.5f;
 
 	private Renderer rend;
 	private Component[] renderers;
@@ -15,31 +16,46 @@ public class CheckPointBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		active = false;
+		Off ();
 		rend = GetComponent<Renderer> ();
 		rend.material.color = colorUnchecked;
 		renderers = gameObject.GetComponentsInChildren(typeof(Renderer));
 	}
 	void OnTriggerEnter(Collider other){
-		active = true;
-		Vector3 spawnPoint = new Vector3 (transform.position.x, transform.position.y + spawnOffset, transform.position.z);
+		//Vector3 spawnPoint = new Vector3 (transform.position.x, transform.position.y + spawnOffset, transform.position.z);
 		//other.gameObject.GetComponent<PlayerControls> ().SetSpawnPoint(spawnPoint);
 		GameManager.instance.SetCheckPoint(gameObject, other.gameObject.layer);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		Color lerpColor = rend.material.color;
-		if (active) {
-			lerpColor = Color.Lerp (rend.material.color, colorChecked, Time.deltaTime);
+		if (switching) {
+			Color lerpColor = rend.material.color;
+			if (active) {
+				lerpColor = Color.Lerp (rend.material.color, colorChecked, 0.07f);
+				if (rend.material.color == colorChecked) {
+					switching = false;
+				}
 			
-		} else {
-			lerpColor = Color.Lerp (rend.material.color, colorUnchecked, Time.deltaTime);
+			} else {
+				lerpColor = Color.Lerp (rend.material.color, colorUnchecked, Time.deltaTime);
+				if (rend.material.color == colorUnchecked) {
+					switching = false;
+				}
+			}
+			rend.material.color = lerpColor;
+			foreach (Renderer childRenderer in renderers) {
+				childRenderer.material.color = lerpColor;
+			}
 		}
-		rend.material.color = lerpColor;
-		foreach (Renderer childRenderer in renderers){
-			childRenderer.material.color = lerpColor;
-		}
+	}
+	public void Off(){
+		active = false;
+		switching = true;
+	}
+	public void On(){
+		active = true;
+		switching = true;
 	}
 }
 

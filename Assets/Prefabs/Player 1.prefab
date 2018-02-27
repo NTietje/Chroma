@@ -124,7 +124,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243286098953972434, guid: 6ed4be0fb85f50a43a7577afeeda8058,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: a4e6e0f9bee41f845822521fd12a3db1, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 9ad4a9e387050d942925ea04962144ef, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -210,7 +210,7 @@ MonoBehaviour:
   maxClimb: 0.2
   maxFallingHeight: 10
   respawnWait: 0.5
-  cubeSound: {fileID: 8300000, guid: a4e6e0f9bee41f845822521fd12a3db1, type: 3}
+  cubeSound: {fileID: 8300000, guid: 9ad4a9e387050d942925ea04962144ef, type: 3}
 --- !u!114 &114961485147578786
 MonoBehaviour:
   m_ObjectHideFlags: 1

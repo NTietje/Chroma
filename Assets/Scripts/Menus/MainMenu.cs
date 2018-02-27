@@ -10,11 +10,7 @@ public class MainMenu : MonoBehaviour {
         //	SceneManager.LoadScene(1); //Lädt eine bestimmte Szene
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); //Lädt die nächste Szene in der Warteschlange, dafür müssen wir sicher gehen das diese sich dort befindet (File -> Build Settings.. -> Scenes in Build) 
         //SceneManager.LoadScene("Dev Nina");
-		if (GameManager.instance.quickload) {
-			GameManager.instance.Load (true);
-		} else {
-			GameManager.instance.NextLevel ();
-		}
+		GameManager.instance.NextLevel ();
         Time.timeScale = 1f;
 	}
 	

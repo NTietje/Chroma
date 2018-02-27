@@ -11,7 +11,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
 
 	public bool debug;
-	public bool quickload;
 
 	public float spawnOffset = 0.5f;
 	public static GameManager instance;
@@ -31,7 +30,6 @@ public class GameManager : MonoBehaviour {
 	private int customSpawnLayer;
 
 	void Awake() {
-		quickload = false;
 		if (instance == null) {
 			DontDestroyOnLoad (gameObject);
 			instance = this;
@@ -66,7 +64,8 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 	public void NextLevel(){
-		LoadLevel (SceneManager.GetActiveScene ().buildIndex + 1);
+		int currentLevel = SceneManager.GetActiveScene ().buildIndex;
+		LoadLevel (currentLevel + 1);
 		//activePlayerLayer = 0;
 
 	}
@@ -87,57 +86,39 @@ public class GameManager : MonoBehaviour {
 	/*public void SetActivePlayerLayer(int layerIndex){
 		this.activePlayerLayer = activePlayerLayer;
 	}*/
-	public void Save(bool quicksave){
+	public void Save(){
 		BinaryFormatter bf = new BinaryFormatter ();
+		FileStream file = File.Create (Application.persistentDataPath + "/playerInfo.dat");
+
 		PlayerData data = new PlayerData ();
-		String filepath = "/";
-		if (quicksave) {
-			filepath += "quicksave";
-			data.x = PlayerControls.instance.transform.position.x;
-			data.y = PlayerControls.instance.transform.position.y;
-			data.z = PlayerControls.instance.transform.position.z;
-			data.layer = PlayerControls.instance.gameObject.layer;
-		} else {
-			filepath += "savegame";
-			data.x = spawnPoint.x;
-			data.y = spawnPoint.y;
-			data.z = spawnPoint.z;
-			data.layer = saveLayer;
-		}
 		data.level = SceneManager.GetActiveScene ().buildIndex;
-		filepath += ".dat";
-		FileStream file = File.Create (Application.persistentDataPath + filepath);
+		data.x = spawnPoint.x;
+		data.y = spawnPoint.y;
+		data.z = spawnPoint.z;
+		data.layer = saveLayer;
+
 		bf.Serialize (file, data);
 		file.Close ();
 	}
-	public void Load(bool quickload){
-		String filepath = "/";
-		if (quickload) {
-			filepath += "quicksave";
-			quickload = false;
-		} else {
-			filepath += "savegame";
-		}
-		filepath += ".dat";
-		if (File.Exists (Application.persistentDataPath + filepath)) {
+	public void Load(){
+		if (File.Exists (Application.persistentDataPath + "/playerInfo.dat")) {
 			BinaryFormatter bf = new BinaryFormatter ();
-			FileStream file = File.Open (Application.persistentDataPath + filepath, FileMode.Open);
+			FileStream file = File.Open (Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
 			PlayerData data = (PlayerData)bf.Deserialize (file);
 			file.Close ();
 			LoadLevel (data.level);
+
+			if (PlayerControls.instance.isActiveAndEnabled) {
+				Debug.Log ("instance not null");
+			}
 			customSpawnPoint = new Vector3(data.x, data.y, data.z);
 			customSpawnLayer = data.layer;
 			customSpawn = true;
 			//PlayerControls.instance.gameObject.transform.position = new Vector3(data.x, data.y, data.z);
 			spawnPoint = new Vector3(data.x, data.y, data.z);
 			//activePlayerLayer = data.activePlayerLayer;
+			Debug.Log (spawnPoint.ToString());
 		}
-	}
-	public void OpenMenu(){
-		//Quicksave
-		Save(true);
-		quickload = true;
-		LoadLevel (0);
 	}
 
 	public bool CustomSpawn(){
@@ -152,13 +133,10 @@ public class GameManager : MonoBehaviour {
 	void OnGUI(){
 		if (debug) {
 			if (GUI.Button (new Rect (10, 100, 100, 30), "Save")) {
-				Save (false);
+				Save ();
 			}
 			if (GUI.Button (new Rect (10, 140, 100, 30), "Load")) {
-				Load (false);
-			}
-			if (GUI.Button (new Rect (10, 180, 100, 30), "Menu")) {
-				OpenMenu ();
+				Load ();
 			}
 		}
 	}

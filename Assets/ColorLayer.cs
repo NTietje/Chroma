@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ColorLayer : MonoBehaviour {
 
-
+	[Range(0.0f, 1.0f)]
+	public float alphaFactor = 1;
 
 
 	// Use this for initialization
@@ -12,7 +13,7 @@ public class ColorLayer : MonoBehaviour {
 		Color layerColor = Color.white;
 		foreach (LayerColor layer in LayerColors.layers) {
 			if (layer.index == gameObject.layer) {
-				layerColor = layer.color;
+				layerColor = new Color(layer.color.r, layer.color.g, layer.color.b, layer.color.a * alphaFactor);
 				break;
 			}
 		}

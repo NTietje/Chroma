@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33795904370093046}
   - component: {fileID: 23213698147666662}
   - component: {fileID: 114225001418811056}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: GlowPlane 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 33929967550030096}
   - component: {fileID: 23554552225066144}
   - component: {fileID: 114491312564441258}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: GlowPlane 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4740589988333010}
   - component: {fileID: 23402332727791876}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Inner Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 33209337440309938}
   - component: {fileID: 23525493043428692}
   - component: {fileID: 114084045855485360}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: GlowPlane 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 65346271286051856}
   - component: {fileID: 23839993645323456}
   - component: {fileID: 114128075382875544}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Color Zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 33583536707943742}
   - component: {fileID: 23849543850191918}
   - component: {fileID: 114840558524529014}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: GlowPlane 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 33521025496569764}
   - component: {fileID: 23755886756714798}
   - component: {fileID: 114632807966383766}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: GlowPlane 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 33872607996949198}
   - component: {fileID: 23202661729001032}
   - component: {fileID: 114706554652294832}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: GlowPlane 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4933544277749058}
   - component: {fileID: 23164283550978262}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Outer Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 33235679166688866}
   - component: {fileID: 23318000788014812}
   - component: {fileID: 114186857179403822}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: GlowPlane 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 33442307575318440}
   - component: {fileID: 23430457134919308}
   - component: {fileID: 114672388289748036}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: GlowPlane 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 33807951158893620}
   - component: {fileID: 65719615398239244}
   - component: {fileID: 23159612863673678}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4402029344332116}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: GlowBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -352,7 +352,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1461096752281914}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: -4, y: 1.005, z: -9}
   m_LocalScale: {x: 3, y: 1, z: 3}
   m_Children:
   - {fileID: 4352439060691632}
@@ -949,6 +949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3f7b87c883749a4b81ac362e8707843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alphaFactor: 0.2
 --- !u!114 &114186857179403822
 MonoBehaviour:
   m_ObjectHideFlags: 1

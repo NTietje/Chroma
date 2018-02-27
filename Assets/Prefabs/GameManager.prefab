@@ -51,6 +51,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf9733780be4c24a897a4cd1e9655ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rockBottomPrefab: {fileID: 1990932538527456, guid: 048bb71fedbfae048907f9e46a88beba,
-    type: 2}
-  rockBottomHeight: -3
+  debug: 1

@@ -63,16 +63,19 @@ public class GameManager : MonoBehaviour {
 			Debug.Log ("no more scenes in build");
 		}
 	}
-	private void NextLevel(){
-		LoadLevel (level+1);
+	public void NextLevel(){
+		if (level != null) {
+			LoadLevel (level + 1);
+		} else {
+			LoadLevel (1);
+		}
 
 	}
 	public void Finish(){
-		//<<<<<<<<<<<activate canvas
-		Invoke ("NextLevel", 2); 
+		//Load Canvas
 	}
 	public void NewGame(){
-		LoadLevel (0);
+		LoadLevel (1);
 	}
 	public Vector3 GetSpawn(){
 		return spawnPoint;

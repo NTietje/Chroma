@@ -11,11 +11,16 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
 
 	public bool debug;
+
+	public float spawnOffset = 0.5f;
 	public static GameManager instance;
 	//public GameObject rockBottomPrefab;
 	//public int rockBottomHeight = -10;
 
+	private GameObject checkPoint;
 	private Vector3 spawnPoint;
+
+	private int saveLayer;
 	private int level;
 	//private int activePlayerLayer;
 
@@ -70,6 +75,14 @@ public class GameManager : MonoBehaviour {
 	public void SetSpawn(Vector3 spawnPoint){
 		this.spawnPoint = spawnPoint;
 	}
+	public void SetCheckPoint(GameObject checkPoint, int layer){
+		if (this.checkPoint != null) {
+			this.checkPoint.GetComponent<CheckPointBehaviour> ().active = false;
+		}
+		this.checkPoint = checkPoint;
+		spawnPoint = new Vector3 (checkPoint.transform.position.x, checkPoint.transform.position.y + spawnOffset, checkPoint.transform.position.z);
+		saveLayer = layer;
+	}
 	/*public void SetActivePlayerLayer(int layerIndex){
 		this.activePlayerLayer = activePlayerLayer;
 	}*/
@@ -82,7 +95,7 @@ public class GameManager : MonoBehaviour {
 		data.x = spawnPoint.x;
 		data.y = spawnPoint.y;
 		data.z = spawnPoint.z;
-		data.layer = PlayerControls.instance.gameObject.layer;
+		data.layer = saveLayer;
 
 		bf.Serialize (file, data);
 		file.Close ();

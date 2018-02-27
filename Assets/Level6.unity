@@ -356,6 +356,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4231926067622568, guid: 4bd01918eac7efd4682e3fdb4d449252, type: 2}
       propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565106407750174, guid: 4bd01918eac7efd4682e3fdb4d449252,
+        type: 2}
+      propertyPath: debug
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2082,7 +2087,7 @@ Transform:
   - {fileID: 905517777}
   - {fileID: 2130061706}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1934877338
 GameObject:

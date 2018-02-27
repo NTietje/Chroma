@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour {
 			Debug.Log ("no more scenes in build");
 		}
 	}
-	private void NextLevel(){
+	public void NextLevel(){
 		LoadLevel (level+1);
 
 	}

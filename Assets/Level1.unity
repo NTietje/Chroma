@@ -171,6 +171,7 @@ GameObject:
   - component: {fileID: 69392150}
   - component: {fileID: 69392152}
   - component: {fileID: 69392151}
+  - component: {fileID: 69392153}
   m_Layer: 5
   m_Name: LevelCompleted
   m_TagString: Untagged
@@ -233,6 +234,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 69392149}
+--- !u!114 &69392153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 69392149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5903a2fe9869ecb4c95fa01c0d4bc576, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &100028993
 Prefab:
   m_ObjectHideFlags: 0
@@ -1745,8 +1757,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1508364763}
-        m_MethodName: LoadLevel
+      - m_Target: {fileID: 1508364764}
+        m_MethodName: LevelCompleted
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1804,6 +1816,7 @@ GameObject:
   - component: {fileID: 1508364759}
   - component: {fileID: 1508364758}
   - component: {fileID: 1508364763}
+  - component: {fileID: 1508364764}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1910,6 +1923,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fda84d8f536d8849817d530f2139591, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1508364764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1508364757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb18a783477b27749b760ed0c08f5bfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1520606135
@@ -2101,7 +2125,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1555485940126354, guid: 22f1b2f24db5dd24fb0e48fb97e19506, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 22f1b2f24db5dd24fb0e48fb97e19506, type: 2}

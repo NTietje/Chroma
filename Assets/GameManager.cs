@@ -64,15 +64,15 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 	public void NextLevel(){
-<<<<<<< HEAD
+
 		LoadLevel (level+1);
-=======
+
 		if (level != null) {
 			LoadLevel (level + 1);
 		} else {
 			LoadLevel (1);
 		}
->>>>>>> 42f6d58d81c647c672ae1362c5c7ed72acbba16b
+
 
 	}
 	public void Finish(){

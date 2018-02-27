@@ -224,13 +224,15 @@ public class PlayerControls : MonoBehaviour {
 	}
 	public IEnumerator Reset(){
 		//immediately stop the camera follow
-		Camera.main.GetComponent<CameraFollow> ().enabled = false;
+		CameraFollow cam = Camera.main.GetComponent<CameraFollow> ();
+		cam.enabled = false;
 
 		//reset player and reenable camera follow
 		yield return new WaitForSeconds (respawnWait);
 
 		falling = false;
-		Camera.main.GetComponent<CameraFollow> ().enabled = true;
+		cam.enabled = true;
+		cam.LerpToTarget();
 		transform.position = GameManager.instance.GetSpawn();
 		moving = false;
 		ResetColor ();

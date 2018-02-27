@@ -63,11 +63,16 @@ public class GameManager : MonoBehaviour {
 			Debug.Log ("no more scenes in build");
 		}
 	}
-	public void NextLevel(){
-		int currentLevel = SceneManager.GetActiveScene ().buildIndex;
-		LoadLevel (currentLevel + 1);
-		//activePlayerLayer = 0;
+	private void NextLevel(){
+		LoadLevel (level+1);
 
+	}
+	public void Finish(){
+		//<<<<<<<<<<<activate canvas
+		Invoke ("NextLevel", 2); 
+	}
+	public void NewGame(){
+		LoadLevel (0);
 	}
 	public Vector3 GetSpawn(){
 		return spawnPoint;
@@ -94,7 +99,7 @@ public class GameManager : MonoBehaviour {
 		FileStream file = File.Create (Application.persistentDataPath + "/playerInfo.dat");
 
 		PlayerData data = new PlayerData ();
-		data.level = SceneManager.GetActiveScene ().buildIndex;
+		data.level = level;
 		data.x = spawnPoint.x;
 		data.y = spawnPoint.y;
 		data.z = spawnPoint.z;

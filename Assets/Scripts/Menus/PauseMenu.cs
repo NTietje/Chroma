@@ -42,13 +42,11 @@ public class PauseMenu : MonoBehaviour {
 
 	public void Pause (){
 		pauseMenuUI.SetActive(true); //Sets the PauseMenu canvas active
-		Time.timeScale = 0f; //Stops the game
-		GameIsPaused = true; 
+		Stop ();
 	}
 	public void LevelCompleted (){
-			completedMenuUI.SetActive (true);
-			//Time.timeScale = 0f; //Stops the game
-			//GameIsPaused = true; 
+		completedMenuUI.SetActive (true);
+		Stop ();
 	}
 	public void LoadMenu(){
 		SceneManager.LoadScene("Menu");	//Calls up the Menu Scene
@@ -69,5 +67,10 @@ public class PauseMenu : MonoBehaviour {
 	}
 	public void WinScreen(){
 		winScreenUI.SetActive(true);
+		Stop ();
+	}
+	private void Stop(){
+		Time.timeScale = 0f; //Stops the game
+		GameIsPaused = true;
 	}
 }

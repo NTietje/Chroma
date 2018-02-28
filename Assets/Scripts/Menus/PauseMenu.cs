@@ -47,8 +47,8 @@ public class PauseMenu : MonoBehaviour {
 	}
 	public void LevelCompleted (){
 			completedMenuUI.SetActive (true);
-			Time.timeScale = 0f; //Stops the game
-			GameIsPaused = true; 
+			//Time.timeScale = 0f; //Stops the game
+			//GameIsPaused = true; 
 	}
 	public void LoadMenu(){
 		SceneManager.LoadScene("Menu");	//Calls up the Menu Scene

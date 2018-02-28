@@ -9,7 +9,10 @@ public class MainMenu : MonoBehaviour {
 		if (GameManager.instance.musicOn){
 			GameManager.instance.MusicOn ();
 		}
-		GameManager.instance.NewGame();
+		//GameManager.instance.NewGame();
+		if (!GameManager.instance.Load()) {
+			GameManager.instance.NewGame();
+		}
         Time.timeScale = 1f;
 	}
 

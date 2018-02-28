@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour {
 	public static GameManager instance;
 
 	//used for various debugging purposes, deactivate this when building 
-	public bool debug;
+	public bool debug = false;
 	public bool musicOn;
 
 	//linked pause menu to call the menus functions
@@ -75,17 +75,20 @@ public class GameManager : MonoBehaviour {
 			Debug.Log ("Level not found.");
 		}
 	}
-	//Load next level
+	//Load next level after finished
 	public void NextLevel(){
-		LoadLevel (level + 1);
+		LoadLevel (level);
 	}
 	//show the level completed screen
 	public void Finish(bool lastLevel){
 		if (lastLevel) {
 			menu.WinScreen ();
+			level = 0;
 		} else {
 			menu.LevelCompleted ();
+			level++;
 		}
+		Save ();
 	}
 	//starts a new game (level 1)
 	public void NewGame(){
@@ -107,6 +110,7 @@ public class GameManager : MonoBehaviour {
 			checkPoint.GetComponent<CheckPointBehaviour>().On ();
 			spawnPoint = new Vector3 (checkPoint.transform.position.x, checkPoint.transform.position.y + spawnOffset, checkPoint.transform.position.z);
 			saveLayer = layer;
+			Save ();
 		} 
 	}
 	//Get currently active spawn location
@@ -138,18 +142,22 @@ public class GameManager : MonoBehaviour {
 	 * load the players progress from a dedicated file
 	 * uses custom spawn point to let the player continue from a checkpoint instead of the levelstart
 	 */
-	public void Load(){
+	public bool Load(){
 		if (File.Exists (Application.persistentDataPath + "/playerInfo.dat")) {
 			BinaryFormatter bf = new BinaryFormatter ();
 			FileStream file = File.Open (Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
 			PlayerData data = (PlayerData)bf.Deserialize (file);
 			file.Close ();
 			LoadLevel (data.level);
-			customSpawnPoint = new Vector3(data.x, data.y, data.z);
+			customSpawnPoint = new Vector3 (data.x, data.y, data.z);
 			customSpawnLayer = data.layer;
 			customSpawn = true;
-			spawnPoint = new Vector3(data.x, data.y, data.z);
-		}
+			spawnPoint = new Vector3 (data.x, data.y, data.z);
+			if (data.level > 0) {
+				return true;
+			}
+		} 
+		return false;
 	}
 	//register the pause menu
 	public void SetMenu(PauseMenu menu){

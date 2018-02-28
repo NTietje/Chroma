@@ -49,6 +49,7 @@ public class PauseMenu : MonoBehaviour {
 		Stop ();
 	}
 	public void LoadMenu(){
+		GameManager.instance.Save ();
 		SceneManager.LoadScene("Menu");	//Calls up the Menu Scene
 		MusicOff();
 		Resume();

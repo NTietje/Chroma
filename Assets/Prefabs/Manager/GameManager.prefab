@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf9733780be4c24a897a4cd1e9655ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 1
+  debug: 0
+  musicOn: 1
   spawnOffset: 0.5
   levelMusicSound: {fileID: 0}

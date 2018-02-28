@@ -82,7 +82,6 @@ public class PlayerControls : MonoBehaviour {
             AlignPosition(); 
             Invoke(moveDirection, 0f);
             Debug.Log("SetNewDirection");
-            cubeSource.PlayOneShot(cubeSound, 1F);
         }
     }
 	/**
@@ -125,6 +124,7 @@ public class PlayerControls : MonoBehaviour {
             if (TargetIsNegotiable(direction))
             {
                 moving = true;
+                cubeSource.PlayOneShot(cubeSound);
             }
 			direction = Vector3.zero;
         }

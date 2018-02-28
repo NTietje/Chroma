@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
 
 	//used for various debugging purposes.
 	public bool debug;
+	public bool musicOn;
 
 	public float spawnOffset = 0.5f;
 	public static GameManager instance;
@@ -55,6 +56,8 @@ public class GameManager : MonoBehaviour {
 		if (SceneManager.GetActiveScene ().buildIndex != 0) {
 			level = SceneManager.GetActiveScene ().buildIndex;
 			//spawnPoint = PlayerControls.instance.transform.position;
+		} else {
+			MusicOff ();
 		}
 		//Instantiate (rockBottomPrefab, transform);
 		//rockBottomPrefab.transform.position = (new Vector3 (0, rockBottomHeight, 0));

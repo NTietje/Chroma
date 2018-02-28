@@ -6,9 +6,20 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour {
 
+	public static PauseMenu instance;
 	public static bool GameIsPaused = false;
 	public GameObject pauseMenuUI;
 	public GameObject completedMenuUI;
+
+	void Awake() {
+		if (instance == null) {
+			DontDestroyOnLoad (gameObject);
+			instance = this;
+		} else if (instance != this) {
+			Destroy (gameObject);
+		}
+
+	}
 
 	void Start (){
 		GameManager.instance.SetMenu (this);
@@ -24,8 +35,10 @@ public class PauseMenu : MonoBehaviour {
 		pauseMenuUI.SetActive(false); //Sets the PauseMenu canvas to not visible
 		Time.timeScale = 1f; //The game continues
 		GameIsPaused = false;
+
+		completedMenuUI.SetActive (false);
 	}
-	
+
 	public void Pause (){
 		pauseMenuUI.SetActive(true); //Sets the PauseMenu canvas active
 		Time.timeScale = 0f; //Stops the game
@@ -38,16 +51,19 @@ public class PauseMenu : MonoBehaviour {
 	}
 	public void LoadMenu(){
 		SceneManager.LoadScene("Menu");	//Calls up the Menu Scene
+		MusicOff();
+		Resume();
 	}
 	public void NextLevel(){
 		GameManager.instance.NextLevel ();
-		Time.timeScale = 1f; //The game continues
-		GameIsPaused = false;
+		Resume ();
 	}
 	public void MusicOff(){
 		GameManager.instance.MusicOff ();
+		GameManager.instance.musicOn = false;
 	}
 	public void MusicOn(){
 		GameManager.instance.MusicOn ();
+		GameManager.instance.musicOn = true;
 	}
 }

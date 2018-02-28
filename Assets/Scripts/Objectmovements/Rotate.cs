@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Script to rotate a gameobject around itself (y axis)
+
 public class Rotate : MonoBehaviour {
 
     public float speed;

@@ -5,14 +5,8 @@ using UnityEngine;
 public class InputController : MonoBehaviour {
 
     public PlayerControls playerController;
-    public bool touchAllowed { get; set; }
 
-    private Vector2 touchOrigin = -Vector2.one;
-
-    // Use this for initialization
-    void Start () {
-        touchAllowed = true;
-	}
+    Vector2 touchOrigin = -Vector2.one;
 	
 	// Update is called once per frame
 	void Update () {
@@ -39,7 +33,7 @@ public class InputController : MonoBehaviour {
 #if UNITY_IOS || UNITY_ANDROID
 
         //Check if Input has registered more than zero touches
-        if (Input.touchCount > 0 && touchAllowed)
+        if (Input.touchCount > 0)
         {
             //Store the first touch detected.
             Touch firstTouch = Input.touches[0];
@@ -74,12 +68,6 @@ public class InputController : MonoBehaviour {
                 }
             }
 
-            /*
-            foreach(Touch touch in Input.touches)
-            {
-                Debug.Log("Touch: " + touch.position);
-            }
-            */
         }
 #endif
 

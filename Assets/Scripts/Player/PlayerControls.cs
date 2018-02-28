@@ -12,7 +12,6 @@ public class PlayerControls : MonoBehaviour {
 	public float respawnWait = 0.5f;
 	public AudioClip cubeSound;
 	public AudioClip fallingSound;
-	//public Material defaultPlayerMaterial;
 
 	private AudioSource cubeSource;
 	private AudioSource fallingSource;
@@ -21,17 +20,13 @@ public class PlayerControls : MonoBehaviour {
     //private Vector3 spawnPoint;
 	private Vector3 rotAxis;
 	private Vector3 direction;
-	private float cubeRadius;
+    private Renderer renderer;
 
-    
-	//private bool touchAllowed;
-	private bool resetting;
+    private float cubeRadius;
+    private int lowerBound;
+    private bool resetting;
 	private bool moving;
 	private bool falling;
-	private int lowerBound;
-	private Renderer renderer; 
-    //private Vector2 touchOrigin = -Vector2.one;
-
 
 	void Awake () {
 		if (instance == null) {
@@ -40,6 +35,7 @@ public class PlayerControls : MonoBehaviour {
 			Destroy (gameObject);
 		}
 	}
+
     // Use this for initialization
     void Start ()
     {
@@ -62,11 +58,6 @@ public class PlayerControls : MonoBehaviour {
 		AlignPosition ();
 	}
 
-    private void Update()
-    {
-		
-    }
-
     public void TryMove(string moveDirection)
     {
         Debug.Log("TryMove");  
@@ -81,15 +72,6 @@ public class PlayerControls : MonoBehaviour {
             //<<<<<<<<<<<<<<<<<<<<<< Move() kann in TryMove() nur mit Coroutine ausgeführt werden, kann ich auch wieder dahin zurück ändern
         }
     }
-
-    /*
-    IEnumerator SequenzHandler(string moveDirection)
-    {
-        Debug.Log(moveDirection);
-        yield return StartCoroutine(moveDirection);
-        yield return StartCoroutine(Move());
-    }
-    */
 
     void MoveToBottomLeft()
     {
@@ -136,7 +118,6 @@ public class PlayerControls : MonoBehaviour {
             }
 			direction = Vector3.zero;
         } 
-        //yield return null;
     }
 
     void FixedUpdate ()
@@ -169,8 +150,7 @@ public class PlayerControls : MonoBehaviour {
 			// player is free falling
 		}
         if (falling)
-        {
-					
+        {					
 			if (transform.position.y < lowerBound && !resetting)
             {
 				fallingSource.PlayOneShot(fallingSound, 1F);
@@ -211,7 +191,6 @@ public class PlayerControls : MonoBehaviour {
 			if (Physics.Raycast (origin, direction * 1.4f, 1f, mask))
             {
 				return false;
-
 			}
 		}
 		return true;
@@ -224,7 +203,8 @@ public class PlayerControls : MonoBehaviour {
 		renderer.material.color = LayerColors.defaultColor;
 		//GameManager.instance.SetActivePlayerLayer (gameObject.layer);
 	}
-	public IEnumerator Reset(){
+
+    public IEnumerator Reset(){
 		//immediately stop the camera follow
 		CameraFollow cam = Camera.main.GetComponent<CameraFollow> ();
 		cam.enabled = false;

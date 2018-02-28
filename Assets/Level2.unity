@@ -266,7 +266,7 @@ Transform:
   - {fileID: 43753171}
   - {fileID: 738195161}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &260185896
 Prefab:
@@ -395,7 +395,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &315893808
 Prefab:
@@ -703,7 +703,7 @@ Transform:
   - {fileID: 1351260816}
   - {fileID: 1636676370}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1198451629
 Prefab:
@@ -838,7 +838,7 @@ Prefab:
     - target: {fileID: 224223652657408380, guid: c3b0877e72c98ba478bd101b06542b77,
         type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 224223652657408380, guid: c3b0877e72c98ba478bd101b06542b77,
         type: 2}
@@ -1208,6 +1208,16 @@ Prefab:
       propertyPath: m_Name
       value: EndPoint
       objectReference: {fileID: 0}
+    - target: {fileID: 65678347833383974, guid: eaa5f7812cb208043a0aa790a5887bb9,
+        type: 2}
+      propertyPath: m_Size.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114704156772602828, guid: eaa5f7812cb208043a0aa790a5887bb9,
+        type: 2}
+      propertyPath: endPointSound
+      value: 
+      objectReference: {fileID: 8300000, guid: a17da2e4da25a3d4f8362687d10e5e1d, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eaa5f7812cb208043a0aa790a5887bb9, type: 2}
   m_IsPrefabParent: 0
@@ -1484,7 +1494,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4273011759636986, guid: 8635619346a7b87419e5233ab10d7a2e, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1055976707300110, guid: 8635619346a7b87419e5233ab10d7a2e, type: 2}
       propertyPath: m_IsActive
@@ -1994,5 +2004,5 @@ Transform:
   - {fileID: 260185897}
   - {fileID: 913804586}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -196,6 +196,7 @@ GameObject:
   - component: {fileID: 65678347833383974}
   - component: {fileID: 23655077034507730}
   - component: {fileID: 114704156772602828}
+  - component: {fileID: 82531021972086232}
   m_Layer: 0
   m_Name: EndPoint2.0
   m_TagString: Untagged
@@ -837,6 +838,87 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.01, z: 0.6}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!82 &82531021972086232
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1871789228937574}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 243286098953972434, guid: 6ed4be0fb85f50a43a7577afeeda8058,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: a17da2e4da25a3d4f8362687d10e5e1d, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114057933519136160
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -928,6 +1010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fbeec4750bad4841ab62b3823fb2377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endPointSound: {fileID: 8300000, guid: a17da2e4da25a3d4f8362687d10e5e1d, type: 3}
 --- !u!114 &114773244301916386
 MonoBehaviour:
   m_ObjectHideFlags: 1

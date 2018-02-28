@@ -33,12 +33,16 @@ public class PauseMenu : MonoBehaviour {
 	}
 	public void LevelCompleted (){
 			completedMenuUI.SetActive (true);
+			Time.timeScale = 0f; //Stops the game
+			GameIsPaused = true; 
 	}
 	public void LoadMenu(){
 		SceneManager.LoadScene("Menu");	//Calls up the Menu Scene
 	}
 	public void NextLevel(){
 		GameManager.instance.NextLevel ();
+		Time.timeScale = 1f; //The game continues
+		GameIsPaused = false;
 	}
 	
 }

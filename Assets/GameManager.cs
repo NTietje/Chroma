@@ -48,14 +48,7 @@ public class GameManager : MonoBehaviour {
 		} else if (instance != this) {
 			Destroy (gameObject);
 		}
-		
-		GameObject[] musicObjs = GameObject.FindGameObjectsWithTag("Music"); //Checks objects in the scene with tag: Music
-			
-			if(musicObjs.Length > 1) 		//If more than 1 object is found, 
-				Destroy(this.gameObject);	//it will be destroyed
 				
-				DontDestroyOnLoad(this.gameObject);
-		
 	}
 	// Use this for initialization
 	void Start () {
@@ -98,6 +91,12 @@ public class GameManager : MonoBehaviour {
 	}
 	public void SetSpawn(Vector3 spawnPoint){
 		this.spawnPoint = spawnPoint;
+	}
+	public void MusicOn(){
+		gameObject.GetComponent<AudioSource> ().enabled = true;
+	}
+	public void MusicOff(){
+		gameObject.GetComponent<AudioSource> ().enabled = false;
 	}
 	public void SetCheckPoint(GameObject checkPoint, int layer){
 		if (checkPoint.GetComponent<CheckPointBehaviour> () && (this.checkPoint != checkPoint)) {

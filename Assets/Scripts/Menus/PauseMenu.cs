@@ -44,5 +44,10 @@ public class PauseMenu : MonoBehaviour {
 		Time.timeScale = 1f; //The game continues
 		GameIsPaused = false;
 	}
-	
+	public void MusicOff(){
+		GameManager.instance.MusicOff ();
+	}
+	public void MusicOn(){
+		GameManager.instance.MusicOn ();
+	}
 }

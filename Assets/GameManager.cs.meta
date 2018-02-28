@@ -1,11 +1,12 @@
 fileFormatVersion: 2
 guid: fbf9733780be4c24a897a4cd1e9655ef
-timeCreated: 1519486501
+timeCreated: 1519829809
 licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - levelMusicSound: {fileID: 8300000, guid: 92c91a511318fe04da2438fba0f0ee56, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

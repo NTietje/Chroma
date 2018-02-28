@@ -63,6 +63,7 @@ public class Projectile : MonoBehaviour {
             //Change player colour
 			if (other.gameObject.GetComponent<PlayerControls> ()) {
 				other.gameObject.GetComponent<PlayerControls> ().ResetColor ();
+				
 			}
         }
     }

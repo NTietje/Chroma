@@ -36,6 +36,10 @@ public class GameManager : MonoBehaviour {
 	private bool customSpawn;
 	private Vector3 customSpawnPoint;
 	private int customSpawnLayer;
+	
+	//Music
+	public AudioClip levelMusicSound;
+	private AudioSource levelMusicSource;
 
 	void Awake() {
 		if (instance == null) {
@@ -44,7 +48,8 @@ public class GameManager : MonoBehaviour {
 		} else if (instance != this) {
 			Destroy (gameObject);
 		}
-			
+		
+		DontDestroyOnLoad (levelMusicSound);
 	}
 	// Use this for initialization
 	void Start () {

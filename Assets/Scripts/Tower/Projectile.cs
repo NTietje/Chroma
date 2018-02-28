@@ -2,30 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Script for projectiles, move the gameobject forwards depending on the projectilegenerator
+
 public class Projectile : MonoBehaviour {
 
     public Color defaultPlayerColour;
     public AudioClip hitSound;
 
-    private AudioSource hitSource;
-    private Vector3 startPosition;
+    AudioSource hitSource;
+    Vector3 startPosition;
 
-    private float projectileDistance;
-    private float projectileSpeed;
-    private bool allowUpdate;
+    float projectileDistance;
+    float projectileSpeed;
+    bool allowUpdate;
     
-    private void Start()
+    void Start()
     {
         hitSource = GetComponent<AudioSource>();
-    }
-
-    // initialize method for projectile
-    public void Initialize(Vector3 startPosition, float projectileDistance, float projectileSpeed)
-    {
-        this.projectileDistance = projectileDistance;
-        this.projectileSpeed = projectileSpeed;
-        this.startPosition = startPosition;
-        allowUpdate = true;	
     }
 
     void FixedUpdate()
@@ -45,6 +38,15 @@ public class Projectile : MonoBehaviour {
         }  
     }
 
+    // initialize method for projectile
+    public void Initialize(Vector3 startPosition, float projectileDistance, float projectileSpeed)
+    {
+        this.projectileDistance = projectileDistance;
+        this.projectileSpeed = projectileSpeed;
+        this.startPosition = startPosition;
+        allowUpdate = true;
+    }
+
     // Waits for trigger-collision with player
     private void OnTriggerEnter(Collider other) 
     {
@@ -59,12 +61,6 @@ public class Projectile : MonoBehaviour {
             gameObject.GetComponent<Renderer>().enabled = false;
             gameObject.GetComponentInChildren<Light>().enabled = false;
             Destroy(gameObject, 3);
-
-            //Change player colour
-			/*if (other.gameObject.GetComponent<PlayerControls> ()) {
-				other.gameObject.GetComponent<PlayerControls> ().ResetColor ();
-				
-			}*/
 			other.gameObject.layer = 0;
         }
     }

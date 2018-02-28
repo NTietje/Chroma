@@ -2,28 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Script to move object from on point to many others in a loop
+
 public class ObjectMovementManyDestiantions : MonoBehaviour {
 
-    public float speed;
     public GameObject platform;
     public Transform[] positions;
+    public float speed;
     public bool oneWay;
     public bool allowMoving;
    
-    private Vector3 nextDestination;
-    private int startIndex;
-    private int destinationIndex;
-    private int direction;
-    private float movementTimer;
-    private bool move = true;
+    Vector3 nextDestination;
+    int startIndex;
+    int destinationIndex;
+    int direction;
+    float movementTimer;
+    bool move = true;
 
     // Use this for initialization
     void Start () {
-
-        // default start position
-        //transform.position = Vector3.zero;
-        //platform.transform.localPosition = Vector3.zero;
-
         // start values
         direction = 0;
         startIndex = 0;

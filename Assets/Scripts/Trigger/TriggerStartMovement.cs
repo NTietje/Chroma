@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// Script for a trigger object to start moving of a platform
+
 public class TriggerStartMovement : MonoBehaviour {
 
     public GameObject platform;
     public float stoptimer;
 	public AudioClip triggerSound;
-	private AudioSource triggerSource;
+
+	AudioSource triggerSource;
 	
 	// Use this for initialization
     void Start ()
@@ -16,7 +20,7 @@ public class TriggerStartMovement : MonoBehaviour {
 	}
 	
     // On Trigger Enter move platform
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         // if collision with player, move the platform
         if (other.tag == "Player")
@@ -33,6 +37,7 @@ public class TriggerStartMovement : MonoBehaviour {
         }  
     }
 
+    // Stops platform with boolean to false
     void stopPlatform()
     {
         platform.GetComponent<ObjectMovementManyDestiantions>().allowMoving = false;

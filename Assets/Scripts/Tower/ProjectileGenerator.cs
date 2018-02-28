@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Script for a gameobject as origin of projectiles
+
 public class ProjectileGenerator : MonoBehaviour {
 
     public GameObject projectilePrefab;

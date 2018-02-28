@@ -49,7 +49,6 @@ public class GameManager : MonoBehaviour {
 			Destroy (gameObject);
 		}
 		
-		DontDestroyOnLoad (levelMusicSound);
 	}
 	// Use this for initialization
 	void Start () {
@@ -59,6 +58,7 @@ public class GameManager : MonoBehaviour {
 		}
 		//Instantiate (rockBottomPrefab, transform);
 		//rockBottomPrefab.transform.position = (new Vector3 (0, rockBottomHeight, 0));
+		
 	}
 	
 	// Update is called once per frame

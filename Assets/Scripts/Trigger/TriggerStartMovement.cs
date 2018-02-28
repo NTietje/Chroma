@@ -6,7 +6,15 @@ public class TriggerStartMovement : MonoBehaviour {
 
     public GameObject platform;
     public float stoptimer;
-
+	public AudioClip triggerSound;
+	private AudioSource triggerSource;
+	
+	// Use this for initialization
+    void Start ()
+    {
+		triggerSource = GetComponent<AudioSource>();
+	}
+	
     // On Trigger Enter move platform
     private void OnTriggerEnter(Collider other)
     {
@@ -15,8 +23,8 @@ public class TriggerStartMovement : MonoBehaviour {
         {
             platform.GetComponent<ObjectMovementManyDestiantions>().allowMoving = true;
 
-            //************************ Hier Sound für Trigger rein ****************************
-
+            //sound for the trigger
+			 triggerSource.PlayOneShot(triggerSound, 1F); //1st parameter: audio clip and 2nd paramenter: volume
             // if stoptimer is set, stop platform after time
             if (stoptimer > 0)
             {

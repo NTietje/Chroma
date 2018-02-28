@@ -42,11 +42,7 @@ GameObject:
   - component: {fileID: 114070744120180114}
   - component: {fileID: 114321925871207562}
   - component: {fileID: 114359825647073410}
-<<<<<<< HEAD
   - component: {fileID: 82346418346187828}
-=======
-  - component: {fileID: 82955288972758112}
->>>>>>> c36f7d83cfa0e2617907fe5afe258183928a6310
   m_Layer: 8
   m_Name: ColourItem
   m_TagString: Untagged
@@ -171,11 +167,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
 --- !u!82 &82346418346187828
-=======
---- !u!82 &82955288972758112
->>>>>>> c36f7d83cfa0e2617907fe5afe258183928a6310
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -185,15 +177,9 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243286098953972434, guid: 6ed4be0fb85f50a43a7577afeeda8058,
     type: 2}
-<<<<<<< HEAD
-  m_audioClip: {fileID: 8300000, guid: d1b0164dc2638c84986d1aa6f1d97ad6, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-=======
   m_audioClip: {fileID: 8300000, guid: a96a1ddbfa8b78e49a987ede6fe9ed59, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.3
->>>>>>> c36f7d83cfa0e2617907fe5afe258183928a6310
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -310,11 +296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   respawnTime: 4
-<<<<<<< HEAD
-  colorItemSound: {fileID: 8300000, guid: d1b0164dc2638c84986d1aa6f1d97ad6, type: 3}
-=======
   colorItemSound: {fileID: 8300000, guid: a96a1ddbfa8b78e49a987ede6fe9ed59, type: 3}
->>>>>>> c36f7d83cfa0e2617907fe5afe258183928a6310
 --- !u!114 &114321925871207562
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -59,7 +59,7 @@ public class ColourPickUp : MonoBehaviour {
 	 */
 	public void PickUp(GameObject player){
 		// Switch player colour
-		player.GetComponent<Renderer>().material.color = gameObject.GetComponent<Renderer>().material.color;
+		//player.GetComponent<Renderer>().material.color = gameObject.GetComponent<Renderer>().material.color;
 
 		// Switch player layer
 		player.layer = gameObject.layer;

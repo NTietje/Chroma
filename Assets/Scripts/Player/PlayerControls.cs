@@ -69,7 +69,7 @@ public class PlayerControls : MonoBehaviour {
     {
 		//TODO: Lerp color
 		if (rend.material.color != LayerColors.FindLayerColor(gameObject.layer)){
-			rend.material.color = Color.Lerp (rend.material.color, LayerColors.FindLayerColor (gameObject.layer), 0.2f);
+			rend.material.color = Color.Lerp (rend.material.color, LayerColors.FindLayerColor (gameObject.layer), 0.1f);
 		}
     }
 	/**

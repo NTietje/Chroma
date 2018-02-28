@@ -1622,9 +1622,19 @@ Prefab:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 114804088092654168, guid: c3b0877e72c98ba478bd101b06542b77,
+        type: 2}
+      propertyPath: completedMenuUI
+      value: 
+      objectReference: {fileID: 1349617590}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c3b0877e72c98ba478bd101b06542b77, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1349617590 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1642103800086714, guid: c3b0877e72c98ba478bd101b06542b77,
+    type: 2}
+  m_PrefabInternal: {fileID: 1349617589}
 --- !u!1 &1350833221
 GameObject:
   m_ObjectHideFlags: 0

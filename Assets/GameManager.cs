@@ -7,15 +7,23 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+/**
+ * The GameManager organizes player data, saves, loads, activates checkpoints 
+ * 
+ * 
+ */
 
 public class GameManager : MonoBehaviour {
 
+	//used for various debugging purposes.
 	public bool debug;
 
 	public float spawnOffset = 0.5f;
 	public static GameManager instance;
 	//public GameObject rockBottomPrefab;
 	//public int rockBottomHeight = -10;
+
+	private PauseMenu menu;
 
 	private GameObject checkPoint;
 	private Vector3 spawnPoint;
@@ -64,10 +72,14 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 	public void NextLevel(){
-		int currentLevel = SceneManager.GetActiveScene ().buildIndex;
-		LoadLevel (currentLevel + 1);
-		//activePlayerLayer = 0;
-
+		Debug.Log (level);
+		LoadLevel (level + 1);
+	}
+	public void Finish(){
+		menu.LevelCompleted ();
+	}
+	public void NewGame(){
+		LoadLevel (1);
 	}
 	public Vector3 GetSpawn(){
 		return spawnPoint;
@@ -76,12 +88,15 @@ public class GameManager : MonoBehaviour {
 		this.spawnPoint = spawnPoint;
 	}
 	public void SetCheckPoint(GameObject checkPoint, int layer){
-		if (this.checkPoint != null) {
-			this.checkPoint.GetComponent<CheckPointBehaviour> ().active = false;
-		}
-		this.checkPoint = checkPoint;
-		spawnPoint = new Vector3 (checkPoint.transform.position.x, checkPoint.transform.position.y + spawnOffset, checkPoint.transform.position.z);
-		saveLayer = layer;
+		if (checkPoint.GetComponent<CheckPointBehaviour> () && (this.checkPoint != checkPoint)) {
+			if (this.checkPoint != null) {
+				this.checkPoint.GetComponent<CheckPointBehaviour> ().Off();
+			}
+			this.checkPoint = checkPoint;
+			checkPoint.GetComponent<CheckPointBehaviour>().On ();
+			spawnPoint = new Vector3 (checkPoint.transform.position.x, checkPoint.transform.position.y + spawnOffset, checkPoint.transform.position.z);
+			saveLayer = layer;
+		} 
 	}
 	/*public void SetActivePlayerLayer(int layerIndex){
 		this.activePlayerLayer = activePlayerLayer;
@@ -91,7 +106,7 @@ public class GameManager : MonoBehaviour {
 		FileStream file = File.Create (Application.persistentDataPath + "/playerInfo.dat");
 
 		PlayerData data = new PlayerData ();
-		data.level = SceneManager.GetActiveScene ().buildIndex;
+		data.level = level;
 		data.x = spawnPoint.x;
 		data.y = spawnPoint.y;
 		data.z = spawnPoint.z;
@@ -119,6 +134,9 @@ public class GameManager : MonoBehaviour {
 			//activePlayerLayer = data.activePlayerLayer;
 			Debug.Log (spawnPoint.ToString());
 		}
+	}
+	public void SetMenu(PauseMenu menu){
+		this.menu = menu;
 	}
 
 	public bool CustomSpawn(){

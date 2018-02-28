@@ -8,26 +8,37 @@ public class PauseMenu : MonoBehaviour {
 
 	public static bool GameIsPaused = false;
 	public GameObject pauseMenuUI;
+	public GameObject completedMenuUI;
+
+	void Start (){
+		GameManager.instance.SetMenu (this);
+	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
 	
+	
 	public void Resume (){
-		pauseMenuUI.SetActive(false); //Das Pausenmenü ist nicht sichtbar
-		Time.timeScale = 1f; //Somit geht das Spiel wieder weiter
+		pauseMenuUI.SetActive(false); //Sets the PauseMenu canvas to not visible
+		Time.timeScale = 1f; //The game continues
 		GameIsPaused = false;
 	}
 	
 	public void Pause (){
-		pauseMenuUI.SetActive(true); //Macht das Pausenmenü sichtbar
-		Time.timeScale = 0f; //Dient dazu die Zeit in dem Spiel anzuhalten
+		pauseMenuUI.SetActive(true); //Sets the PauseMenu canvas active
+		Time.timeScale = 0f; //Stops the game
 		GameIsPaused = true; 
 	}
-	
+	public void LevelCompleted (){
+			completedMenuUI.SetActive (true);
+	}
 	public void LoadMenu(){
-		SceneManager.LoadScene("Menu");	//Ruft Szene Meu auf
+		SceneManager.LoadScene("Menu");	//Calls up the Menu Scene
+	}
+	public void NextLevel(){
+		GameManager.instance.NextLevel ();
 	}
 	
 }

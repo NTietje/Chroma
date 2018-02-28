@@ -10,6 +10,7 @@ public class PauseMenu : MonoBehaviour {
 	public static bool GameIsPaused = false;
 	public GameObject pauseMenuUI;
 	public GameObject completedMenuUI;
+	public GameObject winScreenUI;
 
 	void Awake() {
 		if (instance == null) {
@@ -35,7 +36,7 @@ public class PauseMenu : MonoBehaviour {
 		pauseMenuUI.SetActive(false); //Sets the PauseMenu canvas to not visible
 		Time.timeScale = 1f; //The game continues
 		GameIsPaused = false;
-
+		winScreenUI.SetActive(false);
 		completedMenuUI.SetActive (false);
 	}
 
@@ -65,5 +66,8 @@ public class PauseMenu : MonoBehaviour {
 	public void MusicOn(){
 		GameManager.instance.MusicOn ();
 		GameManager.instance.musicOn = true;
+	}
+	public void WinScreen(){
+		winScreenUI.SetActive(true);
 	}
 }

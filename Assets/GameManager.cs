@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour {
 	public AudioClip levelMusicSound;
 	private AudioSource levelMusicSource;
 
-	void Awake() {
+	void Awake () {
 		if (instance == null) {
 			DontDestroyOnLoad (gameObject);
 			instance = this;
@@ -80,8 +80,12 @@ public class GameManager : MonoBehaviour {
 		LoadLevel (level + 1);
 	}
 	//show the level completed screen
-	public void Finish(){
-		menu.LevelCompleted ();
+	public void Finish(bool lastLevel){
+		if (lastLevel) {
+			menu.WinScreen ();
+		} else {
+			menu.LevelCompleted ();
+		}
 	}
 	//starts a new game (level 1)
 	public void NewGame(){

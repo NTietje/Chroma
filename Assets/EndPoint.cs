@@ -6,6 +6,7 @@ using UnityEngine;
  */
 public class EndPoint : MonoBehaviour {
 
+	public bool lastLevel = false;
 	public AudioClip endPointSound;
 	private AudioSource endPointSource;
 
@@ -23,7 +24,7 @@ public class EndPoint : MonoBehaviour {
 		endPointSource.PlayOneShot(endPointSound, .5F); //1st parameter: audio clip and 2nd paramenter: volume
 		
 		//Calls up the Finish() methode in GameManager
-		GameManager.instance.Finish ();
+			GameManager.instance.Finish (lastLevel);
 		}
 	}
 }

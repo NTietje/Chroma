@@ -8,36 +8,35 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 /**
- * The GameManager organizes player data, saves, loads, activates checkpoints 
- * 
- * 
+ * The GameManager organizes checkpoints, savegames, game progress etc. 
+ * This class is initialized as singleton and can be accessed by any other class with GameManager.instance
+ * This classes instance will also remain active when changing the scene (level change or main menu)
  */
 
 public class GameManager : MonoBehaviour {
 
-	//used for various debugging purposes.
+	//Singleton instance, will 
+	public static GameManager instance;
+
+	//used for various debugging purposes, deactivate this when building 
 	public bool debug;
 	public bool musicOn;
 
-	public float spawnOffset = 0.5f;
-	public static GameManager instance;
-	//public GameObject rockBottomPrefab;
-	//public int rockBottomHeight = -10;
-
+	//linked pause menu to call the menus functions
 	private PauseMenu menu;
 
-	private GameObject checkPoint;
-	private Vector3 spawnPoint;
+	//player spawn related
+	public float spawnOffset = 0.5f; //let's the player spawn above the checkpoint
+	private GameObject checkPoint; //linked active checkpoint
+	private Vector3 spawnPoint; //current spawn position of the player
+	private bool customSpawn; //true: load a level with a custom spawn point
+	private Vector3 customSpawnPoint; //custom spawn point location (see above)
+	private int customSpawnLayer; //custom spawn layer (see above)
+	private int saveLayer; //the layer the player was on, when reaching the last checkpoint
 
-	private int saveLayer;
+	//current active game level
 	private int level;
-	//private int activePlayerLayer;
 
-	//Custom Spawn
-	private bool customSpawn;
-	private Vector3 customSpawnPoint;
-	private int customSpawnLayer;
-	
 	//Music
 	public AudioClip levelMusicSound;
 	private AudioSource levelMusicSource;
@@ -51,49 +50,41 @@ public class GameManager : MonoBehaviour {
 		}
 				
 	}
-	// Use this for initialization
 	void Start () {
+		//active level when starting the game in any scene (dev)
 		if (SceneManager.GetActiveScene ().buildIndex != 0) {
 			level = SceneManager.GetActiveScene ().buildIndex;
 			//spawnPoint = PlayerControls.instance.transform.position;
 		} else {
 			MusicOff ();
 		}
-		//Instantiate (rockBottomPrefab, transform);
-		//rockBottomPrefab.transform.position = (new Vector3 (0, rockBottomHeight, 0));
-		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-	private void LoadLevel(int levelIndex){
+	/**
+	 * Loads a level. Level indices are managed in the SceneManager (build settings)
+	 * make sure the desired level indices are the same as the scene manager build indices
+	 * Can also load the main menu with LoadLevel(0)
+	 * 
+	 * int levelIndex : scene manager index of the scene to open
+	 */
+	public void LoadLevel(int levelIndex){
 		if (levelIndex < SceneManager.sceneCountInBuildSettings) {
 			SceneManager.LoadScene (levelIndex, LoadSceneMode.Single);
 			level = levelIndex;
-
-			//SceneManager.SetActiveScene (SceneManager.GetSceneAt(currentLevel+1));
-
 		} else {
-			Debug.Log ("no more scenes in build");
+			Debug.Log ("Level not found.");
 		}
 	}
+	//Load next level
 	public void NextLevel(){
-		Debug.Log (level);
 		LoadLevel (level + 1);
 	}
+	//show the level completed screen
 	public void Finish(){
 		menu.LevelCompleted ();
 	}
+	//starts a new game (level 1)
 	public void NewGame(){
 		LoadLevel (1);
-	}
-	public Vector3 GetSpawn(){
-		return spawnPoint;
-	}
-	public void SetSpawn(Vector3 spawnPoint){
-		this.spawnPoint = spawnPoint;
 	}
 	public void MusicOn(){
 		gameObject.GetComponent<AudioSource> ().enabled = true;
@@ -101,6 +92,7 @@ public class GameManager : MonoBehaviour {
 	public void MusicOff(){
 		gameObject.GetComponent<AudioSource> ().enabled = false;
 	}
+	//activate and register a new checkpoint, basically saves a players progress within a level
 	public void SetCheckPoint(GameObject checkPoint, int layer){
 		if (checkPoint.GetComponent<CheckPointBehaviour> () && (this.checkPoint != checkPoint)) {
 			if (this.checkPoint != null) {
@@ -112,9 +104,17 @@ public class GameManager : MonoBehaviour {
 			saveLayer = layer;
 		} 
 	}
-	/*public void SetActivePlayerLayer(int layerIndex){
-		this.activePlayerLayer = activePlayerLayer;
-	}*/
+	//Get currently active spawn location
+	public Vector3 GetSpawn(){
+		return spawnPoint;
+	}
+	//Set new spawn location
+	public void SetSpawn(Vector3 spawnPoint){
+		this.spawnPoint = spawnPoint;
+	}
+	/**
+	 * Save the players progress to a dedicated file 
+	 */
 	public void Save(){
 		BinaryFormatter bf = new BinaryFormatter ();
 		FileStream file = File.Create (Application.persistentDataPath + "/playerInfo.dat");
@@ -129,6 +129,10 @@ public class GameManager : MonoBehaviour {
 		bf.Serialize (file, data);
 		file.Close ();
 	}
+	/**
+	 * load the players progress from a dedicated file
+	 * uses custom spawn point to let the player continue from a checkpoint instead of the levelstart
+	 */
 	public void Load(){
 		if (File.Exists (Application.persistentDataPath + "/playerInfo.dat")) {
 			BinaryFormatter bf = new BinaryFormatter ();
@@ -136,23 +140,17 @@ public class GameManager : MonoBehaviour {
 			PlayerData data = (PlayerData)bf.Deserialize (file);
 			file.Close ();
 			LoadLevel (data.level);
-
-			if (PlayerControls.instance.isActiveAndEnabled) {
-				Debug.Log ("instance not null");
-			}
 			customSpawnPoint = new Vector3(data.x, data.y, data.z);
 			customSpawnLayer = data.layer;
 			customSpawn = true;
-			//PlayerControls.instance.gameObject.transform.position = new Vector3(data.x, data.y, data.z);
 			spawnPoint = new Vector3(data.x, data.y, data.z);
-			//activePlayerLayer = data.activePlayerLayer;
-			Debug.Log (spawnPoint.ToString());
 		}
 	}
+	//register the pause menu
 	public void SetMenu(PauseMenu menu){
 		this.menu = menu;
 	}
-
+	//returns true, if a custom spawn is set, also moves the player to its spawn
 	public bool CustomSpawn(){
 		if (customSpawn) {
 			PlayerControls.instance.transform.position = customSpawnPoint;
@@ -162,6 +160,7 @@ public class GameManager : MonoBehaviour {
 		}
 		return false;
 	}
+	//for debugging only atm
 	void OnGUI(){
 		if (debug) {
 			if (GUI.Button (new Rect (10, 100, 100, 30), "Save")) {
@@ -173,6 +172,12 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 }
+/**
+ *this is the save game format. 
+ * public in level : current level
+ * public int layer : current color layer
+ * ints x/y/z define the spawn point
+ */
 [Serializable]
 class PlayerData {
 

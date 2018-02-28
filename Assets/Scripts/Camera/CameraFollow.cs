@@ -2,9 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+* This script enables a camera, if attached, to follow a defined target, e.g. the player.
+*
+* target : the object to follow
+* lerpTo : when this boolean is true, the camera will not instantly follow the target, but interpolate between it's position and the target's position
+* lerpTarget : used to save the last position of the target, before a lerp-follow
+* offset : the distance between the camera and the target
+* 
+* by Cevau
+*/
+
 public class CameraFollow : MonoBehaviour {
 
-	public GameObject target; //object to follow
+	public GameObject target;
 
 	private bool lerpTo;
 	private Vector3 lerpTarget;
@@ -12,17 +23,12 @@ public class CameraFollow : MonoBehaviour {
 	private Vector3 offset; 
 
 	void Awake (){
+		//offset will be the initial distance between the target and the camera
 		offset = transform.position - target.transform.position;
 	}
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
 	void LateUpdate () {
 		if (lerpTo) {
+			//check if target has been reached already, if so, disables lerpTo mode
 			if (transform.position == lerpTarget) {
 				lerpTo = false;
 			} else {
@@ -30,9 +36,13 @@ public class CameraFollow : MonoBehaviour {
 			}
 
 		} else {
+			//follow the target (instantly)
 			transform.position = target.transform.position + offset;
 		}
 	}
+	/**
+	 * enables the lerpTo mode (see lerpTo)  
+	 */
 	public void LerpToTarget(){
 		lerpTarget = target.transform.position + offset;
 		lerpTo = true;

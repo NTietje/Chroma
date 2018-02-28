@@ -1,33 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/**
+ * This class manages the colour-pick-up behaviour. Items where this is attached can be picked up and will also define the picking object's layer and color 
+ * 
+ * !!! ColourPickUp objects themselves should not have an active collider anymore, only the child of type DefaultLayerAnchor
+ * !!! This is a workaround to make the PickUps be pickable from anylayer, although there is no physical collision between the player and the ColourPickUp-object itself
+ */
 public class ColourPickUp : MonoBehaviour {
-
-    /*public enum ColorLayer { ColorLayer1, ColorLayer2, ColorLayer3, ColorLayer4 };
-    public ColorLayer colorLayer;*/
-    public float respawnTime;
 	
-	
-	public AudioClip colorItemSound;
-	private AudioSource colorItemSource;
-
-    //private Color colour;
-
-	// Use this for initialization
-	void Start ()
-    {
-        //colour = GetComponent<Renderer>().material.color;
-		
-		//Looks for the AudioSource
-		colorItemSource = GetComponent<AudioSource>();
-		
-	}
+    public float respawnTime; //respawn of the attached gameObject after pick up
 
     // Change player colour on trigger-collision
     void OnTriggerEnter(Collider other)
     {
-        // Switch player colour
+		//!!! This collision behaviours only works, if the collecting object is not on the same colourlayer as the item itself
+		//!!! if it is desired to make an object be pickable from any layer, use a child with the DefaultLayerAnchor.cs attached and disable this objects collider
+
+		// Switch player colour
 		other.gameObject.GetComponent<Renderer>().material.color = gameObject.GetComponent<Renderer>().material.color;
 
         // Switch player layer
@@ -40,20 +30,27 @@ public class ColourPickUp : MonoBehaviour {
 		Invoke("ShowGameobjectAgain", respawnTime);
 		
     }
-
+	/**
+	 * reenable all visibility and collision
+	 */
     void SetGameObjectActiv(bool boolean)
     {
-        gameObject.GetComponent<Renderer>().enabled = boolean;
-        //gameObject.GetComponent<Collider>().enabled = boolean;
+		gameObject.GetComponent<Renderer>().enabled = boolean;
         gameObject.GetComponentInChildren<Light>().enabled = boolean;
 		gameObject.GetComponentInChildren<BoxCollider> ().enabled = boolean;
     }
-
+	/**
+	 * reactivates the gameObject, can be invoked
+	 */
     void ShowGameobjectAgain()
     {
         SetGameObjectActiv(true);
     }
-
+	/**
+	 * This method lets the attached gameObject be picked up by another one.
+	 * When picked up, it will change the targets layer and color.
+	 * The attached gameObject will also disappear for the defined respawnTime
+	 */
 	public void PickUp(GameObject player){
 		// Switch player colour
 		player.GetComponent<Renderer>().material.color = gameObject.GetComponent<Renderer>().material.color;
@@ -71,22 +68,5 @@ public class ColourPickUp : MonoBehaviour {
 		colorItemSource.PlayOneShot(colorItemSound);
 		
 	}
-
-    /*int ApplyColorLayer(ColorLayer colorLayer)
-    {
-        switch (colorLayer)
-        {
-            case ColorLayer.ColorLayer1:
-                return 8;
-            case ColorLayer.ColorLayer2:
-                return 9;
-            case ColorLayer.ColorLayer3:
-                return 10;
-            case ColorLayer.ColorLayer4:
-                return 11;
-            default:
-                return 0;
-        }
-    }*/
 
 }

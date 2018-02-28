@@ -2,16 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * This script enables a gameObject to register itself as checkpoint in the game manager
+ * When the player is reset or a game is continued, the last activated checkpoint is the place where the player starts
+ * checkpoints become active when the player triggers it's collider
+ * checkpoints become inactive, when a different checkPoint is activated. checkpoints are also inactive by default
+ * 
+ */
 public class CheckPointBehaviour : MonoBehaviour {
 
-	public Color colorUnchecked = Color.yellow;
-	public Color colorChecked = Color.green;
-	private bool active;
-	private bool switching;
-	//public float spawnOffset = 0.5f;
+	public Color colorUnchecked = Color.yellow; //inactive color
+	public Color colorChecked = Color.green; //active color
+	private bool active; //checkpoint is active, only one will be active at once (handled by game manager)
+	private bool switching; //checkpoint is currently changeing it's color
 
-	private Renderer rend;
-	private Component[] renderers;
+	private Renderer rend; //attached gameobject's renderer
+	private Component[] renderers; //gameobjects' childs renderes
 
 
 	// Use this for initialization
@@ -22,37 +28,43 @@ public class CheckPointBehaviour : MonoBehaviour {
 		renderers = gameObject.GetComponentsInChildren(typeof(Renderer));
 	}
 	void OnTriggerEnter(Collider other){
-		//Vector3 spawnPoint = new Vector3 (transform.position.x, transform.position.y + spawnOffset, transform.position.z);
-		//other.gameObject.GetComponent<PlayerControls> ().SetSpawnPoint(spawnPoint);
-		GameManager.instance.SetCheckPoint(gameObject, other.gameObject.layer);
+		//registeres the attached gameObject as active spawnPoint in the gameManagers
+		if (other.gameObject.tag == "Player") {
+			GameManager.instance.SetCheckPoint (gameObject, other.gameObject.layer);
+		}
 	}
 
 	// Update is called once per frame
 	void Update () {
+		//manages the color change from active to inactive and vice versa
 		if (switching) {
 			Color lerpColor = rend.material.color;
 			if (active) {
 				lerpColor = Color.Lerp (rend.material.color, colorChecked, 0.07f);
+				//color switch completed
 				if (rend.material.color == colorChecked) {
 					switching = false;
 				}
-			
 			} else {
 				lerpColor = Color.Lerp (rend.material.color, colorUnchecked, Time.deltaTime);
+				//color switch completed
 				if (rend.material.color == colorUnchecked) {
 					switching = false;
 				}
 			}
+			//apply color to gameObject's renderer and children
 			rend.material.color = lerpColor;
 			foreach (Renderer childRenderer in renderers) {
 				childRenderer.material.color = lerpColor;
 			}
 		}
 	}
+	// deactivates
 	public void Off(){
 		active = false;
 		switching = true;
 	}
+	//activates
 	public void On(){
 		active = true;
 		switching = true;

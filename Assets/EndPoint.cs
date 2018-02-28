@@ -1,18 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/**
+ * This script finishes the active level when a collider is triggered by a player
+ */
 public class EndPoint : MonoBehaviour {
 
 	public AudioClip endPointSound;
 	private AudioSource endPointSource;
 
-	// Use this for initialization
 	void Start ()
     {		
 		//Looks for the AudioSource
 		endPointSource = GetComponent<AudioSource>();
 	}
+	// Use this for initialization
 	
 	void OnTriggerEnter(Collider other){
 		if (other.tag == "Player")

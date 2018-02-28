@@ -2,33 +2,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/**
+ * This script handles anything relevant to the controllable player
+ * It also instantiates as singleton to be accessable from anywhere
+ * It controls the movement, but not the input (see inputController.cs)
+ */
 public class PlayerControls : MonoBehaviour {
 
 	public static PlayerControls instance;
 
-	public int speed = 450;
-	public float maxClimb = 0.2f;
-	public int maxFallingHeight = 50;
-	public float respawnWait = 0.5f;
-	public AudioClip cubeSound;
-	public AudioClip fallingSound;
+	private Renderer renderer;
 
+	public int speed = 450; //movement speed
+	public float maxClimb = 0.2f; //max height the cube can climb
+	public int maxFallingHeight = 50; //after falling this high, player will be reset
+	public float respawnWait = 0.5f; //player reset will happen after this time has passed
+	//Audio
+	public AudioClip cubeSound; //movement sound
+	public AudioClip fallingSound;
 	private AudioSource cubeSource;
 	private AudioSource fallingSource;
 	
-    private GameObject pivot;
-    //private Vector3 spawnPoint;
-	private Vector3 rotAxis;
-	private Vector3 direction;
-    private Renderer renderer;
+    private GameObject pivot; //this is a point used to perform the cube movement around
+	private Vector3 rotAxis; //for player movement
+	private Vector3 direction; //movement direction
+	private float cubeRadius; //used for movement calculation (placing the pivot)
 
-    private float cubeRadius;
-    private int lowerBound;
-    private bool resetting;
+	//these booleans primarily lock the input and let the script finish certain states
+	private bool resetting;
 	private bool moving;
 	private bool falling;
 
+	private int lowerBound; //replace player after crossing this rock bottom
+
 	void Awake () {
+		//singleton pattern
 		if (instance == null) {
 			instance = this;
 		} else if (instance != this) {
@@ -41,44 +50,47 @@ public class PlayerControls : MonoBehaviour {
     {
 		cubeSource = GetComponent<AudioSource>();
 		fallingSource = GetComponent<AudioSource>();
-        //touchAllowed = true;
         cubeRadius = transform.lossyScale.x*0.5f;
-		//spawnPoint = transform.position;
 		pivot = new GameObject("Pivot");
 		pivot.transform.SetParent (transform);
-
 		renderer = gameObject.GetComponent<Renderer> ();
 		if (GameManager.instance.CustomSpawn()) {
 			renderer.material.color = LayerColors.FindLayerColor (gameObject.layer);
 		} else {
-
 			renderer.material.color = LayerColors.defaultColor;
 		}
+		//Set the first spawnpoint to the inital location of the player prefab (as set in scene editor)
 		GameManager.instance.SetSpawn(transform.position);
 		AlignPosition ();
 	}
 
+    private void Update()
+    {
+		//TODO: Lerp color
+		/*if (renderer.material.color != LayerColors.FindLayerColor(gameObject.layer)){
+			renderer.material.color = Color.Lerp (renderer.material.color, LayerColors.FindLayerColor (gameObject.layer), 0.2f);
+		}*/
+    }
+	/**
+	 * check, if movement is not locked, if so, move into the desired direction 
+	 */
     public void TryMove(string moveDirection)
     {
-        Debug.Log("TryMove");  
         if (!moving && !falling && !resetting)
         {
             AlignPosition(); 
             Invoke(moveDirection, 0f); //<<<<<<<<<<<<<<<<<<<<<< hier wird MoveToBottomLeft o.ä. aufgerufen, darin wird Move aufgerufen
-            //pivot.transform.localPosition = rotPointOffset;
-            //StartCoroutine(SequenzHandler(moveDirection));
             Debug.Log("SetNewDirection");
-            cubeSource.PlayOneShot(cubeSound, 1F); //1parameter: audio clip 2paramenter: volume
-            //<<<<<<<<<<<<<<<<<<<<<< Move() kann in TryMove() nur mit Coroutine ausgeführt werden, kann ich auch wieder dahin zurück ändern
+            cubeSource.PlayOneShot(cubeSound, 1F);
         }
     }
-
-    void MoveToBottomLeft()
+	/**
+	 * These methods convert the input directions to unity handled directions
+	 * 
+	 */
+	void MoveToBottomLeft()
     {
-        Debug.Log("in MoveBottomLeft");
-        //x-0.5, y-0.5 BottomLeft
         direction = Vector3.left;
-        //rotPointOffset = new Vector3 (-0.5f, -0.5f, 0f);
         rotAxis = Vector3.forward;
         Move();
     }
@@ -86,7 +98,6 @@ public class PlayerControls : MonoBehaviour {
     void MoveToBottomRight()
     {
         direction = Vector3.back;
-        //rotPointOffset = new Vector3 (0f, -0.5f, -0.5f);
         rotAxis = Vector3.left;
         Move();
     }
@@ -94,7 +105,6 @@ public class PlayerControls : MonoBehaviour {
     void MoveToTopLeft()
     {
         direction = Vector3.forward;
-        //rotPointOffset = new Vector3 (0f, -0.5f, 0.5f);
         rotAxis = Vector3.right;
         Move();
     }
@@ -102,14 +112,13 @@ public class PlayerControls : MonoBehaviour {
     void MoveToTopRight()
     {
         direction = Vector3.right;
-        //rotPointOffset = new Vector3 (0.5f, -0.5f, 0f);
         rotAxis = Vector3.back;
         Move();
     }
 
     void Move()
     {
-        if (direction != Vector3.zero)
+        if (direction != Vector3.zero) //can be removed, was used when movement was part of Update
         {
             pivot.transform.localPosition = new Vector3(cubeRadius * direction.x, -cubeRadius, cubeRadius * direction.z);
             if (TargetIsNegotiable(direction))
@@ -117,7 +126,7 @@ public class PlayerControls : MonoBehaviour {
                 moving = true;
             }
 			direction = Vector3.zero;
-        } 
+        }
     }
 
     void FixedUpdate ()
@@ -127,6 +136,7 @@ public class PlayerControls : MonoBehaviour {
 		if (Physics.Raycast (transform.position, Vector3.down, out hit, 0.51f))
         {
 			falling = false;
+			//set platform to the players parent, so player can use the local grid
 			if (hit.transform.tag == "Platform")
             {
 				transform.SetParent (hit.transform.parent);
@@ -147,10 +157,12 @@ public class PlayerControls : MonoBehaviour {
 				moving = false;
 				AlignPosition ();
 			}
-			// player is free falling
 		}
+
+		// player is free falling (ground detection see above)
         if (falling)
-        {					
+        {
+			//check if lower bounds have been passed and reset (locked for only one start of the reset coroutine via bool resetting)
 			if (transform.position.y < lowerBound && !resetting)
             {
 				fallingSource.PlayOneShot(fallingSound, 1F);
@@ -163,7 +175,9 @@ public class PlayerControls : MonoBehaviour {
 		//player interaction is not locked by a current falling or moving status
 		}
 	}
-	//corrects the position of the game object to integers, sets all angles and velocity to zero 
+	/**
+	 * corrects the position of the game object to integers, sets all angles and velocity to zero to make the grid-like movement behaviour
+	 */
 	public void AlignPosition()
     {
 		transform.localRotation = Quaternion.identity;
@@ -171,12 +185,11 @@ public class PlayerControls : MonoBehaviour {
 		gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 		lowerBound = (int)transform.position.y - maxFallingHeight;
 	}
-
-	/*public void SetSpawnPoint(Vector3 spawnPoint)
-    {
-		this.spawnPoint = spawnPoint;
-	}*/
-
+	/**
+	 * This method checks, if the desired movement target does not contain any obstacles, which would block the movement
+	 * Checks for any obstacles with a minimum height (float maxClimb) and on any physics layer, except the own colour-layer (if not default)
+	 * returns false if movement is not possible
+	 */
 	private bool TargetIsNegotiable(Vector3 direction)
     {
 		Vector3 origin = new Vector3 (transform.position.x, (transform.position.y - cubeRadius) + maxClimb, transform.position.z);
@@ -203,8 +216,8 @@ public class PlayerControls : MonoBehaviour {
 		renderer.material.color = LayerColors.defaultColor;
 		//GameManager.instance.SetActivePlayerLayer (gameObject.layer);
 	}
-
-    public IEnumerator Reset(){
+	//resets the player
+	public IEnumerator Reset(){
 		//immediately stop the camera follow
 		CameraFollow cam = Camera.main.GetComponent<CameraFollow> ();
 		cam.enabled = false;

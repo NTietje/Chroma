@@ -20,21 +20,21 @@ public class PlayerControls : MonoBehaviour {
 	//Audio
 	public AudioClip cubeSound; //movement sound
 	public AudioClip fallingSound;
-	private AudioSource cubeSource;
-	private AudioSource fallingSource;
+	AudioSource cubeSource;
+	AudioSource fallingSource;
 	
-    private Renderer rend; //this objects renderer
-    private GameObject pivot; //this is a point used to perform the cube movement around
-	private Vector3 rotAxis; //for player movement
-	private Vector3 direction; //movement direction
-	private float cubeRadius; //used for movement calculation (placing the pivot)
+    Renderer rend; //this objects renderer
+    GameObject pivot; //this is a point used to perform the cube movement around
+	Vector3 rotAxis; //for player movement
+	Vector3 direction; //movement direction
+	float cubeRadius; //used for movement calculation (placing the pivot)
 
 	//these booleans primarily lock the input and let the script finish certain states
-	private bool resetting;
-	private bool moving;
-	private bool falling;
+	bool resetting;
+	bool moving;
+	bool falling;
 
-	private int lowerBound; //replace player after crossing this rock bottom
+	int lowerBound; //replace player after crossing this rock bottom
 
 	void Awake () {
 		//singleton pattern
@@ -65,7 +65,7 @@ public class PlayerControls : MonoBehaviour {
 		AlignPosition ();
 	}
 
-    private void Update()
+    void Update()
     {
 		//TODO: Lerp color
 		if (rend.material.color != LayerColors.FindLayerColor(gameObject.layer)){
@@ -191,7 +191,7 @@ public class PlayerControls : MonoBehaviour {
 	 * Checks for any obstacles with a minimum height (float maxClimb) and on any physics layer, except the own colour-layer (if not default)
 	 * returns false if movement is not possible
 	 */
-	private bool TargetIsNegotiable(Vector3 direction)
+	bool TargetIsNegotiable(Vector3 direction)
     {
 		Vector3 origin = new Vector3 (transform.position.x, (transform.position.y - cubeRadius) + maxClimb, transform.position.z);
 		if (gameObject.layer == 0)

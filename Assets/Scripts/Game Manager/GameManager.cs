@@ -23,23 +23,24 @@ public class GameManager : MonoBehaviour {
 	public bool musicOn;
 
 	//linked pause menu to call the menus functions
-	private PauseMenu menu;
+	PauseMenu menu;
 
 	//player spawn related
 	public float spawnOffset = 0.5f; //let's the player spawn above the checkpoint
-	private GameObject checkPoint; //linked active checkpoint
-	private Vector3 spawnPoint; //current spawn position of the player
-	private bool customSpawn; //true: load a level with a custom spawn point
-	private Vector3 customSpawnPoint; //custom spawn point location (see above)
-	private int customSpawnLayer; //custom spawn layer (see above)
-	private int saveLayer; //the layer the player was on, when reaching the last checkpoint
+
+	GameObject checkPoint; //linked active checkpoint
+	Vector3 spawnPoint; //current spawn position of the player
+	bool customSpawn; //true: load a level with a custom spawn point
+	Vector3 customSpawnPoint; //custom spawn point location (see above)
+	int customSpawnLayer; //custom spawn layer (see above)
+	int saveLayer; //the layer the player was on, when reaching the last checkpoint
 
 	//current active game level
-	private int level;
+	int level;
 
 	//Music
 	public AudioClip levelMusicSound;
-	private AudioSource levelMusicSource;
+	AudioSource levelMusicSource;
 
 	void Awake () {
 		if (instance == null) {

@@ -8,7 +8,8 @@ public class EndPoint : MonoBehaviour {
 
 	public bool lastLevel = false;
 	public AudioClip endPointSound;
-	private AudioSource endPointSource;
+
+	AudioSource endPointSource;
 
 	void Start ()
     {		

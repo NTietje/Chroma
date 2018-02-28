@@ -13,11 +13,11 @@ public class CheckPointBehaviour : MonoBehaviour {
 
 	public Color colorUnchecked = Color.yellow; //inactive color
 	public Color colorChecked = Color.green; //active color
-	private bool active; //checkpoint is active, only one will be active at once (handled by game manager)
-	private bool switching; //checkpoint is currently changeing it's color
 
-	private Renderer rend; //attached gameobject's renderer
-	private Component[] renderers; //gameobjects' childs renderes
+	bool active; //checkpoint is active, only one will be active at once (handled by game manager)
+	bool switching; //checkpoint is currently changeing it's color
+	Renderer rend; //attached gameobject's renderer
+	Component[] renderers; //gameobjects' childs renderes
 
 
 	// Use this for initialization

@@ -11,7 +11,7 @@ public class ColourPickUp : MonoBehaviour {
 	
     public float respawnTime; //respawn of the attached gameObject after pick up
 	public AudioClip colorItemSound;
-	private AudioSource colorItemSource;
+	AudioSource colorItemSource;
 	void Start(){
 		//Looks for the Audio Source
 		colorItemSource = GetComponent<AudioSource>();

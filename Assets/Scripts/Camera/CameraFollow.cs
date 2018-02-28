@@ -17,10 +17,9 @@ public class CameraFollow : MonoBehaviour {
 
 	public GameObject target;
 
-	private bool lerpTo;
-	private Vector3 lerpTarget;
-
-	private Vector3 offset; 
+	bool lerpTo;
+	Vector3 lerpTarget;
+	Vector3 offset; 
 
 	void Awake (){
 		//offset will be the initial distance between the target and the camera

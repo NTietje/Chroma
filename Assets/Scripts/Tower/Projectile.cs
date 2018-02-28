@@ -48,7 +48,7 @@ public class Projectile : MonoBehaviour {
     }
 
     // Waits for trigger-collision with player
-    private void OnTriggerEnter(Collider other) 
+    void OnTriggerEnter(Collider other) 
     {
         if (other.tag == "Player")
         {

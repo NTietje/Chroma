@@ -13,6 +13,7 @@ public class PlayerControls : MonoBehaviour {
 	public AudioClip cubeSound;
 	public AudioClip fallingSound;
 
+
 	private AudioSource cubeSource;
 	private AudioSource fallingSource;
 	
@@ -48,10 +49,12 @@ public class PlayerControls : MonoBehaviour {
 		pivot.transform.SetParent (transform);
 
 		renderer = gameObject.GetComponent<Renderer> ();
-		if (GameManager.instance.CustomSpawn()) {
+		if (GameManager.instance.CustomSpawn())
+        {
 			renderer.material.color = LayerColors.FindLayerColor (gameObject.layer);
-		} else {
-
+		}
+        else
+        {
 			renderer.material.color = LayerColors.defaultColor;
 		}
 		GameManager.instance.SetSpawn(transform.position);
@@ -64,12 +67,9 @@ public class PlayerControls : MonoBehaviour {
         if (!moving && !falling && !resetting)
         {
             AlignPosition(); 
-            Invoke(moveDirection, 0f); //<<<<<<<<<<<<<<<<<<<<<< hier wird MoveToBottomLeft o.ä. aufgerufen, darin wird Move aufgerufen
+            Invoke(moveDirection, 0f);
             //pivot.transform.localPosition = rotPointOffset;
-            //StartCoroutine(SequenzHandler(moveDirection));
             Debug.Log("SetNewDirection");
-            cubeSource.PlayOneShot(cubeSound, 1F); //1parameter: audio clip 2paramenter: volume
-            //<<<<<<<<<<<<<<<<<<<<<< Move() kann in TryMove() nur mit Coroutine ausgeführt werden, kann ich auch wieder dahin zurück ändern
         }
     }
 
@@ -104,7 +104,7 @@ public class PlayerControls : MonoBehaviour {
         direction = Vector3.right;
         //rotPointOffset = new Vector3 (0.5f, -0.5f, 0f);
         rotAxis = Vector3.back;
-        Move();
+        Move();  
     }
 
     void Move()
@@ -114,6 +114,7 @@ public class PlayerControls : MonoBehaviour {
             pivot.transform.localPosition = new Vector3(cubeRadius * direction.x, -cubeRadius, cubeRadius * direction.z);
             if (TargetIsNegotiable(direction))
             {
+                cubeSource.PlayOneShot(cubeSound);
                 moving = true;
             }
 			direction = Vector3.zero;

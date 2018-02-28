@@ -68,7 +68,7 @@ public class ColourPickUp : MonoBehaviour {
 		Invoke("ShowGameobjectAgain", respawnTime);
 		
 		//Sound for when the player picks up a color	
-		colorItemSource.PlayOneShot(colorItemSound, .25F); //1st parameter: audio clip and 2nd paramenter: volume
+		colorItemSource.PlayOneShot(colorItemSound);
 		
 	}
 

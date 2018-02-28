@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/TS Tower & Moving Platform.unity
     guid: c88a070fcf0f9dc469c125706b2c48de
-  - enabled: 1
+  - enabled: 0
     path: Assets/Dev Cvb.unity
     guid: 8c4487dabd19a644cb8701cdc2ce7fc2
   - enabled: 0

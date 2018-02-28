@@ -11,7 +11,15 @@ public class Projectile : MonoBehaviour {
     float projectileSpeed;
     Vector3 startPosition;
 	
+	public AudioClip lostColorSound;
+	private AudioSource lostColorSource;
 	
+	// Use this for initialization
+	void Start () {
+		
+		//Looks for the LosColor-AudioSource
+		lostColorSource = GetComponent<AudioSource>();
+	}
 
     public void Initialize(Vector3 startPosition, float projectileDistance, float projectileSpeed)
     {
@@ -43,11 +51,15 @@ public class Projectile : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
+			//Sound for when the player looses its color	
+			lostColorSource.PlayOneShot(lostColorSound, .5F); //1st parameter: audio clip and 2nd paramenter: volume
+		
             Destroy(gameObject); //Destroys projetile
-
+			
             //Change player colour
 			if (other.gameObject.GetComponent<PlayerControls> ()) {
 				other.gameObject.GetComponent<PlayerControls> ().ResetColor ();
+				
 			}
             //other.gameObject.GetComponent<Renderer>().material.color = defaultPlayerColour;
             //Debug.Log("Spieler wurde von Projektil getroffen");

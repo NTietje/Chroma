@@ -7,6 +7,10 @@ public class ColourPickUp : MonoBehaviour {
     /*public enum ColorLayer { ColorLayer1, ColorLayer2, ColorLayer3, ColorLayer4 };
     public ColorLayer colorLayer;*/
     public float respawnTime;
+	
+	
+	public AudioClip colorItemSound;
+	private AudioSource colorItemSource;
 
     //private Color colour;
 
@@ -14,6 +18,10 @@ public class ColourPickUp : MonoBehaviour {
 	void Start ()
     {
         //colour = GetComponent<Renderer>().material.color;
+		
+		//Looks for the AudioSource
+		colorItemSource = GetComponent<AudioSource>();
+		
 	}
 
     // Change player colour on trigger-collision
@@ -30,6 +38,7 @@ public class ColourPickUp : MonoBehaviour {
 
 		// After respawnTime again visible/ usable
 		Invoke("ShowGameobjectAgain", respawnTime);
+		
     }
 
     void SetGameObjectActiv(bool boolean)
@@ -57,6 +66,10 @@ public class ColourPickUp : MonoBehaviour {
 
 		// After respawnTime again visible/ usable
 		Invoke("ShowGameobjectAgain", respawnTime);
+		
+		//Sound for when the player picks up a color	
+		colorItemSource.PlayOneShot(colorItemSound, .25F); //1st parameter: audio clip and 2nd paramenter: volume
+		
 	}
 
     /*int ApplyColorLayer(ColorLayer colorLayer)

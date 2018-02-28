@@ -10,6 +10,12 @@ using UnityEngine;
 public class ColourPickUp : MonoBehaviour {
 	
     public float respawnTime; //respawn of the attached gameObject after pick up
+	public AudioClip colorItemSound;
+	private AudioSource colorItemSource;
+	void Start(){
+		//Looks for the Audio Source
+		colorItemSource = GetComponent<AudioSource>();
+	}
 
     // Change player colour on trigger-collision
     void OnTriggerEnter(Collider other)
@@ -18,7 +24,7 @@ public class ColourPickUp : MonoBehaviour {
 		//!!! if it is desired to make an object be pickable from any layer, use a child with the DefaultLayerAnchor.cs attached and disable this objects collider
 
 		// Switch player colour
-		other.gameObject.GetComponent<Renderer>().material.color = gameObject.GetComponent<Renderer>().material.color;
+		//other.gameObject.GetComponent<Renderer>().material.color = gameObject.GetComponent<Renderer>().material.color;
 
         // Switch player layer
 		other.gameObject.layer = gameObject.layer;

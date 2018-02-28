@@ -12,7 +12,6 @@ public class PlayerControls : MonoBehaviour {
 
 	public static PlayerControls instance;
 
-	private Renderer renderer;
 
 	public int speed = 450; //movement speed
 	public float maxClimb = 0.2f; //max height the cube can climb
@@ -24,6 +23,7 @@ public class PlayerControls : MonoBehaviour {
 	private AudioSource cubeSource;
 	private AudioSource fallingSource;
 	
+    private Renderer rend; //this objects renderer
     private GameObject pivot; //this is a point used to perform the cube movement around
 	private Vector3 rotAxis; //for player movement
 	private Vector3 direction; //movement direction
@@ -53,11 +53,12 @@ public class PlayerControls : MonoBehaviour {
         cubeRadius = transform.lossyScale.x*0.5f;
 		pivot = new GameObject("Pivot");
 		pivot.transform.SetParent (transform);
-		renderer = gameObject.GetComponent<Renderer> ();
+		rend = gameObject.GetComponent<Renderer> ();
 		if (GameManager.instance.CustomSpawn()) {
-			renderer.material.color = LayerColors.FindLayerColor (gameObject.layer);
+			rend.material.color = LayerColors.FindLayerColor (gameObject.layer);
 		} else {
-			renderer.material.color = LayerColors.defaultColor;
+
+			rend.material.color = LayerColors.defaultColor;
 		}
 		//Set the first spawnpoint to the inital location of the player prefab (as set in scene editor)
 		GameManager.instance.SetSpawn(transform.position);
@@ -67,9 +68,9 @@ public class PlayerControls : MonoBehaviour {
     private void Update()
     {
 		//TODO: Lerp color
-		/*if (renderer.material.color != LayerColors.FindLayerColor(gameObject.layer)){
-			renderer.material.color = Color.Lerp (renderer.material.color, LayerColors.FindLayerColor (gameObject.layer), 0.2f);
-		}*/
+		if (rend.material.color != LayerColors.FindLayerColor(gameObject.layer)){
+			rend.material.color = Color.Lerp (rend.material.color, LayerColors.FindLayerColor (gameObject.layer), 0.2f);
+		}
     }
 	/**
 	 * check, if movement is not locked, if so, move into the desired direction 
@@ -79,7 +80,7 @@ public class PlayerControls : MonoBehaviour {
         if (!moving && !falling && !resetting)
         {
             AlignPosition(); 
-            Invoke(moveDirection, 0f); //<<<<<<<<<<<<<<<<<<<<<< hier wird MoveToBottomLeft o.ä. aufgerufen, darin wird Move aufgerufen
+            Invoke(moveDirection, 0f);
             Debug.Log("SetNewDirection");
             cubeSource.PlayOneShot(cubeSound, 1F);
         }
@@ -213,7 +214,7 @@ public class PlayerControls : MonoBehaviour {
     {
 		gameObject.layer = 0;
 		//GetComponent<Renderer> ().material.color = defaultPlayerMaterial.color;
-		renderer.material.color = LayerColors.defaultColor;
+		rend.material.color = LayerColors.defaultColor;
 		//GameManager.instance.SetActivePlayerLayer (gameObject.layer);
 	}
 	//resets the player

@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour {
 		} else {
 			MusicOff ();
 		}
+		musicOn = true;
 	}
 	/**
 	 * Loads a level. Level indices are managed in the SceneManager (build settings)

@@ -1301,11 +1301,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09599c70aa4e80140a7bf38528abf751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
   platform: {fileID: 778812423}
   positions:
   - {fileID: 211333397}
   - {fileID: 457223034}
+  speed: 1
   oneWay: 0
   allowMoving: 0
 --- !u!1001 &1152192484
@@ -2449,11 +2449,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09599c70aa4e80140a7bf38528abf751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
   platform: {fileID: 1935044790}
   positions:
   - {fileID: 1498510393}
   - {fileID: 1428204554}
+  speed: 1
   oneWay: 1
   allowMoving: 0
 --- !u!1001 &1913774945
@@ -2494,6 +2494,21 @@ Prefab:
     - target: {fileID: 4786061945946728, guid: 6aed57f7a0c20d74e85f94b989f98fee, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114531493963914234, guid: 6aed57f7a0c20d74e85f94b989f98fee,
+        type: 2}
+      propertyPath: colorLayers.Array.data[3].color.r
+      value: 0.62581134
+      objectReference: {fileID: 0}
+    - target: {fileID: 114531493963914234, guid: 6aed57f7a0c20d74e85f94b989f98fee,
+        type: 2}
+      propertyPath: colorLayers.Array.data[3].color.g
+      value: 0.875
+      objectReference: {fileID: 0}
+    - target: {fileID: 114531493963914234, guid: 6aed57f7a0c20d74e85f94b989f98fee,
+        type: 2}
+      propertyPath: colorLayers.Array.data[3].color.b
+      value: 0.5275735
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6aed57f7a0c20d74e85f94b989f98fee, type: 2}

@@ -780,6 +780,26 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114531493963914234, guid: 6aed57f7a0c20d74e85f94b989f98fee,
+        type: 2}
+      propertyPath: colorLayers.Array.data[0].color.g
+      value: 0.203
+      objectReference: {fileID: 0}
+    - target: {fileID: 114531493963914234, guid: 6aed57f7a0c20d74e85f94b989f98fee,
+        type: 2}
+      propertyPath: colorLayers.Array.data[3].color.r
+      value: 0.2352941
+      objectReference: {fileID: 0}
+    - target: {fileID: 114531493963914234, guid: 6aed57f7a0c20d74e85f94b989f98fee,
+        type: 2}
+      propertyPath: colorLayers.Array.data[3].color.g
+      value: 0.9683569
+      objectReference: {fileID: 0}
+    - target: {fileID: 114531493963914234, guid: 6aed57f7a0c20d74e85f94b989f98fee,
+        type: 2}
+      propertyPath: colorLayers.Array.data[3].color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6aed57f7a0c20d74e85f94b989f98fee, type: 2}
   m_IsPrefabParent: 0
@@ -1604,11 +1624,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09599c70aa4e80140a7bf38528abf751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
   platform: {fileID: 2114305765}
   positions:
   - {fileID: 1394748215}
   - {fileID: 417204831}
+  speed: 1
   oneWay: 1
   allowMoving: 0
 --- !u!1001 &2004947847

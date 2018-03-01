@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour {
 			menu.LevelCompleted ();
 			level++;
 		}
-		Save ();
+		Save (false);
 	}
 	//starts a new game (level 1)
 	public void NewGame(){
@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour {
 			checkPoint.GetComponent<CheckPointBehaviour>().On ();
 			spawnPoint = new Vector3 (checkPoint.transform.position.x, checkPoint.transform.position.y + spawnOffset, checkPoint.transform.position.z);
 			saveLayer = layer;
-			Save ();
+			Save (true);
 		} 
 	}
 	//Get currently active spawn location
@@ -125,7 +125,7 @@ public class GameManager : MonoBehaviour {
 	/**
 	 * Save the players progress to a dedicated file 
 	 */
-	public void Save(){
+	public void Save(bool customSpawn){
 		BinaryFormatter bf = new BinaryFormatter ();
 		FileStream file = File.Create (Application.persistentDataPath + "/playerInfo.dat");
 
@@ -135,6 +135,7 @@ public class GameManager : MonoBehaviour {
 		data.y = spawnPoint.y;
 		data.z = spawnPoint.z;
 		data.layer = saveLayer;
+		data.customSpawn = customSpawn;
 
 		bf.Serialize (file, data);
 		file.Close ();
@@ -149,12 +150,12 @@ public class GameManager : MonoBehaviour {
 			FileStream file = File.Open (Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
 			PlayerData data = (PlayerData)bf.Deserialize (file);
 			file.Close ();
-			LoadLevel (data.level);
-			customSpawnPoint = new Vector3 (data.x, data.y, data.z);
-			customSpawnLayer = data.layer;
-			customSpawn = true;
-			spawnPoint = new Vector3 (data.x, data.y, data.z);
 			if (data.level > 0) {
+				LoadLevel (data.level);
+				customSpawnPoint = new Vector3 (data.x, data.y, data.z);
+				customSpawnLayer = data.layer;
+				customSpawn = data.customSpawn;
+				spawnPoint = new Vector3 (data.x, data.y, data.z);
 				return true;
 			}
 		} 
@@ -178,7 +179,7 @@ public class GameManager : MonoBehaviour {
 	void OnGUI(){
 		if (debug) {
 			if (GUI.Button (new Rect (10, 100, 100, 30), "Save")) {
-				Save ();
+				Save (true);
 			}
 			if (GUI.Button (new Rect (10, 140, 100, 30), "Load")) {
 				Load ();
@@ -194,6 +195,7 @@ public class GameManager : MonoBehaviour {
  */
 [Serializable]
 class PlayerData {
+	public bool customSpawn;
 
 	public int level;
 	public int layer;

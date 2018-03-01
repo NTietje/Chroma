@@ -153,11 +153,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 114565106407750174, guid: 4bd01918eac7efd4682e3fdb4d449252,
-        type: 2}
-      propertyPath: debug
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4bd01918eac7efd4682e3fdb4d449252, type: 2}
   m_IsPrefabParent: 0
@@ -319,6 +314,11 @@ Prefab:
     - target: {fileID: 4786061945946728, guid: 6aed57f7a0c20d74e85f94b989f98fee, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114531493963914234, guid: 6aed57f7a0c20d74e85f94b989f98fee,
+        type: 2}
+      propertyPath: colorLayers.Array.data[3].color.a
+      value: 0.353
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6aed57f7a0c20d74e85f94b989f98fee, type: 2}
@@ -1624,11 +1624,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09599c70aa4e80140a7bf38528abf751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
   platform: {fileID: 2100064291}
   positions:
   - {fileID: 1621779577}
   - {fileID: 1501826271}
+  speed: 1
   oneWay: 0
   allowMoving: 0
 --- !u!1001 &683348655
@@ -4073,11 +4073,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09599c70aa4e80140a7bf38528abf751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
   platform: {fileID: 905622897}
   positions:
   - {fileID: 743274185}
   - {fileID: 61118327}
+  speed: 1
   oneWay: 0
   allowMoving: 0
 --- !u!1 &1922737684
@@ -4124,11 +4124,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09599c70aa4e80140a7bf38528abf751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
   platform: {fileID: 2069988521}
   positions:
   - {fileID: 773557349}
   - {fileID: 629058935}
+  speed: 1
   oneWay: 1
   allowMoving: 0
 --- !u!1001 &1932450117
@@ -4420,11 +4420,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09599c70aa4e80140a7bf38528abf751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
   platform: {fileID: 2058866904}
   positions:
   - {fileID: 441586160}
   - {fileID: 1607640272}
+  speed: 1
   oneWay: 0
   allowMoving: 0
 --- !u!1 &2058866904
